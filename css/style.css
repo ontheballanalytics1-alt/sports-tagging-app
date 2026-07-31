@@ -1,0 +1,257 @@
+.watermark-logo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 500px;  
+    opacity: 0.1;      
+    z-index: 0;
+    pointer-events: none;
+
+}
+
+.tag-button {
+  background-color: pink;
+  border-radius: 25px;
+  width: 150px;
+  height: 50px;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: Arial, sans-serif;
+  color: black;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: 0.1s;
+
+  }
+
+  .tag-button:active {
+    transform: translateY(4px);
+  
+  }
+
+  .green-button {
+    background-color: lightgreen;
+    
+
+  }
+
+  .red-button {
+    background-color: lightcoral;
+    
+  }
+
+  .grey-button {
+    background-color: lightgrey;
+
+  }
+  .black-button {
+    color: white;
+    background-color: black;
+
+  }
+
+  .counter {
+    display: block;
+    font-size: 13px;
+    margin-top: 5px;
+  
+  }
+
+    .player-box {
+    border: 4px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: white;
+    width: 310px;
+      
+  }
+
+.match-report-box {
+    border: 4px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: white;
+    width: 350px;
+    margin-bottom: 0px;
+  
+}
+  
+.game-feed {
+    border: 4px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: white;
+    width: 597px;
+
+    max-height: 605px;
+    overflow-y: auto;
+  
+}
+
+.shot-scored-event {
+  background-color: #D8B4FE;
+  color: black;
+
+}
+
+.shot-missed-event {
+  background-color: #AEB6C2;
+  color: black;
+  
+}
+
+.attack-rebound-won-event {
+  background-color: #D8B4FE;
+  color: black;
+  
+  }
+
+.attack-rebound-lost-event {
+  background-color: #AEB6C2;
+  color: black;
+  
+  }
+
+.feed-success-event {
+  background-color: #D8B4FE;
+  color: black;
+  
+ }
+
+.feed-missed-event {
+  background-color: #AEB6C2;
+  color: black;
+  
+}
+
+.centre-success-event {
+  background-color: #D8B4FE;
+  color: black;
+  
+}
+
+.centre-fail-event {
+  background-color: #AEB6C2;
+  color: black;
+  
+}
+
+.turnover-event {
+  background-color: #D8B4FE;
+  color: black;
+  
+}
+
+.unforced-error-event {
+  background-color: #AEB6C2;
+  color: black;
+  
+}
+
+.defence-rebound-won-event {
+  background-color: #D8B4FE;
+  color: black;
+  
+}
+
+.defence-rebound-lost-event {
+  background-color: #AEB6C2;
+  color: black;
+  
+}
+
+.feed-success-event {
+  background-color: #D8B4FE;
+  color: black;
+  
+}
+
+.oppo-score-event {
+  background-color: #AEB6C2;
+  color: black;
+  
+}
+
+  .player-title {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: arial, sans-serif;
+
+  }
+
+  .report-heading {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+   .container {
+   outline: 2px solid red;
+   display: flex;
+   gap: 40px;
+   align-items: flex-start;
+  
+  }
+
+   .progress-bar {
+   width: 350px;
+   height: 20px;
+   background-color: lightgray;
+   border-radius: 10px;
+   overflow: hidden;
+   margin-top: 0px;
+   margin-bottom: 30px;
+   position: relative;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+     z-index: 1;
+   border: 1px solid rgba(0,0,0,0.2);
+     
+ }
+
+   .progress-fill {
+   height: 100%;
+   width: 0%;
+ background-color: #A78BFA;
+   transition: width 0.3s;
+
+   position: absolute;
+   left: 0;
+   top: 0;
+   z-index: 2;
+     
+ }
+
+   .progress-text {
+   position: center;
+
+   font-size: 16px;
+   font-weight: bold;
+
+   z-index: 3;
+
+    color: #111827;
+
+  }
+
+  .column {
+    outline: 2px solid blue;
+    display: flex;
+    width: auto;
+    flex-direction: column;
+    gap: 0px;
+
+  }
+
+   #start-match, #opposition-score-btn {
+  vertical-align: top;
+  }
