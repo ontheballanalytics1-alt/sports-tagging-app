@@ -265,36 +265,35 @@
     /* MAIN THREE-COLUMN LAYOUT */
     .container {
         width: 100%;
+        display: flex;
         gap: 12px;
         padding: 0 10px;
         box-sizing: border-box;
-        display: flex;
-        justify-content: center;
         align-items: flex-start;
     }
 
-    /* LEFT COLUMN — MATCH REPORT */
+    /* ALL THREE COLUMNS */
+    .container > .column {
+        box-sizing: border-box;
+        min-width: 0;
+    }
+
+    /* MATCH REPORT COLUMN */
     .container > .column:nth-child(1) {
-        width: 29%;
-        box-sizing: border-box;
-        flex-shrink: 0;
+        flex: 0 0 30%;
     }
 
-    /* MIDDLE COLUMN — GAME FEED */
+    /* GAME FEED COLUMN */
     .container > .column:nth-child(2) {
-        width: 41%;
-        box-sizing: border-box;
-        flex-shrink: 0;
+        flex: 0 0 40%;
     }
 
-    /* RIGHT COLUMN — BUTTONS */
+    /* BUTTON COLUMN */
     .container > .column:nth-child(3) {
-        width: 30%;
-        box-sizing: border-box;
-        flex-shrink: 0;
+        flex: 0 0 30%;
     }
 
-    /* BOXES FILL THEIR COLUMN */
+    /* BOXES FILL THEIR COLUMNS */
     .match-report-box,
     .game-feed,
     .player-box {
@@ -302,28 +301,26 @@
         box-sizing: border-box;
     }
 
-    /* PLAYER BOX PADDING */
+    /* PLAYER BOX */
     .player-box {
         padding: 12px;
     }
 
     /* MAIN TITLES */
     .player-title {
-       font-size: clamp(20px, 3vw, 36px);
-       line-height: 1.1;
-       text-align: center;
-       white-space: nowrap;
-
+        font-size: clamp(24px, 3vw, 36px);
+        line-height: 1.1;
+        text-align: center;
+        white-space: nowrap;
     }
 
     /* REPORT HEADINGS */
     .report-heading {
-       font-size: clamp(14px, 1.8vw, 22px);
-       line-height: 1.1;
-       text-align: center;
-       white-space: nowrap;
-       
-   }
+        font-size: clamp(14px, 1.8vw, 22px);
+        line-height: 1.1;
+        text-align: center;
+        white-space: nowrap;
+    }
 
     /* BUTTON GRID */
     .column .player-box:first-child {
@@ -332,7 +329,7 @@
         gap: 8px;
     }
 
-    /* REMOVE HTML BREAKS FROM BUTTON GRID */
+    /* REMOVE <br><br> GAPS */
     .column .player-box:first-child br {
         display: none;
     }
