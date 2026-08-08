@@ -49,6 +49,7 @@ let history = [];
 const crosskeysScoreText = document.getElementById("crosskeys-score");
 const oppositionScoreText = document.getElementById("opposition-score");
 const eventFeed = document.getElementById("event-feed");
+const oppositionButton = document.getElementById("opposition-score-btn");
 
 function scrollGameFeedToBottom() {
   eventFeed.scrollTop = eventFeed.scrollHeight;
@@ -62,18 +63,6 @@ function updateCrosskeysScore() {
 function updateOppositionScore() {
   oppositionScoreText.textContent = oppositionScore;
 }
-  
-const oppositionButton = document.getElementById("opposition-score-btn");
-
-oppositionButton.addEventListener("click", () => {
-  oppositionScore++;
-  updateOppositionScore();
-
-  history.push({
-    button: "opposition-score-btn",
-    time: matchClock.textContent
-  });
-});
 
 // SHOT SUCCESS
 const shotScoredButton = document.querySelector("#level1-attack-shot-success");
@@ -330,6 +319,16 @@ function undoLastAction() {
 
             break;
 
+        case "level1-defence-unforced-error":
+
+           dunforcedErrorCount--;
+           updateDunforcedError();
+
+           dunforcedErrorButton.querySelector(".counter").textContent =
+           Number(dunforcedErrorButton.querySelector(".counter").textContent) - 1;
+
+            break;
+
 
         case "opposition-score-btn":
 
@@ -502,12 +501,16 @@ buttons.forEach((button) => {
        
     }
     
-    //GAMEFEED UPDATE oppo score
+    // GAMEFEED UPDATE oppo score
      if (button.id === "opposition-score-btn") {
-      eventFeed.innerHTML =
-      `<div class="oppo-score-event">${matchClock.textContent} - OPPO SCORE</div>` +
-      eventFeed.innerHTML;
-       
+
+     oppositionScore++;
+     updateOppositionScore();
+
+     eventFeed.innerHTML =
+     `<div class="oppo-score-event">${matchClock.textContent} - OPPO SCORE</div>` +
+     eventFeed.innerHTML;
+     
     }
 
   });
