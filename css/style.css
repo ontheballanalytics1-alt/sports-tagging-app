@@ -262,68 +262,80 @@
 
 @media screen and (max-width: 1200px) and (orientation: landscape) {
 
-
+    /* MAIN THREE-COLUMN LAYOUT */
     .container {
         width: 100%;
         gap: 12px;
         padding: 0 10px;
         box-sizing: border-box;
+        display: flex;
         justify-content: center;
-
+        align-items: flex-start;
     }
 
-    .match-report-box {
+    /* LEFT COLUMN — MATCH REPORT */
+    .container > .column:nth-child(1) {
         width: 29%;
         box-sizing: border-box;
-
+        flex-shrink: 0;
     }
 
-    .game-feed {
+    /* MIDDLE COLUMN — GAME FEED */
+    .container > .column:nth-child(2) {
         width: 41%;
         box-sizing: border-box;
-
+        flex-shrink: 0;
     }
 
-    .column {
+    /* RIGHT COLUMN — BUTTONS */
+    .container > .column:nth-child(3) {
         width: 30%;
         box-sizing: border-box;
-
+        flex-shrink: 0;
     }
 
+    /* BOXES FILL THEIR COLUMN */
+    .match-report-box,
+    .game-feed,
     .player-box {
         width: 100%;
         box-sizing: border-box;
+    }
+
+    /* PLAYER BOX PADDING */
+    .player-box {
         padding: 12px;
-
     }
 
+    /* MAIN TITLES */
     .player-title {
-       font-size: clamp(24px, 3vw, 36px);
-       line-height: 1.1;
-       text-align: center;
-       overflow-wrap: break-word;
-
+        font-size: clamp(24px, 3vw, 36px);
+        line-height: 1.1;
+        text-align: center;
+        overflow-wrap: break-word;
     }
 
-     .report-heading {
-       font-size: clamp(14px, 1.8vw, 22px);
-       line-height: 1.1;
-       text-align: center;
-       overflow-wrap: break-word;
-       
+    /* REPORT HEADINGS */
+    .report-heading {
+        font-size: clamp(14px, 1.8vw, 22px);
+        line-height: 1.1;
+        text-align: center;
+        overflow-wrap: break-word;
     }
 
+    /* BUTTON GRID */
     .column .player-box:first-child {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
-
     }
-   
+
+    /* REMOVE HTML BREAKS FROM BUTTON GRID */
     .column .player-box:first-child br {
         display: none;
     }
 
+    /* TAG BUTTONS */
     .tag-button {
         width: 100%;
         height: 46px;
@@ -331,22 +343,26 @@
         font-size: clamp(10px, 1.2vw, 13px);
     }
 
+    /* COUNTERS */
     .counter {
         font-size: 12px;
         margin-top: 3px;
     }
 
+    /* CONTROL BUTTONS */
     .column .player-box:last-child {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
     }
 
+    /* PROGRESS BARS */
     .progress-bar {
         width: 100%;
         box-sizing: border-box;
     }
 }
+
   /* =========================
    iPAD PORTRAIT
    ========================= */
