@@ -257,43 +257,88 @@
   }
 
   /* =========================
-   TABLET / iPAD LANDSCAPE
-   ========================= */
+   iPAD LANDSCAPE
+========================= */
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1200px) and (orientation: landscape) {
+
 
     .container {
         width: 100%;
-        gap: 15px;
-        justify-content: center;
-    }
-
-    .player-box {
-        width: 25vw;
+        gap: 12px;
+        padding: 0 10px;
         box-sizing: border-box;
+        justify-content: center;
+
     }
 
     .match-report-box {
-        width: 30vw;
+        width: 29%;
         box-sizing: border-box;
+
     }
 
     .game-feed {
-        width: 45vw;
+        width: 41%;
         box-sizing: border-box;
+
+    }
+
+    .column {
+        width: 30%;
+        box-sizing: border-box;
+
+    }
+
+    .player-box {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+
+    }
+
+    .player-title {
+        font-size: clamp(24px, 3vw, 36px);
+        line-height: 1.1;
+        text-align: center;
+        overflow-wrap: break-word;
+
+    }
+
+    .column .player-box:first-child {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+
+    }
+   
+    .column .player-box:first-child br {
+        display: none;
+    }
+
+    .tag-button {
+        width: 100%;
+        height: 46px;
+        box-sizing: border-box;
+        font-size: clamp(10px, 1.2vw, 13px);
+    }
+
+    .counter {
+        font-size: 12px;
+        margin-top: 3px;
+    }
+
+    .column .player-box:last-child {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
     }
 
     .progress-bar {
         width: 100%;
         box-sizing: border-box;
     }
-
-    .tag-button {
-        width: 100%;
-        max-width: 150px;
-    }
 }
-
   /* =========================
    iPAD PORTRAIT
    ========================= */
