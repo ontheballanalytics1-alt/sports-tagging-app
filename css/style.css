@@ -272,28 +272,28 @@
         align-items: flex-start;
     }
 
-    /* ALL THREE COLUMNS */
+    /* ALLOW COLUMNS TO SHRINK */
     .container > .column {
         box-sizing: border-box;
         min-width: 0;
     }
 
-    /* MATCH REPORT COLUMN */
+    /* MATCH REPORT */
     .container > .column:nth-child(1) {
         flex: 0 0 30%;
     }
 
-    /* GAME FEED COLUMN */
+    /* GAME FEED */
     .container > .column:nth-child(2) {
-        flex: 0 0 40%;
+        flex: 0 0 38%;
     }
 
-    /* BUTTON COLUMN */
+    /* BUTTONS */
     .container > .column:nth-child(3) {
-        flex: 0 0 30%;
+        flex: 0 0 32%;
     }
 
-    /* BOXES FILL THEIR COLUMNS */
+    /* BOXES FILL THEIR COLUMN */
     .match-report-box,
     .game-feed,
     .player-box {
@@ -308,10 +308,11 @@
 
     /* MAIN TITLES */
     .player-title {
-        font-size: clamp(24px, 3vw, 36px);
+        font-size: clamp(20px, 3vw, 36px);
         line-height: 1.1;
         text-align: center;
         white-space: nowrap;
+        margin-bottom: 10px;
     }
 
     /* REPORT HEADINGS */
@@ -322,24 +323,35 @@
         white-space: nowrap;
     }
 
-    /* BUTTON GRID */
+    /* =========================
+       CROSSKEYS BUTTON BOX
+    ========================= */
+
     .column .player-box:first-child {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        display: block;
     }
 
-    /* REMOVE <br><br> GAPS */
-    .column .player-box:first-child br {
-        display: none;
-    }
-
-    /* TAG BUTTONS */
-    .tag-button {
+    /* TITLE MUST NOT BE PART OF BUTTON GRID */
+    .column .player-box:first-child .player-title {
+        display: block;
         width: 100%;
+    }
+
+    /* BUTTONS ONLY */
+    .column .player-box:first-child .tag-button {
+        display: inline-block;
+        width: calc(50% - 5px);
         height: 46px;
         box-sizing: border-box;
-        font-size: clamp(10px, 1.2vw, 13px);
+        font-size: clamp(9px, 1.1vw, 13px);
+        padding: 4px;
+        vertical-align: top;
+        margin-bottom: 8px;
+    }
+
+    /* REMOVE THE BR ELEMENTS */
+    .column .player-box:first-child br {
+        display: none;
     }
 
     /* COUNTERS */
@@ -348,11 +360,26 @@
         margin-top: 3px;
     }
 
-    /* CONTROL BUTTONS */
+    /* =========================
+       BOTTOM CONTROL BOX
+    ========================= */
+
     .column .player-box:last-child {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
+    }
+
+    .column .player-box:last-child .tag-button {
+        width: 100%;
+        height: 46px;
+        box-sizing: border-box;
+        font-size: clamp(9px, 1.1vw, 13px);
+        padding: 4px;
+    }
+
+    .column .player-box:last-child br {
+        display: none;
     }
 
     /* PROGRESS BARS */
