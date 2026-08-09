@@ -280,12 +280,12 @@
 
     /* MATCH REPORT */
     .container > .column:nth-child(1) {
-        flex: 0 0 30%;
+        flex: 0 0 29%;
     }
 
     /* GAME FEED */
     .container > .column:nth-child(2) {
-        flex: 0 0 38%;
+        flex: 0 0 37%;
     }
 
     /* BUTTONS */
