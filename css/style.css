@@ -493,3 +493,70 @@
     text-align: center;
     margin: 10px 0 0;
 }
+
+/* =========================
+   LOGIN PAGE - iPAD
+========================= */
+
+@media screen and (max-width: 1200px) {
+
+    body.login-page {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: black;
+    }
+
+    .login-page .login-container {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        box-sizing: border-box;
+        padding-top: 17vh;
+    }
+
+    .login-page .login-logo {
+        width: 100%;
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: clamp(40px, 7vw, 70px);
+        font-weight: bold;
+        font-style: italic;
+        text-align: center;
+        white-space: nowrap;
+        margin: 0 0 45px 0;
+    }
+
+    .login-page .login-form {
+        width: 145px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .login-page .login-form input {
+        width: 145px;
+        height: 29px;
+        box-sizing: border-box;
+        margin: 0 0 13px 0;
+        padding: 4px 8px;
+        border: none;
+        border-radius: 0;
+        font-size: 11px;
+    }
+
+    .login-page #login-button {
+        width: 145px;
+        height: 24px;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 0;
+        background-color: #eeeeee;
+        color: black;
+        font-size: 14px;
+    }
+}
