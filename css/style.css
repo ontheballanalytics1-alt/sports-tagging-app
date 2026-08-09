@@ -194,7 +194,6 @@
 }
 
    .container {
-   outline: 2px solid red;
    display: flex;
    gap: 40px;
    align-items: flex-start;
@@ -244,7 +243,6 @@
   }
 
   .column {
-    outline: 2px solid blue;
     display: flex;
     width: auto;
     flex-direction: column;

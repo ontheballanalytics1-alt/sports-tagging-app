@@ -2,167 +2,45 @@
 <html>
 <head>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Crosskeys App</title>
+    <title>Sports Tagging App - Login</title>
 
-  <link rel="stylesheet" href="css/style.css">
-  
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-<img src="https://crosskeysnetballclub.co.uk/wp-content/uploads/2023/02/cropped-cropped-cropped-Crosskeys-logo-01-1-1.png" class="watermark-logo">
-  
-<div class="container">
- <div class="column">
-  <div class="match-report-box">
-   <div class="player-title">MATCH REPORT</div>
-   <h3 class="report-heading">SHOT SUCCESS</h3>
-   <div class="progress-bar">
-   <div class="progress-fill" id="level1-progress-fill"></div>
-   <h3 class="progress-text" id="level1-shot-percentage">0%</h3>
-   </div>
-   <h3 class="report-heading">ATTACKING REBOUND</h3>
-   <div class="progress-bar">
-   <div class="progress-fill" id="level1-attack-rebound-fill"></div>
-   <h3 class="progress-text" id="level1-attack-rebound-percentage">0%</h3>
-   </div>
-   <h3 class="report-heading">FEED SUCCESS</h3>
-   <div class="progress-bar">
-   <div class="progress-fill" id="level1-feed-success-fill"></div>
-   <h3 class="progress-text" id="level1-feed-success-percentage">0%</h3>
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <h1>SPORTS TAGGING APP</h1>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Username"
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+            >
+
+            <button id="login-button">
+                LOG IN
+            </button>
+
+            <p id="login-error"></p>
+
         </div>
-   <h3 class="report-heading">CENTRE SUCCESS</h3>
-   <div class="progress-bar">
-   <div class="progress-fill" id="level1-centre-success-fill"></div>
-   <h3 class="progress-text" id="level1-centre-success-percentage">0%</h3>
-           </div>
-   <h3 class="report-heading">DEFENSIVE REBOUND</h3>
-   <div class="progress-bar">
-   <div class="progress-fill" id="level1-defence-rebound-fill"></div>
-   <h3 class="progress-text" id="level1-defence-rebound-percentage">0%</h3>
-           </div>
-   <h3 class="report-heading">TURNOVER</h3>
-   <div class="progress-bar">
-   <div class="progress-fill" id="level1-turnover-fill"></div>
-   <h3 class="progress-text" id="level1-turnover-count">0</h3>
-   </div>
-   <h3 class="report-heading">UNFORCED ERROR</h3>
-   <div class="progress-bar">
-   <div class="progress-fill" id="level1-unforced-error-fill"></div>
-   <h3 class="progress-text" id="level1-unforced-error-count">0</h3>
-   </div>
-  </div>
- </div>  
 
-<div class="column">
- <div class="game-feed">
-  <div class="player-title" id="match-clock">00:00</div>
-  <h1 class="report-heading">
-  CROSSKEYS <span id="crosskeys-score">0</span> v <span id="opposition-score">0</span> OPPOSITION</h1>
-   <div id="event-feed"></div>
- </div>
-</div>
- <div class="column">
-  <div class="player-box">
-  <div class="player-title">CROSSKEYS </div>
-  <button class="tag-button green-button" id="level1-attack-shot-success">
-  SHOT SCORED
-  <span class="counter">0</span>
-  </button>
+    </div>
 
-  <button class="tag-button red-button" id="level1-attack-shot-missed">
-  SHOT MISSED
-  <span class="counter">0</span>
-  </button>
+    <script src="js/login.js"></script>
 
-  <br><br>
-
-  <button class="tag-button green-button" id="level1-attack-rebound-won">
-  A REBOUND WON
-  <span class="counter">0</span>
-  </button>
-
-  <button class="tag-button red-button" id="level1-attack-rebound-lost">
-  A REBOUND LOST
-  <span class="counter">0</span>
-  </button>
-
-  <br><br>
-
-  <button class="tag-button green-button" id="level1-feed-success">
-  FEED SUCCESS
-  <span class="counter">0</span>
-  </button>
-
-  <button class="tag-button red-button" id="level1-feed-missed">
-  FEED MISSED
-  <span class="counter">0</span>
-  </button> 
-          
-  <br><br>
-
-  <button class="tag-button green-button" id="level1-centre-success">
-  CENTRE SUCCESS
-  <span class="counter">0</span>
-  </button>
-
-  <button class="tag-button red-button" id="level1-centre-missed">
-  CENTRE MISSED
-  <span class="counter">0</span>
-  </button>
-
-  <br><br>
-
-  <button class="tag-button green-button" id="level1-attack-turnover">
-  TURNOVER
-  <span class="counter">0</span>
-  </button>
-
-  <button class="tag-button red-button" id="level1-unforced-error">
-  UNFORCED ERROR
-  <span class="counter">0</span>
-  </button>
-        
-  <br><br>
-   
-  <button class="tag-button green-button" id="level1-defence-rebound-won">
-  D REBOUND WON
-  <span class="counter">0</span>
-  </button>
-
-  <button class="tag-button red-button" id="level1-defence-rebound-lost">
-  D REBOUND LOST
-  <span class="counter">0</span>
-  </button>
-  
-  </div>
-   
-  <div class="player-box">
-   <button class="tag-button green-button" id="start-match">
-   START/STOP MATCH
-   </button>
-
-   <button class="tag-button red-button" id="opposition-score-btn">
-   OPPO SCORE
-     <span class="counter">0</span>
-   </button>
-    
-    <br><br>
-    
-    <button class="tag-button grey-button" id="clock-restart">
-   RESTART TIMER
-   </button>
-
-   <button class="tag-button black-button" id="clear-last">
-   CLEAR LAST
-   </button>
-    
-  </div>
- </div>
-</div>
-
-<script src="js/script.js"></script>
 </body>
 </html>
