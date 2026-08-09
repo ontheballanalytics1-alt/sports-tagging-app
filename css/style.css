@@ -420,143 +420,96 @@
    LOGIN HOMEPAGE
 ========================= */
 
-.login-page {
+html:has(body.login-page) {
     margin: 0;
     padding: 0;
-    background-color: black;
+    background: black;
+}
+
+body.login-page {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100vw;
     min-height: 100vh;
+    background: black !important;
     overflow: hidden;
 }
 
-.login-container {
-    min-height: 100vh;
-    width: 100%;
+.login-page .login-container {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    min-height: 0;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    
     box-sizing: border-box;
     padding-top: 17vh;
 }
 
-.login-logo {
-    color: white;
-    font-family: Arial, sans-serif;
-    font-size: clamp(42px, 6vw, 78px);
-    font-weight: bold;
-    font-style: italic;
+.login-page .login-logo {
+    color: white !important;
+    font-family: Arial, sans-serif !important;
+    font-size: clamp(42px, 6vw, 78px) !important;
+    font-weight: bold !important;
+    font-style: italic !important;
     text-align: center;
     white-space: nowrap;
-    margin-bottom: 45px;
+    margin: 0 0 45px 0;
+    width: auto;
 }
 
-.login-form {
+.login-page .login-form {
     width: 145px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
-.login-form input {
-    width: 100%;
+.login-page .login-form input {
+    width: 145px;
     height: 29px;
     box-sizing: border-box;
-    margin-bottom: 13px;
+    margin: 0 0 13px 0;
     padding: 4px 8px;
+    
     border: none;
     border-radius: 0;
+    
     font-family: Arial, sans-serif;
     font-size: 11px;
 }
 
-#login-button {
-    width: 100%;
+.login-page #login-button {
+    width: 145px;
     height: 24px;
+    
     box-sizing: border-box;
     padding: 0;
+    
     border: none;
     border-radius: 0;
+    
     background-color: #eeeeee;
     color: black;
+    
     font-family: Arial, sans-serif;
     font-size: 14px;
     cursor: pointer;
 }
 
-#login-button:active {
+.login-page #login-button:active {
     transform: translateY(2px);
 }
 
-#login-error {
+.login-page #login-error {
     color: white;
     font-family: Arial, sans-serif;
     font-size: 11px;
     text-align: center;
     margin: 10px 0 0;
-}
-
-/* =========================
-   LOGIN PAGE - iPAD
-========================= */
-
-@media screen and (max-width: 1200px) {
-
-    body.login-page {
-        width: 100%;
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
-        background-color: black;
-    }
-
-    .login-page .login-container {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        box-sizing: border-box;
-        padding-top: 17vh;
-    }
-
-    .login-page .login-logo {
-        width: 100%;
-        color: white;
-        font-family: Arial, sans-serif;
-        font-size: clamp(40px, 7vw, 70px);
-        font-weight: bold;
-        font-style: italic;
-        text-align: center;
-        white-space: nowrap;
-        margin: 0 0 45px 0;
-    }
-
-    .login-page .login-form {
-        width: 145px;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .login-page .login-form input {
-        width: 145px;
-        height: 29px;
-        box-sizing: border-box;
-        margin: 0 0 13px 0;
-        padding: 4px 8px;
-        border: none;
-        border-radius: 0;
-        font-size: 11px;
-    }
-
-    .login-page #login-button {
-        width: 145px;
-        height: 24px;
-        box-sizing: border-box;
-        border: none;
-        border-radius: 0;
-        background-color: #eeeeee;
-        color: black;
-        font-size: 14px;
-    }
 }
