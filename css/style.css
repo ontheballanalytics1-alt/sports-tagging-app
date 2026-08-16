@@ -388,31 +388,161 @@
 }
 
   /* =========================
-   iPAD PORTRAIT
-   ========================= */
+   iPHONE PORTRAIT
+========================= */
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) and (orientation: portrait) {
 
+    /* MAIN PAGE */
     .container {
+        display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 15px;
+        gap: 12px;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
     }
 
-    .player-box,
+    /* =========================
+       COLUMN ORDER
+       
+       1 = MATCH REPORT
+       2 = TAGGING PANEL
+       3 = GAME FEED
+    ========================= */
+
+    /* Match Report */
+    .container > .column:nth-child(1) {
+        order: 1;
+        width: 100%;
+    }
+
+    /* Game Feed -> move to third */
+    .container > .column:nth-child(2) {
+        order: 3;
+        width: 100%;
+    }
+
+    /* Tagging Panel -> move to second */
+    .container > .column:nth-child(3) {
+        order: 2;
+        width: 100%;
+    }
+
+
+    /* =========================
+       BOX WIDTHS
+    ========================= */
+
     .match-report-box,
-    .game-feed {
-        width: 90vw;
-        max-width: 600px;
+    .game-feed,
+    .player-box {
+        width: 100%;
+        max-width: none;
         box-sizing: border-box;
+    }
+
+
+    /* =========================
+       MATCH REPORT
+    ========================= */
+
+    .match-report-box {
+        padding: 12px;
+    }
+
+    .report-heading {
+        font-size: 18px;
+        line-height: 1.1;
+        white-space: normal;
     }
 
     .progress-bar {
         width: 100%;
+        height: 20px;
+        margin-bottom: 18px;
     }
 
-    .tag-button {
-        width: 150px;
+
+    /* =========================
+       TAGGING PANEL
+    ========================= */
+
+    .player-box {
+        padding: 12px;
+    }
+
+    .player-title {
+        font-size: 28px;
+        line-height: 1.1;
+        margin-bottom: 12px;
+        white-space: nowrap;
+    }
+
+    /* First player box = main tagging buttons */
+
+    .column .player-box:first-child {
+        display: block;
+    }
+
+    .column .player-box:first-child .player-title {
+        display: block;
+        width: 100%;
+    }
+
+    .column .player-box:first-child .tag-button {
+        display: inline-block;
+        width: calc(50% - 5px);
+        height: 50px;
+        box-sizing: border-box;
+        font-size: 11px;
+        padding: 4px;
+        vertical-align: top;
+        margin-bottom: 8px;
+    }
+
+    .column .player-box:first-child br {
+        display: none;
+    }
+
+    .counter {
+        font-size: 12px;
+        margin-top: 3px;
+    }
+
+
+    /* =========================
+       BOTTOM CONTROL BOX
+    ========================= */
+
+    .column .player-box:last-child {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .column .player-box:last-child .tag-button {
+        width: 100%;
+        height: 50px;
+        box-sizing: border-box;
+        font-size: 11px;
+        padding: 4px;
+    }
+
+    .column .player-box:last-child br {
+        display: none;
+    }
+
+
+    /* =========================
+       GAME FEED
+    ========================= */
+
+    .game-feed {
+        max-height: 450px;
+        overflow-y: auto;
+        padding: 12px;
     }
 }
 
