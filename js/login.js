@@ -5,7 +5,10 @@ loginButton.addEventListener("click", function () {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    if (username === "crosskeys" && password === "password123") {
+    if (
+        (username === "crosskeys" && password === "password123") ||
+        (username === "trial" && password === "trial")
+    ) {
 
         window.location.href = "tagging.html";
 
