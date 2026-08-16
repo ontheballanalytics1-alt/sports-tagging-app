@@ -4,7 +4,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Crosskeys App</title>
+  <title>On The Ball Analytics</title>
 
   <link rel="stylesheet" href="css/style.css">
   
@@ -13,7 +13,7 @@
 <body>
 
 <img id="watermark-logo" class="watermark-logo">
-  
+
 <div class="container">
  <div class="column">
   <div class="match-report-box">
@@ -60,13 +60,17 @@
  <div class="game-feed">
   <div class="player-title" id="match-clock">00:00</div>
   <h1 class="report-heading">
-  CROSSKEYS <span id="crosskeys-score">0</span> v <span id="opposition-score">0</span> OPPOSITION</h1>
+    <span id="team-name"></span>
+    <span id="team-score">0</span> v
+    <span id="opposition-score">0</span>
+    OPPOSITION
+</h1>
    <div id="event-feed"></div>
  </div>
 </div>
  <div class="column">
   <div class="player-box">
-  <div class="player-title">CROSSKEYS </div>
+  <div class="player-title" id="button-team-name"></div>
   <button class="tag-button green-button" id="level1-attack-shot-success">
   SHOT SCORED
   <span class="counter">0</span>

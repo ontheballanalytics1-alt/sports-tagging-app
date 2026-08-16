@@ -3,6 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
 const params = new URLSearchParams(window.location.search);
 const team = params.get("team");
 
+const teamName = document.getElementById("team-name");
+const buttonTeamName = document.getElementById("button-team-name");
+
+if (team === "crosskeys") {
+    teamName.textContent = "CROSSKEYS";
+    buttonTeamName.textContent = "CROSSKEYS";
+} else if (team === "trial") {
+    teamName.textContent = "TRIAL";
+    buttonTeamName.textContent = "TRIAL";
+}
+
 const watermarkLogo = document.getElementById("watermark-logo");
 
 if (team === "crosskeys") {
@@ -57,12 +68,12 @@ restartButton.addEventListener("click", () => {
 });
 
 // SCORE UPDATE
-let crosskeysScore = 0;
+let teamScore = 0;
 let oppositionScore = 0;
 
 let history = [];
 
-const crosskeysScoreText = document.getElementById("crosskeys-score");
+const teamScoreText = document.getElementById("team-score");
 const oppositionScoreText = document.getElementById("opposition-score");
 const eventFeed = document.getElementById("event-feed");
 const oppositionButton = document.getElementById("opposition-score-btn");
@@ -72,8 +83,8 @@ function scrollGameFeedToBottom() {
     
 }
   
-function updateCrosskeysScore() {
-  crosskeysScoreText.textContent = crosskeysScore;
+function updateTeamScore() {
+  teamScoreText.textContent = teamScore;
 }
 
 function updateOppositionScore() {
@@ -237,8 +248,8 @@ function undoLastAction() {
 
         case "level1-attack-shot-success":
 
-            crosskeysScore--;
-            updateCrosskeysScore();
+            teamScore--;
+            updateTeamScore();
 
             shotScoredButton.querySelector(".counter").textContent =
             Number(shotScoredButton.querySelector(".counter").textContent) - 1;
@@ -429,9 +440,9 @@ buttons.forEach((button) => {
     
     //GAMEFEED UPDATE shot scored
     if (button.id === "level1-attack-shot-success") {
-    crosskeysScore++;
+    teamScore++;
    
-    updateCrosskeysScore();
+    updateTeamScore();
       
       eventFeed.innerHTML = `<div class="shot-scored-event">${matchClock.textContent} - SHOT SCORED</div>` +
   eventFeed.innerHTML;
