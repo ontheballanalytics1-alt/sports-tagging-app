@@ -1,5 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+const params = new URLSearchParams(window.location.search);
+const team = params.get("team");
+
+const watermarkLogo = document.getElementById("watermark-logo");
+
+if (team === "crosskeys") {
+
+    watermarkLogo.src =
+        "https://crosskeysnetballclub.co.uk/wp-content/uploads/2023/02/cropped-cropped-cropped-Crosskeys-logo-01-1-1.png";
+
+} else if (team === "trial") {
+
+    watermarkLogo.src = "images/trial-logo.png";
+
+}
+
 const buttons = document.querySelectorAll(".tag-button");
 
 const clearLastButton = document.getElementById("clear-last");
