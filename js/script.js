@@ -496,7 +496,7 @@ buttons.forEach((button) => {
     //GAMEFEED UPDATE defence rebound lost
      if (button.id === "level1-defence-rebound-lost") {
       eventFeed.innerHTML =
-     `<div class="defence-rebound-lost-event">${matchClock.textContent} - DEFENCEREBOUND LOST</div>` +
+     `<div class="defence-rebound-lost-event">${matchClock.textContent} - DEFENCE REBOUND LOST</div>` +
      eventFeed.innerHTML;
        
     }
