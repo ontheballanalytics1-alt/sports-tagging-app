@@ -431,14 +431,14 @@ buttons.forEach((button) => {
       
     //GAMEFEEWD UPDATE attacking rebound won
       if (button.id === "level1-attack-rebound-won") {
-  eventFeed.innerHTML = `<div class="attack-rebound-won-event">${matchClock.textContent} - REBOUND WON</div>`+
+  eventFeed.innerHTML = `<div class="attack-rebound-won-event">${matchClock.textContent} - ATTACK REBOUND WON</div>`+
   eventFeed.innerHTML;
       
     }
     
     //GAMEFEED UPDATE attacking rebound lost
      if (button.id === "level1-attack-rebound-lost") {
-  eventFeed.innerHTML = `<div class="attack-rebound-lost-event">${matchClock.textContent} - REBOUND LOST</div>`+
+  eventFeed.innerHTML = `<div class="attack-rebound-lost-event">${matchClock.textContent} - ATTACKREBOUND LOST</div>`+
   eventFeed.innerHTML;
        
     }
@@ -488,7 +488,7 @@ buttons.forEach((button) => {
     //GAMEFEED UPDATE defence rebound won
      if (button.id === "level1-defence-rebound-won") {
   eventFeed.innerHTML = 
-  `<div class="defence-rebound-won-event">${matchClock.textContent} - REBOUND WON</div>` +
+  `<div class="defence-rebound-won-event">${matchClock.textContent} - DEFENCE REBOUND WON</div>` +
   eventFeed.innerHTML;
        
     }
@@ -496,7 +496,7 @@ buttons.forEach((button) => {
     //GAMEFEED UPDATE defence rebound lost
      if (button.id === "level1-defence-rebound-lost") {
       eventFeed.innerHTML =
-     `<div class="defence-rebound-lost-event">${matchClock.textContent} - REBOUND LOST</div>` +
+     `<div class="defence-rebound-lost-event">${matchClock.textContent} - DEFENCEREBOUND LOST</div>` +
      eventFeed.innerHTML;
        
     }
