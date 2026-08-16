@@ -438,7 +438,7 @@ buttons.forEach((button) => {
     
     //GAMEFEED UPDATE attacking rebound lost
      if (button.id === "level1-attack-rebound-lost") {
-  eventFeed.innerHTML = `<div class="attack-rebound-lost-event">${matchClock.textContent} - ATTACKREBOUND LOST</div>`+
+  eventFeed.innerHTML = `<div class="attack-rebound-lost-event">${matchClock.textContent} - ATTACK REBOUND LOST</div>`+
   eventFeed.innerHTML;
        
     }
