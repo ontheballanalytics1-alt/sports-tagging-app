@@ -359,54 +359,45 @@
     }
 
     /* =========================
-       BOTTOM CONTROL BOX
-    ========================= */
+   TIMER / CONTROL BOX
+========================= */
 
-    .column .player-box:last-child {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
+.column .player-box:last-child {
+    display: block;
+}
 
-    .column .player-box:last-child .tag-button {
-        width: 100%;
-        height: 46px;
-        box-sizing: border-box;
-        font-size: clamp(9px, 1.1vw, 13px);
-        padding: 4px;
-    }
+/* START/STOP + RESTART */
+.timer-buttons {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 8px;
+}
 
-    .column .player-box:last-child br {
-        display: none;
-    }
+.timer-buttons .tag-button {
+    width: calc(50% - 4px);
+    flex: 0 0 calc(50% - 4px);
+    height: 46px;
+    box-sizing: border-box;
+    font-size: clamp(9px, 1.1vw, 13px);
+    padding: 4px;
+}
+
+/* CLEAR LAST */
+#clear-last {
+    display: block;
+    width: 100%;
+    height: 46px;
+    box-sizing: border-box;
+    font-size: clamp(9px, 1.1vw, 13px);
+    padding: 4px;
+}
 
     /* PROGRESS BARS */
     .progress-bar {
        width: 100%;
        box-sizing: border-box;
     }
-
-    /* =========================
-   TIMER BUTTONS
-========================= */
-
-.column:nth-child(3) .player-box:nth-child(2) {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    justify-content: center;
-    align-items: center;
-}
-
-.column:nth-child(3) .player-box:nth-child(2) .tag-button {
-    display: inline-block;
-    width: calc(50% - 4px);
-    height: 46px;
-    box-sizing: border-box;
-    flex: 0 0 calc(50% - 4px);
-    font-size: clamp(9px, 1.1vw, 13px);
-    padding: 4px;
-}
 
 }
 
@@ -536,26 +527,39 @@ iPHONE PORTRAIT
 
 
     /* =========================
-       BOTTOM CONTROL BOX
-    ========================= */
+   BOTTOM CONTROL BOX
+========================= */
 
-    .column .player-box:last-child {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
+.column .player-box:last-child {
+    display: block;
+}
 
-    .column .player-box:last-child .tag-button {
-        width: 100%;
-        height: 50px;
-        box-sizing: border-box;
-        font-size: 11px;
-        padding: 4px;
-    }
+/* START/STOP + RESTART */
+.timer-buttons {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 8px;
+}
 
-    .column .player-box:last-child br {
-        display: none;
-    }
+.timer-buttons .tag-button {
+    width: calc(50% - 4px);
+    flex: 0 0 calc(50% - 4px);
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 11px;
+    padding: 4px;
+}
+
+/* CLEAR LAST */
+#clear-last {
+    display: block;
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 11px;
+    padding: 4px;
+}
 
 
     /* =========================
@@ -567,17 +571,6 @@ iPHONE PORTRAIT
         overflow-y: auto;
         padding: 12px;
     }
-
-    .column:nth-child(3) .player-box:nth-child(2) {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-}
-
-.column:nth-child(3) .player-box:nth-child(2) .tag-button {
-    width: 50%;
-    box-sizing: border-box;
-}
 
 }
 
