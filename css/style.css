@@ -364,20 +364,19 @@
 ========================= */
 
 .column .player-box:last-child {
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
 }
 
 /* START/STOP + RESTART */
 .timer-buttons {
-    display: flex;
-    gap: 8px;
-    width: 100%;
-    margin-bottom: 8px;
+    display: contents;
 }
 
+/* ALL THREE BUTTONS */
 .timer-buttons .tag-button {
-    width: calc(50% - 4px);
-    flex: 0 0 calc(50% - 4px);
+    width: 100%;
     height: 46px;
     box-sizing: border-box;
     font-size: clamp(9px, 1.1vw, 13px);
@@ -386,12 +385,12 @@
 
 /* CLEAR LAST */
 #clear-last {
-    display: block;
     width: 100%;
     height: 46px;
     box-sizing: border-box;
     font-size: clamp(9px, 1.1vw, 13px);
     padding: 4px;
+    grid-column: 1 / 3;
 }
 
     /* PROGRESS BARS */
