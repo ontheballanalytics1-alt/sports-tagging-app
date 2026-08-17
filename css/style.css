@@ -387,19 +387,26 @@
     }
 
     /* =========================
-    TIMER BUTTONS
-    ========================= */
+   TIMER BUTTONS
+========================= */
 
-    .column:nth-child(3) .player-box:nth-child(2) {
-     display: flex;
-     gap: 8px;
-     justify-content: center;
-   }
+.column:nth-child(3) .player-box:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
 
-    .column:nth-child(3) .player-box:nth-child(2) .tag-button {
-     width: 50%;
-     box-sizing: border-box;
-   }
+.column:nth-child(3) .player-box:nth-child(2) .tag-button {
+    display: inline-block;
+    width: calc(50% - 4px);
+    height: 46px;
+    box-sizing: border-box;
+    flex: 0 0 calc(50% - 4px);
+    font-size: clamp(9px, 1.1vw, 13px);
+    padding: 4px;
+}
 
 }
 
