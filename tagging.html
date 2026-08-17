@@ -18,15 +18,15 @@
  <div class="column">
   <div class="match-report-box">
    <div class="player-title">MATCH REPORT</div>
-   <h3 class="report-heading">SHOT SUCCESS</h3>
-   <div class="progress-bar">
-   <div class="progress-fill" id="level1-progress-fill"></div>
-   <h3 class="progress-text" id="level1-shot-percentage">0%</h3>
-   </div>
    <h3 class="report-heading">ATTACKING REBOUND</h3>
    <div class="progress-bar">
    <div class="progress-fill" id="level1-attack-rebound-fill"></div>
    <h3 class="progress-text" id="level1-attack-rebound-percentage">0%</h3>
+   </div>
+   <h3 class="report-heading">SHOT SUCCESS</h3>
+   <div class="progress-bar">
+   <div class="progress-fill" id="level1-progress-fill"></div>
+   <h3 class="progress-text" id="level1-shot-percentage">0%</h3>
    </div>
    <h3 class="report-heading">FEED SUCCESS</h3>
    <div class="progress-bar">
@@ -71,17 +71,6 @@
  <div class="column">
   <div class="player-box">
   <div class="player-title" id="button-team-name"></div>
-  <button class="tag-button green-button" id="level1-attack-shot-success">
-  SHOT SCORED
-  <span class="counter">0</span>
-  </button>
-
-  <button class="tag-button red-button" id="level1-attack-shot-missed">
-  SHOT MISSED
-  <span class="counter">0</span>
-  </button>
-
-  <br><br>
 
   <button class="tag-button green-button" id="level1-attack-rebound-won">
   A REBOUND WON
@@ -90,6 +79,18 @@
 
   <button class="tag-button red-button" id="level1-attack-rebound-lost">
   A REBOUND LOST
+  <span class="counter">0</span>
+  </button>
+
+  <br><br>
+
+  <button class="tag-button green-button" id="level1-attack-shot-success">
+  SHOT SCORED
+  <span class="counter">0</span>
+  </button>
+
+  <button class="tag-button red-button" id="level1-attack-shot-missed">
+  SHOT MISSED
   <span class="counter">0</span>
   </button>
 
@@ -140,28 +141,31 @@
   D REBOUND LOST
   <span class="counter">0</span>
   </button>
-  
+
+  <br><br>
+
+  <button class="tag-button red-button" id="opposition-score-btn">
+  OPPO SCORE
+  <span class="counter">0</span>
+  </button>
+    
   </div>
    
   <div class="player-box">
-   <button class="tag-button green-button" id="start-match">
-   START/STOP MATCH
-   </button>
+  <button class="tag-button green-button" id="start-match">
+  START/STOP TIMER
+  </button>
 
-   <button class="tag-button red-button" id="opposition-score-btn">
-   OPPO SCORE
-     <span class="counter">0</span>
-   </button>
-    
-    <br><br>
-    
-    <button class="tag-button grey-button" id="clock-restart">
-   RESTART TIMER
-   </button>
+  <button class="tag-button grey-button" id="clock-restart">
+  RESTART TIMER
+  </button>
 
-   <button class="tag-button black-button" id="clear-last">
-   CLEAR LAST
-   </button>
+  </div>
+
+  <div class="player-box">
+  <button class="tag-button black-button" id="clear-last">
+  CLEAR LAST
+  </button>
     
   </div>
  </div>
