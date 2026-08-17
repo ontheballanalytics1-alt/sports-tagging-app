@@ -287,9 +287,10 @@
     }
 
     /* BUTTONS */
-    .container > .column:nth-child(3) {
-        flex: 0 0 32%;
-    }
+.container > .column:nth-child(3) {
+    flex: 1;
+    min-width: 0;
+}
 
     /* BOXES FILL THEIR COLUMN */
     .match-report-box,
