@@ -461,12 +461,13 @@
 }
 
     /* BOXES FILL THEIR COLUMN */
-    .match-report-box,
-    .game-feed,
-    .player-box {
-        width: 100%;
-        box-sizing: border-box;
-    }
+.match-report-box,
+.gs-box,
+.game-feed,
+.player-box {
+    width: 100%;
+    box-sizing: border-box;
+}
 
     /* PLAYER BOX */
     .player-box {
