@@ -451,9 +451,19 @@
 }
 
     /* GAME FEED */
-    .container > .column:nth-child(2) {
-        flex: 0 0 34%;
-    }
+.container > .column:nth-child(2) {
+    flex: 0 0 32%;
+    width: 32%;
+    min-width: 0;
+}
+
+/* GAME FEED BOX */
+.container > .column:nth-child(2) .game-feed {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
 
     /* BUTTONS */
 .container > .column:nth-child(3) {
