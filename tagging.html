@@ -15,7 +15,15 @@
 <img id="watermark-logo" class="watermark-logo">
 
 <div class="container">
- <div class="column">
+ <div class="column match-report-column">
+  <div class="testing-file-tabs">
+   <div class="testing-file-tab" id="match-report-tab">
+    MATCH REPORT
+   </div>
+   <div class="testing-file-tab" id="gs-tab">
+    GS
+   </div>
+  </div>
   <div class="match-report-box">
    <div class="player-title">MATCH REPORT</div>
    <h3 class="report-heading">ATTACKING REBOUND</h3>
@@ -54,7 +62,17 @@
    <h3 class="progress-text" id="level1-unforced-error-count">0</h3>
    </div>
   </div>
- </div>  
+
+   <div class="gs-box">
+    <div class="player-title editable-player-name" id="gs-name" contenteditable="true">GS</div>
+    <h3 class="report-heading">ATTACKING REBOUND</h3>
+    <div class="progress-bar">
+     <div class="progress-fill" id="gs-attack-rebound-fill"></div>
+     <h3 class="progress-text" id="gs-attack-rebound-percentage">0%</h3>
+   </div>
+  </div>
+ </div>
+
 
 <div class="column">
  <div class="game-feed">
@@ -68,6 +86,15 @@
    <div id="event-feed"></div>
  </div>
 </div>
+
+<div class="column" id="player-toggles-column">
+  <div class="player-toggles">
+    <button class="player-lock locked" id="player-lock-toggle"></button>
+   <button class="player-toggle" id="gs-toggle">GS</button>
+   <button class="player-toggle" id="1-toggle">1</button>
+  </div>
+</div>
+
  <div class="column">
   <div class="player-box">
   <div class="player-title" id="button-team-name"></div>

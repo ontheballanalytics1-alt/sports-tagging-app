@@ -1,10 +1,186 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+// LOGIN SECURITY
+const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes for testing
+
+let idleTimer;
+
+function logoutUser() {
+  sessionStorage.removeItem("loggedIn");
+  sessionStorage.removeItem("lastActivity");
+  window.location.replace("index.html");
+}
+
+function checkLoginSession() {
+
+  const loggedIn = sessionStorage.getItem("loggedIn");
+  const lastActivity = Number(sessionStorage.getItem("lastActivity"));
+
+  if (loggedIn !== "true" || !lastActivity) {
+    logoutUser();
+    return false;
+  }
+
+  // Check whether the user has been inactive too long
+  if (Date.now() - lastActivity >= SESSION_TIMEOUT) {
+    logoutUser();
+    return false;
+  }
+
+  return true;
+}
+
+function resetIdleTimer() {
+
+  // Record the user's latest activity
+  sessionStorage.setItem("lastActivity", Date.now());
+
+  clearTimeout(idleTimer);
+
+  idleTimer = setTimeout(() => {
+    logoutUser();
+  }, SESSION_TIMEOUT);
+}
+
+// Check login when the page loads
+if (!checkLoginSession()) {
+  return;
+}
+
+// Start the inactivity timer
+resetIdleTimer();
+
+// Reset inactivity timer whenever the user interacts
+[
+  "click",
+  "touchstart",
+  "pointerdown",
+  "keydown"
+].forEach((eventName) => {
+  document.addEventListener(eventName, resetIdleTimer);
+});
+
+// Check again when using browser Back/Forward
+window.addEventListener("pageshow", () => {
+
+  if (!checkLoginSession()) {
+    return;
+  }
+
+});
+
 const params = new URLSearchParams(window.location.search);
 const team = params.get("team");
 
 const teamName = document.getElementById("team-name");
 const buttonTeamName = document.getElementById("button-team-name");
+
+const playerTogglesColumn = document.getElementById("player-toggles-column");
+const matchReportTab = document.getElementById("match-report-tab");
+const gsTab = document.getElementById("gs-tab");
+const matchReportBox = document.querySelector(".match-report-box");
+const gsBox = document.querySelector(".gs-box");
+
+const gsToggle = document.getElementById("gs-toggle");
+const playerLock = document.getElementById("player-lock-toggle");
+
+const gsName = document.getElementById("gs-name");
+
+gsName.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    gsName.blur();
+  }
+});
+
+if (team === "testing") {
+  matchReportTab.style.display = "flex";
+  gsTab.style.display = "flex";
+  matchReportBox.style.display = "block";
+  gsBox.style.display = "none";
+  matchReportTab.classList.add("active");
+  gsTab.classList.remove("active");
+
+  matchReportTab.addEventListener("click", () => {
+  matchReportBox.style.display = "block";
+  gsBox.style.display = "none";
+
+  matchReportTab.classList.add("active");
+  gsTab.classList.remove("active");
+});
+
+gsTab.addEventListener("click", () => {
+  matchReportBox.style.display = "none";
+  gsBox.style.display = "block";
+
+  gsTab.classList.add("active");
+  matchReportTab.classList.remove("active");
+});
+
+  // GS toggle
+  gsToggle.addEventListener("click", () => {
+    gsToggle.classList.toggle("active");
+  });
+
+  // Player lock
+  playerLock.addEventListener("click", () => {
+    playerLock.classList.toggle("locked");
+  });
+
+  // PLAYER TOGGLE CLICK-TO-SWAP
+const playerToggles = document.querySelectorAll(".player-toggle");
+
+let selectedPlayer = null;
+
+playerToggles.forEach((toggle) => {
+
+  toggle.addEventListener("click", () => {
+
+    // Don't allow swapping when locked
+    if (playerLock.classList.contains("locked")) {
+      return;
+    }
+
+    // First player clicked
+    if (selectedPlayer === null) {
+
+      selectedPlayer = toggle;
+      toggle.classList.add("active");
+
+      return;
+    }
+
+    // Clicking the same player cancels selection
+    if (selectedPlayer === toggle) {
+
+      toggle.classList.remove("active");
+      selectedPlayer = null;
+
+      return;
+    }
+
+    // Swap the player names
+    const tempText = selectedPlayer.textContent;
+    selectedPlayer.textContent = toggle.textContent;
+    toggle.textContent = tempText;
+
+    // Turn both toggles off
+    selectedPlayer.classList.remove("active");
+    toggle.classList.remove("active");
+
+    // Clear selection
+    selectedPlayer = null;
+
+  });
+
+});
+
+} else {
+
+  // Hide player toggles on Crosskeys and Trial
+  playerTogglesColumn.style.display = "none";
+
+}
 
 if (team === "crosskeys") {
     teamName.textContent = "CROSSKEYS";
@@ -12,6 +188,9 @@ if (team === "crosskeys") {
 } else if (team === "trial") {
     teamName.textContent = "TRIAL";
     buttonTeamName.textContent = "TRIAL";
+} else if (team === "testing") {
+    teamName.textContent = "TESTING";
+    buttonTeamName.textContent = "TESTING";
 }
 
 const watermarkLogo = document.getElementById("watermark-logo");
@@ -119,6 +298,8 @@ const reboundWon = document.querySelector("#level1-attack-rebound-won");
 const reboundLost = document.querySelector("#level1-attack-rebound-lost");
 const reboundText = document.querySelector("#level1-attack-rebound-percentage");
 const reboundFill = document.querySelector("#level1-attack-rebound-fill");
+let gsReboundWon = 0;
+let gsReboundLost = 0;
 
 function updateAttackReboundPercentage() {
   const won = Number(reboundWon.querySelector(".counter").textContent);
@@ -134,6 +315,25 @@ function updateAttackReboundPercentage() {
   const percentage = Math.round((won / total) * 100);
   reboundText.textContent = percentage + "%";
   reboundFill.style.width = percentage + "%";
+}
+
+function updateGSAttackReboundPercentage() {
+    const total = Number(reboundWon.querySelector(".counter").textContent) +
+                  Number(reboundLost.querySelector(".counter").textContent);
+
+    const gsText = document.querySelector("#gs-attack-rebound-percentage");
+    const gsFill = document.querySelector("#gs-attack-rebound-fill");
+
+    if (total === 0) {
+        gsText.textContent = "0%";
+        gsFill.style.width = "0%";
+        return;
+    }
+
+    const percentage = Math.round((gsReboundWon / total) * 100);
+
+    gsText.textContent = percentage + "%";
+    gsFill.style.width = percentage + "%";
 }
 
 
@@ -267,16 +467,24 @@ function undoLastAction() {
 
         case "level1-attack-rebound-won":
 
-            reboundWon.querySelector(".counter").textContent =
-            Number(reboundWon.querySelector(".counter").textContent) - 1;
+    reboundWon.querySelector(".counter").textContent =
+    Number(reboundWon.querySelector(".counter").textContent) - 1;
 
-            break;
+    if (lastAction.gs) {
+        gsReboundWon--;
+    }
+
+    break;
 
 
         case "level1-attack-rebound-lost":
 
             reboundLost.querySelector(".counter").textContent =
             Number(reboundLost.querySelector(".counter").textContent) - 1;
+
+            if (lastAction.gs) {
+            gsReboundLost--;
+}
 
             break;
 
@@ -372,10 +580,11 @@ function undoLastAction() {
 
     // refresh percentages
     updateShotPercentage();
-    updateAttackReboundPercentage();
-    updateFeedSuccessPercentage();
-    updateCentreSuccessPercentage();
-    updateDefenceReboundPercentage();
+updateAttackReboundPercentage();
+updateGSAttackReboundPercentage();
+updateFeedSuccessPercentage();
+updateCentreSuccessPercentage();
+updateDefenceReboundPercentage();
 
 }
 
@@ -404,11 +613,13 @@ buttons.forEach((button) => {
 
    history.push({
     button: button.id,
-    time: matchClock.textContent
+    time: matchClock.textContent,
+    gs: gsToggle.classList.contains("active")
 });
 
     updateShotPercentage();
     updateAttackReboundPercentage();
+    updateGSAttackReboundPercentage();
     updateFeedSuccessPercentage();
     updateCentreSuccessPercentage();
     
@@ -443,30 +654,63 @@ buttons.forEach((button) => {
     teamScore++;
    
     updateTeamScore();
+
+    const playerPrefix = gsToggle.classList.contains("active") ? "GS " : "";
       
-      eventFeed.innerHTML = `<div class="shot-scored-event">${matchClock.textContent} - SHOT SCORED</div>` +
+      eventFeed.innerHTML = `<div class="shot-scored-event">${matchClock.textContent} - ${playerPrefix}SHOT SCORED</div>` +
   eventFeed.innerHTML;
+
+  // Turn GS toggle off after the action
+  gsToggle.classList.remove("active");
       
     } 
     
     //GAMEFEED UPDATE shot missed
     if (button.id === "level1-attack-shot-missed") {
-  eventFeed.innerHTML = `<div class="shot-missed-event">${matchClock.textContent} - SHOT MISSED</div>`+
+
+      const playerPrefix = gsToggle.classList.contains("active") ? "GS " : "";
+
+  eventFeed.innerHTML = `<div class="shot-missed-event">${matchClock.textContent} - ${playerPrefix}SHOT MISSED</div>`+
   eventFeed.innerHTML;
+
+  // Turn GS toggle off after the action
+  gsToggle.classList.remove("active");
       
     }
       
-    //GAMEFEEWD UPDATE attacking rebound won
-      if (button.id === "level1-attack-rebound-won") {
-  eventFeed.innerHTML = `<div class="attack-rebound-won-event">${matchClock.textContent} - ATTACK REBOUND WON</div>`+
-  eventFeed.innerHTML;
-      
-    }
+    // GAMEFEED UPDATE attacking rebound won
+if (button.id === "level1-attack-rebound-won") {
+
+  const playerPrefix = gsToggle.classList.contains("active") ? "GS " : "";
+  if (gsToggle.classList.contains("active")) {
+  gsReboundWon++;
+  updateGSAttackReboundPercentage();
+}
+
+  eventFeed.innerHTML =
+    `<div class="attack-rebound-won-event">${matchClock.textContent} - ${playerPrefix}ATTACK REBOUND WON</div>` +
+    eventFeed.innerHTML;
+
+  // Turn GS toggle off after the action
+  gsToggle.classList.remove("active");
+  
+}
     
     //GAMEFEED UPDATE attacking rebound lost
      if (button.id === "level1-attack-rebound-lost") {
-  eventFeed.innerHTML = `<div class="attack-rebound-lost-event">${matchClock.textContent} - ATTACK REBOUND LOST</div>`+
+
+      const playerPrefix = gsToggle.classList.contains("active") ? "GS " : "";
+
+      if (gsToggle.classList.contains("active")) {
+    gsReboundLost++;
+    updateGSAttackReboundPercentage();
+  }
+
+  eventFeed.innerHTML = `<div class="attack-rebound-lost-event">${matchClock.textContent} - ${playerPrefix}ATTACK REBOUND LOST</div>`+
   eventFeed.innerHTML;
+
+  // Turn GS toggle off after the action
+  gsToggle.classList.remove("active");
        
     }
     

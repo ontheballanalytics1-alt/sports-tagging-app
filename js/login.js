@@ -2,16 +2,29 @@ const loginButton = document.getElementById("login-button");
 
 loginButton.addEventListener("click", function () {
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
     if (username === "crosskeys" && password === "password123") {
 
-        window.location.href = "tagging.html?team=crosskeys";
+        sessionStorage.setItem("loggedIn", "true");
+        sessionStorage.setItem("lastActivity", Date.now());
+
+        window.location.replace("tagging.html?team=crosskeys");
 
     } else if (username === "trial" && password === "trial") {
 
-        window.location.href = "tagging.html?team=trial";
+        sessionStorage.setItem("loggedIn", "true");
+        sessionStorage.setItem("lastActivity", Date.now());
+
+        window.location.replace("tagging.html?team=trial");
+
+    } else if (username === "testing" && password === "testing") {
+
+        sessionStorage.setItem("loggedIn", "true");
+        sessionStorage.setItem("lastActivity", Date.now());
+
+        window.location.replace("tagging.html?team=testing");
 
     } else {
 
