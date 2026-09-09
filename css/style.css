@@ -452,8 +452,8 @@
 
     /* GAME FEED */
 .container > .column:nth-child(2) {
-    flex: 0 0 32%;
-    width: 32%;
+    flex: 1 1 0;
+    width: 0;
     min-width: 0;
 }
 
@@ -463,6 +463,20 @@
     min-width: 0;
     max-width: 100%;
     box-sizing: border-box;
+}
+
+/* PLAYER TOGGLES */
+.container > .column:nth-child(3) {
+    flex: 0 0 46px;
+    width: 46px;
+    min-width: 46px;
+}
+
+/* TAGGING PANEL */
+.container > .column:nth-child(4) {
+    flex: 0 0 310px;
+    width: 310px;
+    min-width: 310px;
 }
 
     /* BUTTONS */
