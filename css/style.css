@@ -469,6 +469,13 @@
     box-sizing: border-box;
 }
 
+/* TESTING MATCH REPORT / GS WIDTH */
+.match-report-column .match-report-box,
+.match-report-column .gs-box {
+    width: 350px;
+    flex-shrink: 0;
+}
+
     /* PLAYER BOX */
     .player-box {
         padding: 12px;
