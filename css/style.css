@@ -452,7 +452,7 @@
 
     /* GAME FEED */
     .container > .column:nth-child(2) {
-        flex: 0 0 37%;
+        flex: 0 0 34%;
     }
 
     /* BUTTONS */
