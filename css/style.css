@@ -472,8 +472,10 @@
 /* TESTING MATCH REPORT / GS WIDTH */
 .match-report-column .match-report-box,
 .match-report-column .gs-box {
-    width: 300px;
-    flex: 0 0 350px;
+    width: 300px !important;
+    min-width: 300px;
+    max-width: 300px;
+    flex: 0 0 300px;
     box-sizing: border-box;
 }
 
