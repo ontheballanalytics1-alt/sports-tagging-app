@@ -93,6 +93,10 @@ gsName.addEventListener("keydown", (event) => {
   }
 });
 
+gsName.addEventListener("input", () => {
+    gsToggle.textContent = gsName.textContent.trim() || "GS";
+});
+
 if (team === "testing") {
   matchReportTab.style.display = "flex";
   gsTab.style.display = "flex";
@@ -276,6 +280,9 @@ const shotMissedButton = document.querySelector("#level1-attack-shot-missed");
 const shotPercentageText = document.querySelector("#level1-shot-percentage");
 const shotProgressFill = document.querySelector("#level1-progress-fill");
 
+let gsShotSuccess = 0;
+let gsShotMissed = 0;
+
 function updateShotPercentage() {
   const scored = Number(shotScoredButton.querySelector(".counter").textContent);
   const missed = Number(shotMissedButton.querySelector(".counter").textContent);
@@ -292,12 +299,31 @@ function updateShotPercentage() {
   shotProgressFill.style.width = percentage + "%";
 }
 
+function updateGSShotPercentage() {
+    const total = gsShotSuccess + gsShotMissed;
+
+    const gsText = document.querySelector("#gs-shot-percentage");
+    const gsFill = document.querySelector("#gs-shot-fill");
+
+    if (total === 0) {
+        gsText.textContent = "0%";
+        gsFill.style.width = "0%";
+        return;
+    }
+
+    const percentage = Math.round((gsShotSuccess / total) * 100);
+
+    gsText.textContent = percentage + "%";
+    gsFill.style.width = percentage + "%";
+}
+
 
 // ATTACK REBOUND
 const reboundWon = document.querySelector("#level1-attack-rebound-won");
 const reboundLost = document.querySelector("#level1-attack-rebound-lost");
 const reboundText = document.querySelector("#level1-attack-rebound-percentage");
 const reboundFill = document.querySelector("#level1-attack-rebound-fill");
+
 let gsReboundWon = 0;
 let gsReboundLost = 0;
 
@@ -336,12 +362,14 @@ function updateGSAttackReboundPercentage() {
     gsFill.style.width = percentage + "%";
 }
 
-
 // FEED SUCCESS
 const feedSuccess = document.querySelector("#level1-feed-success");
 const feedMissed = document.querySelector("#level1-feed-missed");
 const feedText = document.querySelector("#level1-feed-success-percentage");
 const feedFill = document.querySelector("#level1-feed-success-fill");
+
+let gsFeedSuccess = 0;
+let gsFeedMissed = 0;
 
 function updateFeedSuccessPercentage() {
   const won = Number(feedSuccess.querySelector(".counter").textContent);
@@ -357,6 +385,24 @@ function updateFeedSuccessPercentage() {
   const percentage = Math.round((won / total) * 100);
   feedText.textContent = percentage + "%";
   feedFill.style.width = percentage + "%";
+}
+
+function updateGSFeedSuccessPercentage() {
+    const total = gsFeedSuccess + gsFeedMissed;
+
+    const gsText = document.querySelector("#gs-feed-success-percentage");
+    const gsFill = document.querySelector("#gs-feed-success-fill");
+
+    if (total === 0) {
+        gsText.textContent = "0%";
+        gsFill.style.width = "0%";
+        return;
+    }
+
+    const percentage = Math.round((gsFeedSuccess / total) * 100);
+
+    gsText.textContent = percentage + "%";
+    gsFill.style.width = percentage + "%";
 }
 
 
@@ -448,21 +494,29 @@ function undoLastAction() {
 
         case "level1-attack-shot-success":
 
-            teamScore--;
-            updateTeamScore();
+    teamScore--;
+    updateTeamScore();
 
-            shotScoredButton.querySelector(".counter").textContent =
-            Number(shotScoredButton.querySelector(".counter").textContent) - 1;
+    shotScoredButton.querySelector(".counter").textContent =
+    Number(shotScoredButton.querySelector(".counter").textContent) - 1;
 
-            break;
+    if (lastAction.gs) {
+        gsShotSuccess--;
+    }
+
+    break;
 
 
         case "level1-attack-shot-missed":
 
-            shotMissedButton.querySelector(".counter").textContent =
-            Number(shotMissedButton.querySelector(".counter").textContent) - 1;
+    shotMissedButton.querySelector(".counter").textContent =
+    Number(shotMissedButton.querySelector(".counter").textContent) - 1;
 
-            break;
+    if (lastAction.gs) {
+        gsShotMissed--;
+    }
+
+    break;
 
 
         case "level1-attack-rebound-won":
@@ -490,19 +544,24 @@ function undoLastAction() {
 
 
         case "level1-feed-success":
+    feedSuccess.querySelector(".counter").textContent =
+    Number(feedSuccess.querySelector(".counter").textContent) - 1;
 
-            feedSuccess.querySelector(".counter").textContent =
-            Number(feedSuccess.querySelector(".counter").textContent) - 1;
+    if (lastAction.gs) {
+        gsFeedSuccess--;
+    }
 
-            break;
+    break;
 
+case "level1-feed-missed":
+    feedMissed.querySelector(".counter").textContent =
+    Number(feedMissed.querySelector(".counter").textContent) - 1;
 
-        case "level1-feed-missed":
+    if (lastAction.gs) {
+        gsFeedMissed--;
+    }
 
-            feedMissed.querySelector(".counter").textContent =
-            Number(feedMissed.querySelector(".counter").textContent) - 1;
-
-            break;
+    break;
 
 
         case "level1-centre-success":
@@ -579,9 +638,11 @@ function undoLastAction() {
 
 
     // refresh percentages
-    updateShotPercentage();
+updateShotPercentage();
 updateAttackReboundPercentage();
 updateGSAttackReboundPercentage();
+updateGSShotPercentage();
+updateGSFeedSuccessPercentage();
 updateFeedSuccessPercentage();
 updateCentreSuccessPercentage();
 updateDefenceReboundPercentage();
@@ -650,33 +711,48 @@ buttons.forEach((button) => {
     }
     
     //GAMEFEED UPDATE shot scored
-    if (button.id === "level1-attack-shot-success") {
+if (button.id === "level1-attack-shot-success") {
+
+    const isGS = gsToggle.classList.contains("active");
+
     teamScore++;
-   
     updateTeamScore();
 
-    const playerPrefix = gsToggle.classList.contains("active") ? "GS " : "";
-      
-      eventFeed.innerHTML = `<div class="shot-scored-event">${matchClock.textContent} - ${playerPrefix}SHOT SCORED</div>` +
-  eventFeed.innerHTML;
-
-  // Turn GS toggle off after the action
-  gsToggle.classList.remove("active");
-      
-    } 
-    
-    //GAMEFEED UPDATE shot missed
-    if (button.id === "level1-attack-shot-missed") {
-
-      const playerPrefix = gsToggle.classList.contains("active") ? "GS " : "";
-
-  eventFeed.innerHTML = `<div class="shot-missed-event">${matchClock.textContent} - ${playerPrefix}SHOT MISSED</div>`+
-  eventFeed.innerHTML;
-
-  // Turn GS toggle off after the action
-  gsToggle.classList.remove("active");
-      
+    if (isGS) {
+        gsShotSuccess++;
+        updateGSShotPercentage();
     }
+
+    const playerPrefix = isGS ? "GS " : "";
+
+    eventFeed.innerHTML =
+        `<div class="shot-scored-event">${matchClock.textContent} - ${playerPrefix}SHOT SCORED</div>` +
+        eventFeed.innerHTML;
+
+    // Turn GS toggle off after the action
+    gsToggle.classList.remove("active");
+}
+
+
+//GAMEFEED UPDATE shot missed
+if (button.id === "level1-attack-shot-missed") {
+
+    const isGS = gsToggle.classList.contains("active");
+
+    if (isGS) {
+        gsShotMissed++;
+        updateGSShotPercentage();
+    }
+
+    const playerPrefix = isGS ? "GS " : "";
+
+    eventFeed.innerHTML =
+        `<div class="shot-missed-event">${matchClock.textContent} - ${playerPrefix}SHOT MISSED</div>` +
+        eventFeed.innerHTML;
+
+    // Turn GS toggle off after the action
+    gsToggle.classList.remove("active");
+}
       
     // GAMEFEED UPDATE attacking rebound won
 if (button.id === "level1-attack-rebound-won") {
@@ -716,17 +792,41 @@ if (button.id === "level1-attack-rebound-won") {
     
     //GAMEFEED UPDATE feed success
      if (button.id === "level1-feed-success") {
-  eventFeed.innerHTML = `<div class="feed-success-event">${matchClock.textContent} - FEED SUCCESS</div>`+
-  eventFeed.innerHTML;
-       
-    }
+
+  const isGS = gsToggle.classList.contains("active");
+
+  if (isGS) {
+    gsFeedSuccess++;
+    updateGSFeedSuccessPercentage();
+  }
+
+  const playerPrefix = isGS ? "GS " : "";
+
+  eventFeed.innerHTML =
+    `<div class="feed-success-event">${matchClock.textContent} - ${playerPrefix}FEED SUCCESS</div>` +
+    eventFeed.innerHTML;
+
+  gsToggle.classList.remove("active");
+}
     
     //GAMEFEED UPDATE feed missed
      if (button.id === "level1-feed-missed") {
-  eventFeed.innerHTML = `<div class="feed-missed-event">${matchClock.textContent} - FEED FAIL</div>`+
-  eventFeed.innerHTML;
-       
-    }
+
+  const isGS = gsToggle.classList.contains("active");
+
+  if (isGS) {
+    gsFeedMissed++;
+    updateGSFeedSuccessPercentage();
+  }
+
+  const playerPrefix = isGS ? "GS " : "";
+
+  eventFeed.innerHTML =
+    `<div class="feed-missed-event">${matchClock.textContent} - ${playerPrefix}FEED FAIL</div>` +
+    eventFeed.innerHTML;
+
+  gsToggle.classList.remove("active");
+}
     
     //GAMEFEED UPDATE centre success
      if (button.id === "level1-centre-success") {
