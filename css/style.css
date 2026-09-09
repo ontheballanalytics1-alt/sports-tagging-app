@@ -445,9 +445,10 @@
     }
 
     /* MATCH REPORT */
-    .container > .column:nth-child(1) {
-        flex: 0 0 29%;
-    }
+.container > .column:nth-child(1) {
+    flex: 0 0 335px;
+    width: 335px;
+}
 
     /* GAME FEED */
     .container > .column:nth-child(2) {
