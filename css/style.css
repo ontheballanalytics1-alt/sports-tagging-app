@@ -473,7 +473,8 @@
 .match-report-column .match-report-box,
 .match-report-column .gs-box {
     width: 350px;
-    flex-shrink: 0;
+    flex: 0 0 350px;
+    box-sizing: border-box;
 }
 
     /* PLAYER BOX */
