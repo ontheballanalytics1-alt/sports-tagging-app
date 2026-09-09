@@ -479,12 +479,6 @@
     min-width: 310px;
 }
 
-    /* BUTTONS */
-.container > .column:nth-child(3) {
-    flex: 1;
-    min-width: 0;
-}
-
     /* BOXES FILL THEIR COLUMN */
 .match-report-box,
 .gs-box,
