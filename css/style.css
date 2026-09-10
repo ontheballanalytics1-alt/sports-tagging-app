@@ -74,7 +74,11 @@
 
 #match-report-tab {
     position: relative;
-    z-index: 8;
+    z-index: 2;
+}
+
+#match-report-tab.active {
+    z-index: 9;
 }
 
 #gs-tab,
@@ -92,25 +96,65 @@
     position: relative;
 }
 
-#match-report-tab.active,
-#gs-tab.active,
-#ga-tab.active,
-#wa-tab.active,
-#c-tab.active,
-#wd-tab.active,
-#gd-tab.active,
-#gk-tab.active,
-[id="1-tab"].active,
-[id="2-tab"].active,
-[id="3-tab"].active,
-[id="4-tab"].active,
+#match-report-tab.active {
+    z-index: 8;
+}
+
+#gs-tab.active {
+    z-index: 8;
+}
+
+#ga-tab.active {
+    z-index: 8;
+}
+
+#wa-tab.active {
+    z-index: 8;
+}
+
+#c-tab.active {
+    z-index: 8;
+}
+
+#wd-tab.active {
+    z-index: 8;
+}
+
+#gd-tab.active {
+    z-index: 8;
+}
+
+#gk-tab.active {
+    z-index: 8;
+}
+
+[id="1-tab"].active {
+    z-index: 8;
+}
+
+[id="2-tab"].active {
+    z-index: 8;
+}
+
+[id="3-tab"].active {
+    z-index: 8;
+}
+
+[id="4-tab"].active {
+    z-index: 8;
+}
+
 [id="5-tab"].active {
-    z-index: 3;
+    z-index: 8;
 }
 
 #gs-tab {
     margin-top: -10px;
     z-index: 2;
+}
+
+#gs-tab.active {
+    z-index: 8;
 }
 
 #ga-tab {
@@ -173,7 +217,11 @@
    MATCH REPORT / GS BOXES
 ========================= */
 
-.match-report-box,
+.match-report-box {
+    position: relative;
+    z-index: 2;
+}
+
 .gs-box {
     position: relative;
     z-index: 2;
