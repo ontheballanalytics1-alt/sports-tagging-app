@@ -78,8 +78,23 @@ const buttonTeamName = document.getElementById("button-team-name");
 const playerTogglesColumn = document.getElementById("player-toggles-column");
 const matchReportTab = document.getElementById("match-report-tab");
 const gsTab = document.getElementById("gs-tab");
+
 const matchReportBox = document.querySelector(".match-report-box");
 const gsBox = document.querySelector(".gs-box");
+
+const playerTabs = [
+  document.getElementById("ga-tab"),
+  document.getElementById("wa-tab"),
+  document.getElementById("c-tab"),
+  document.getElementById("wd-tab"),
+  document.getElementById("gd-tab"),
+  document.getElementById("gk-tab"),
+  document.getElementById("1-tab"),
+  document.getElementById("2-tab"),
+  document.getElementById("3-tab"),
+  document.getElementById("4-tab"),
+  document.getElementById("5-tab")
+];
 
 const gsToggle = document.getElementById("gs-toggle");
 const playerLock = document.getElementById("player-lock-toggle");
@@ -94,119 +109,206 @@ gsName.addEventListener("keydown", (event) => {
 });
 
 gsName.addEventListener("input", () => {
-    gsToggle.textContent = gsName.textContent.trim() || "GS";
+  gsToggle.textContent = gsName.textContent.trim() || "GS";
 });
 
 if (team === "testing") {
+
+  // Show all tabs
   matchReportTab.style.display = "flex";
   gsTab.style.display = "flex";
+
+  playerTabs.forEach((tab) => {
+    tab.style.display = "flex";
+  });
+
+
+  // Hide all player containers for now
   matchReportBox.style.display = "block";
   gsBox.style.display = "none";
+
+
+  // MATCH REPORT is active by default
   matchReportTab.classList.add("active");
   gsTab.classList.remove("active");
+
+  playerTabs.forEach((tab) => {
+    tab.classList.remove("active");
+  });
+
+
+  // ==================================================
+  // MATCH REPORT TAB
+  // ==================================================
 
   matchReportTab.addEventListener("click", () => {
-  matchReportBox.style.display = "block";
-  gsBox.style.display = "none";
 
-  matchReportTab.classList.add("active");
-  gsTab.classList.remove("active");
-});
+    matchReportBox.style.display = "block";
+    gsBox.style.display = "none";
 
-gsTab.addEventListener("click", () => {
-  matchReportBox.style.display = "none";
-  gsBox.style.display = "block";
+    matchReportTab.classList.add("active");
+    gsTab.classList.remove("active");
 
-  gsTab.classList.add("active");
-  matchReportTab.classList.remove("active");
-});
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
 
-  // GS toggle
-  gsToggle.addEventListener("click", () => {
-    gsToggle.classList.toggle("active");
   });
+
+
+  // ==================================================
+  // GS TAB
+  // ==================================================
+
+  gsTab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "block";
+
+    gsTab.classList.add("active");
+    matchReportTab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+  });
+
+
+  // ==================================================
+  // PLAYER TABS
+  // ==================================================
+
+  playerTabs.forEach((tab) => {
+
+    tab.addEventListener("click", () => {
+
+      // Containers for these tabs haven't been created yet.
+      // For now, just make the selected tab active.
+
+      matchReportTab.classList.remove("active");
+      gsTab.classList.remove("active");
+
+      playerTabs.forEach((otherTab) => {
+        otherTab.classList.remove("active");
+      });
+
+      tab.classList.add("active");
+
+    });
+
+  });
+
 
   // Player lock
   playerLock.addEventListener("click", () => {
     playerLock.classList.toggle("locked");
   });
 
+
   // PLAYER TOGGLE CLICK-TO-SWAP
-const playerToggles = document.querySelectorAll(".player-toggle");
+  const playerToggles = document.querySelectorAll(".player-toggle");
 
-let selectedPlayer = null;
+  let selectedPlayer = null;
 
-playerToggles.forEach((toggle) => {
 
-  toggle.addEventListener("click", () => {
+  playerToggles.forEach((toggle) => {
 
-    // Don't allow swapping when locked
-    if (playerLock.classList.contains("locked")) {
-      return;
-    }
+    toggle.addEventListener("click", () => {
 
-    // First player clicked
-    if (selectedPlayer === null) {
 
-      selectedPlayer = toggle;
-      toggle.classList.add("active");
+      // ==========================================
+      // LOCKED
+      // ==========================================
 
-      return;
-    }
+      if (playerLock.classList.contains("locked")) {
 
-    // Clicking the same player cancels selection
-    if (selectedPlayer === toggle) {
+        toggle.classList.toggle("active");
 
+        return;
+      }
+
+
+      // ==========================================
+      // UNLOCKED
+      // ==========================================
+
+      if (selectedPlayer === null) {
+
+        toggle.classList.add("active");
+
+        selectedPlayer = toggle;
+
+        return;
+      }
+
+
+      // Clicking the same player cancels selection
+      if (selectedPlayer === toggle) {
+
+        toggle.classList.remove("active");
+
+        selectedPlayer = null;
+
+        return;
+      }
+
+
+      // ==========================================
+      // SWAP THE PLAYER NAMES
+      // ==========================================
+
+      const tempText = selectedPlayer.textContent;
+
+      selectedPlayer.textContent =
+        toggle.textContent;
+
+      toggle.textContent =
+        tempText;
+
+
+      // Deselect both players
+      selectedPlayer.classList.remove("active");
       toggle.classList.remove("active");
+
+
+      // Clear selection
       selectedPlayer = null;
 
-      return;
-    }
-
-    // Swap the player names
-    const tempText = selectedPlayer.textContent;
-    selectedPlayer.textContent = toggle.textContent;
-    toggle.textContent = tempText;
-
-    // Turn both toggles off
-    selectedPlayer.classList.remove("active");
-    toggle.classList.remove("active");
-
-    // Clear selection
-    selectedPlayer = null;
+    });
 
   });
 
-});
-
 } else {
 
-  // Hide player toggles on Crosskeys and Trial
-  playerTogglesColumn.style.display = "none";
+// Hide player toggles on Crosskeys and Trial
+playerTogglesColumn.style.display = "none";
 
 }
 
 if (team === "crosskeys") {
-    teamName.textContent = "CROSSKEYS";
-    buttonTeamName.textContent = "CROSSKEYS";
+  teamName.textContent = "CROSSKEYS";
+  buttonTeamName.textContent = "CROSSKEYS";
+
 } else if (team === "trial") {
-    teamName.textContent = "TRIAL";
-    buttonTeamName.textContent = "TRIAL";
+  teamName.textContent = "TRIAL";
+  buttonTeamName.textContent = "TRIAL";
+
 } else if (team === "testing") {
-    teamName.textContent = "TESTING";
-    buttonTeamName.textContent = "TESTING";
+  teamName.textContent = "TESTING";
+  buttonTeamName.textContent = "TESTING";
 }
 
 const watermarkLogo = document.getElementById("watermark-logo");
 
 if (team === "crosskeys") {
 
-    watermarkLogo.src =
-        "https://crosskeysnetballclub.co.uk/wp-content/uploads/2023/02/cropped-cropped-cropped-Crosskeys-logo-01-1-1.png";
+  watermarkLogo.src =
+    "https://crosskeysnetballclub.co.uk/wp-content/uploads/2023/02/cropped-cropped-cropped-Crosskeys-logo-01-1-1.png";
 
 } else if (team === "trial") {
 
-    watermarkLogo.src = "images/trial-logo.png";
+  watermarkLogo.src = "images/trial-logo.png";
 
 }
 
@@ -217,11 +319,13 @@ const clearLastButton = document.getElementById("clear-last");
 // CLOCK
 const matchClock = document.querySelector("#match-clock");
 const startButton = document.querySelector("#start-match");
+
 let seconds = 0;
 let timer = null;
 let running = false;
 
 function updateClock() {
+
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
 
@@ -230,24 +334,32 @@ function updateClock() {
     String(remainingSeconds).padStart(2, "0");
 
   seconds++;
-  
+
 }
 
 startButton.addEventListener("click", () => {
+
   if (!running) {
+
     timer = setInterval(updateClock, 1000);
     running = true;
+
   } else {
+
     clearInterval(timer);
     running = false;
+
   }
+
 });
-  
+
 const restartButton = document.querySelector("#clock-restart");
 
 restartButton.addEventListener("click", () => {
+
   seconds = 0;
   matchClock.textContent = "00:00";
+
 });
 
 // SCORE UPDATE
@@ -263,9 +375,8 @@ const oppositionButton = document.getElementById("opposition-score-btn");
 
 function scrollGameFeedToBottom() {
   eventFeed.scrollTop = eventFeed.scrollHeight;
-    
 }
-  
+
 function updateTeamScore() {
   teamScoreText.textContent = teamScore;
 }
@@ -274,7 +385,11 @@ function updateOppositionScore() {
   oppositionScoreText.textContent = oppositionScore;
 }
 
+
+// ======================================================
 // SHOT SUCCESS
+// ======================================================
+
 const shotScoredButton = document.querySelector("#level1-attack-shot-success");
 const shotMissedButton = document.querySelector("#level1-attack-shot-missed");
 const shotPercentageText = document.querySelector("#level1-shot-percentage");
@@ -284,41 +399,54 @@ let gsShotSuccess = 0;
 let gsShotMissed = 0;
 
 function updateShotPercentage() {
+
   const scored = Number(shotScoredButton.querySelector(".counter").textContent);
   const missed = Number(shotMissedButton.querySelector(".counter").textContent);
+
   const total = scored + missed;
 
   if (total === 0) {
+
     shotPercentageText.textContent = "0%";
     shotProgressFill.style.width = "0%";
+
     return;
   }
 
   const percentage = Math.round((scored / total) * 100);
+
   shotPercentageText.textContent = percentage + "%";
   shotProgressFill.style.width = percentage + "%";
+
 }
 
 function updateGSShotPercentage() {
-    const total = gsShotSuccess + gsShotMissed;
 
-    const gsText = document.querySelector("#gs-shot-percentage");
-    const gsFill = document.querySelector("#gs-shot-fill");
+  const total = gsShotSuccess + gsShotMissed;
 
-    if (total === 0) {
-        gsText.textContent = "0%";
-        gsFill.style.width = "0%";
-        return;
-    }
+  const gsText = document.querySelector("#gs-shot-percentage");
+  const gsFill = document.querySelector("#gs-shot-fill");
 
-    const percentage = Math.round((gsShotSuccess / total) * 100);
+  if (total === 0) {
 
-    gsText.textContent = percentage + "%";
-    gsFill.style.width = percentage + "%";
+    gsText.textContent = "0%";
+    gsFill.style.width = "0%";
+
+    return;
+  }
+
+  const percentage = Math.round((gsShotSuccess / total) * 100);
+
+  gsText.textContent = percentage + "%";
+  gsFill.style.width = percentage + "%";
+
 }
 
 
+// ======================================================
 // ATTACK REBOUND
+// ======================================================
+
 const reboundWon = document.querySelector("#level1-attack-rebound-won");
 const reboundLost = document.querySelector("#level1-attack-rebound-lost");
 const reboundText = document.querySelector("#level1-attack-rebound-percentage");
@@ -328,41 +456,54 @@ let gsReboundWon = 0;
 let gsReboundLost = 0;
 
 function updateAttackReboundPercentage() {
+
   const won = Number(reboundWon.querySelector(".counter").textContent);
   const lost = Number(reboundLost.querySelector(".counter").textContent);
+
   const total = won + lost;
 
   if (total === 0) {
+
     reboundText.textContent = "0%";
     reboundFill.style.width = "0%";
+
     return;
   }
 
   const percentage = Math.round((won / total) * 100);
+
   reboundText.textContent = percentage + "%";
   reboundFill.style.width = percentage + "%";
+
 }
 
 function updateGSAttackReboundPercentage() {
-    const total = Number(reboundWon.querySelector(".counter").textContent) +
-                  Number(reboundLost.querySelector(".counter").textContent);
 
-    const gsText = document.querySelector("#gs-attack-rebound-percentage");
-    const gsFill = document.querySelector("#gs-attack-rebound-fill");
+  const total = gsReboundWon + gsReboundLost;
 
-    if (total === 0) {
-        gsText.textContent = "0%";
-        gsFill.style.width = "0%";
-        return;
-    }
+  const gsText = document.querySelector("#gs-attack-rebound-percentage");
+  const gsFill = document.querySelector("#gs-attack-rebound-fill");
 
-    const percentage = Math.round((gsReboundWon / total) * 100);
+  if (total === 0) {
 
-    gsText.textContent = percentage + "%";
-    gsFill.style.width = percentage + "%";
+    gsText.textContent = "0%";
+    gsFill.style.width = "0%";
+
+    return;
+  }
+
+  const percentage = Math.round((gsReboundWon / total) * 100);
+
+  gsText.textContent = percentage + "%";
+  gsFill.style.width = percentage + "%";
+
 }
 
+
+// ======================================================
 // FEED SUCCESS
+// ======================================================
+
 const feedSuccess = document.querySelector("#level1-feed-success");
 const feedMissed = document.querySelector("#level1-feed-missed");
 const feedText = document.querySelector("#level1-feed-success-percentage");
@@ -372,522 +513,915 @@ let gsFeedSuccess = 0;
 let gsFeedMissed = 0;
 
 function updateFeedSuccessPercentage() {
+
   const won = Number(feedSuccess.querySelector(".counter").textContent);
   const lost = Number(feedMissed.querySelector(".counter").textContent);
+
   const total = won + lost;
 
   if (total === 0) {
+
     feedText.textContent = "0%";
     feedFill.style.width = "0%";
+
     return;
   }
 
   const percentage = Math.round((won / total) * 100);
+
   feedText.textContent = percentage + "%";
   feedFill.style.width = percentage + "%";
+
 }
 
 function updateGSFeedSuccessPercentage() {
-    const total = gsFeedSuccess + gsFeedMissed;
 
-    const gsText = document.querySelector("#gs-feed-success-percentage");
-    const gsFill = document.querySelector("#gs-feed-success-fill");
+  const total = gsFeedSuccess + gsFeedMissed;
 
-    if (total === 0) {
-        gsText.textContent = "0%";
-        gsFill.style.width = "0%";
-        return;
-    }
+  const gsText = document.querySelector("#gs-feed-success-percentage");
+  const gsFill = document.querySelector("#gs-feed-success-fill");
 
-    const percentage = Math.round((gsFeedSuccess / total) * 100);
+  if (total === 0) {
 
-    gsText.textContent = percentage + "%";
-    gsFill.style.width = percentage + "%";
+    gsText.textContent = "0%";
+    gsFill.style.width = "0%";
+
+    return;
+  }
+
+  const percentage = Math.round((gsFeedSuccess / total) * 100);
+
+  gsText.textContent = percentage + "%";
+  gsFill.style.width = percentage + "%";
+
 }
 
 
+// ======================================================
 // CENTRE SUCCESS
+// ======================================================
+
 const centreSuccess = document.querySelector("#level1-centre-success");
 const centreMissed = document.querySelector("#level1-centre-missed");
 const centreText = document.querySelector("#level1-centre-success-percentage");
 const centreFill = document.querySelector("#level1-centre-success-fill");
 
+let gsCentreSuccess = 0;
+let gsCentreMissed = 0;
+
 function updateCentreSuccessPercentage() {
+
   const won = Number(centreSuccess.querySelector(".counter").textContent);
   const lost = Number(centreMissed.querySelector(".counter").textContent);
+
   const total = won + lost;
 
   if (total === 0) {
+
     centreText.textContent = "0%";
     centreFill.style.width = "0%";
+
     return;
   }
 
   const percentage = Math.round((won / total) * 100);
+
   centreText.textContent = percentage + "%";
   centreFill.style.width = percentage + "%";
+
 }
 
+function updateGSCentreSuccessPercentage() {
+
+  const total = gsCentreSuccess + gsCentreMissed;
+
+  const gsText = document.querySelector("#gs-centre-success-percentage");
+  const gsFill = document.querySelector("#gs-centre-success-fill");
+
+  if (total === 0) {
+
+    gsText.textContent = "0%";
+    gsFill.style.width = "0%";
+
+    return;
+  }
+
+  const percentage = Math.round((gsCentreSuccess / total) * 100);
+
+  gsText.textContent = percentage + "%";
+  gsFill.style.width = percentage + "%";
+
+}
+
+
+// ======================================================
 // DEFENSIVE REBOUNDS
+// ======================================================
+
 const lvl1dreboundwon = document.querySelector("#level1-defence-rebound-won");
 const lvl1dreboundlost = document.querySelector("#level1-defence-rebound-lost");
 const lvl1dreboundText = document.querySelector("#level1-defence-rebound-percentage");
 const lvl1dreboundFill = document.querySelector("#level1-defence-rebound-fill");
 
+let gsDReboundWon = 0;
+let gsDReboundLost = 0;
+
 function updateDefenceReboundPercentage() {
+
   const won = Number(lvl1dreboundwon.querySelector(".counter").textContent);
   const lost = Number(lvl1dreboundlost.querySelector(".counter").textContent);
+
   const total = won + lost;
 
   if (total === 0) {
+
     lvl1dreboundText.textContent = "0%";
     lvl1dreboundFill.style.width = "0%";
+
     return;
   }
 
   const percentage = Math.round((won / total) * 100);
+
   lvl1dreboundText.textContent = percentage + "%";
   lvl1dreboundFill.style.width = percentage + "%";
+
+}
+
+function updateGSDReboundPercentage() {
+
+  const total = gsDReboundWon + gsDReboundLost;
+
+  const gsText = document.querySelector("#gs-defence-rebound-percentage");
+  const gsFill = document.querySelector("#gs-defence-rebound-fill");
+
+  if (total === 0) {
+
+    gsText.textContent = "0%";
+    gsFill.style.width = "0%";
+
+    return;
+  }
+
+  const percentage = Math.round((gsDReboundWon / total) * 100);
+
+  gsText.textContent = percentage + "%";
+  gsFill.style.width = percentage + "%";
+
 }
 
 
-// TURNOVER (0–10 cap)
+// ======================================================
+// TURNOVER
+// ======================================================
+
 const turnoverButton = document.querySelector("#level1-attack-turnover");
 const turnoverText = document.querySelector("#level1-turnover-count");
 const turnoverFill = document.querySelector("#level1-turnover-fill");
 
 let turnoverCount = 0;
+
 const TURNOVER_MAX = 10;
 
+let gsTurnoverCount = 0;
+
 function updateTurnover() {
+
   turnoverText.textContent = turnoverCount;
-  turnoverFill.style.width = (turnoverCount / TURNOVER_MAX) * 100 + "%";
+
+  turnoverFill.style.width =
+    (turnoverCount / TURNOVER_MAX) * 100 + "%";
+
+}
+
+function updateGSTurnover() {
+
+  const gsText = document.querySelector("#gs-turnover-count");
+  const gsFill = document.querySelector("#gs-turnover-fill");
+
+  gsText.textContent = gsTurnoverCount;
+
+  gsFill.style.width =
+    (gsTurnoverCount / TURNOVER_MAX) * 100 + "%";
+
 }
 
 
-// ATTACK UNFORCED ERROR (FIXED)
+// ======================================================
+// ATTACK UNFORCED ERROR
+// ======================================================
+
 const unforcedErrorButton = document.querySelector("#level1-unforced-error");
 const unforcedErrorText = document.querySelector("#level1-unforced-error-count");
 const unforcedErrorFill = document.querySelector("#level1-unforced-error-fill");
 
 let unforcedErrorCount = 0;
+
 const UNFORCED_ERROR_MAX = 10;
 
+let gsUnforcedErrorCount = 0;
+
 function updateUnforcedError() {
+
   unforcedErrorText.textContent = unforcedErrorCount;
-  unforcedErrorFill.style.width = (unforcedErrorCount / UNFORCED_ERROR_MAX) * 100 + "%";
-}
 
-function undoLastAction() {
-
-    const lastAction = history.pop();
-
-    if (!lastAction) return;
-
-
-    // REMOVE GAME FEED
-    eventFeed.firstElementChild?.remove();
-
-
-    switch(lastAction.button) {
-
-
-        case "level1-attack-shot-success":
-
-    teamScore--;
-    updateTeamScore();
-
-    shotScoredButton.querySelector(".counter").textContent =
-    Number(shotScoredButton.querySelector(".counter").textContent) - 1;
-
-    if (lastAction.gs) {
-        gsShotSuccess--;
-    }
-
-    break;
-
-
-        case "level1-attack-shot-missed":
-
-    shotMissedButton.querySelector(".counter").textContent =
-    Number(shotMissedButton.querySelector(".counter").textContent) - 1;
-
-    if (lastAction.gs) {
-        gsShotMissed--;
-    }
-
-    break;
-
-
-        case "level1-attack-rebound-won":
-
-    reboundWon.querySelector(".counter").textContent =
-    Number(reboundWon.querySelector(".counter").textContent) - 1;
-
-    if (lastAction.gs) {
-        gsReboundWon--;
-    }
-
-    break;
-
-
-        case "level1-attack-rebound-lost":
-
-            reboundLost.querySelector(".counter").textContent =
-            Number(reboundLost.querySelector(".counter").textContent) - 1;
-
-            if (lastAction.gs) {
-            gsReboundLost--;
-}
-
-            break;
-
-
-        case "level1-feed-success":
-    feedSuccess.querySelector(".counter").textContent =
-    Number(feedSuccess.querySelector(".counter").textContent) - 1;
-
-    if (lastAction.gs) {
-        gsFeedSuccess--;
-    }
-
-    break;
-
-case "level1-feed-missed":
-    feedMissed.querySelector(".counter").textContent =
-    Number(feedMissed.querySelector(".counter").textContent) - 1;
-
-    if (lastAction.gs) {
-        gsFeedMissed--;
-    }
-
-    break;
-
-
-        case "level1-centre-success":
-
-            centreSuccess.querySelector(".counter").textContent =
-            Number(centreSuccess.querySelector(".counter").textContent) - 1;
-
-            break;
-
-
-        case "level1-centre-missed":
-
-            centreMissed.querySelector(".counter").textContent =
-            Number(centreMissed.querySelector(".counter").textContent) - 1;
-
-            break;
-
-        case "level1-attack-turnover":
-
-            turnoverCount--;
-            updateTurnover();
-
-            turnoverButton.querySelector(".counter").textContent =
-            Number(turnoverButton.querySelector(".counter").textContent) - 1;
-
-            break;
-
-        case "level1-unforced-error":
-
-            unforcedErrorCount--;
-            updateUnforcedError();
-
-            unforcedErrorButton.querySelector(".counter").textContent =
-            Number(unforcedErrorButton.querySelector(".counter").textContent) - 1;
-
-            break;
-
-        case "level1-defence-rebound-won":
-
-            lvl1dreboundwon.querySelector(".counter").textContent =
-            Number(lvl1dreboundwon.querySelector(".counter").textContent) - 1;
-
-            break;
-
-        case "level1-defence-rebound-lost":
-
-            lvl1dreboundlost.querySelector(".counter").textContent =
-            Number(lvl1dreboundlost.querySelector(".counter").textContent) - 1;
-
-            break;
-
-        case "level1-defence-unforced-error":
-
-           dunforcedErrorCount--;
-           updateDunforcedError();
-
-           dunforcedErrorButton.querySelector(".counter").textContent =
-           Number(dunforcedErrorButton.querySelector(".counter").textContent) - 1;
-
-            break;
-
-
-        case "opposition-score-btn":
-
-           oppositionScore--;
-           updateOppositionScore();
-
-           oppositionButton.querySelector(".counter").textContent =
-           Number(oppositionButton.querySelector(".counter").textContent) - 1;
-
-            break;
-          
-    }
-
-
-    // refresh percentages
-updateShotPercentage();
-updateAttackReboundPercentage();
-updateGSAttackReboundPercentage();
-updateGSShotPercentage();
-updateGSFeedSuccessPercentage();
-updateFeedSuccessPercentage();
-updateCentreSuccessPercentage();
-updateDefenceReboundPercentage();
+  unforcedErrorFill.style.width =
+    (unforcedErrorCount / UNFORCED_ERROR_MAX) * 100 + "%";
 
 }
 
-// DEFENCE UNFORCED ERROR (FIXED)
+function updateGSUnforcedError() {
+
+  const gsText = document.querySelector("#gs-unforced-error-count");
+  const gsFill = document.querySelector("#gs-unforced-error-fill");
+
+  gsText.textContent = gsUnforcedErrorCount;
+
+  gsFill.style.width =
+    (gsUnforcedErrorCount / UNFORCED_ERROR_MAX) * 100 + "%";
+
+}
+
+
+// ======================================================
+// DEFENCE UNFORCED ERROR
+// ======================================================
+
 const dunforcedErrorButton = document.querySelector("#level1-defence-unforced-error");
 const dunforcedErrorText = document.querySelector("#level1-defence-unforced-error-count");
 const dunforcedErrorFill = document.querySelector("#level1-defence-unforced-error-fill");
 
 let dunforcedErrorCount = 0;
+
 const DUNFORCED_ERROR_MAX = 10;
 
 function updateDunforcedError() {
+
   dunforcedErrorText.textContent = dunforcedErrorCount;
-  dunforcedErrorFill.style.width = (dunforcedErrorCount / DUNFORCED_ERROR_MAX) * 100 + "%";
+
+  dunforcedErrorFill.style.width =
+    (dunforcedErrorCount / DUNFORCED_ERROR_MAX) * 100 + "%";
+
 }
 
 
+// ======================================================
+// UNDO LAST ACTION
+// ======================================================
+
+function undoLastAction() {
+
+  const lastAction = history.pop();
+
+  if (!lastAction) return;
+
+  // Remove most recent game feed event
+  eventFeed.firstElementChild?.remove();
+
+
+  switch(lastAction.button) {
+
+
+    // --------------------------------------------
+    // SHOT SCORED
+    // --------------------------------------------
+
+    case "level1-attack-shot-success":
+
+      teamScore--;
+      updateTeamScore();
+
+      shotScoredButton.querySelector(".counter").textContent =
+        Number(shotScoredButton.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsShotSuccess--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // SHOT MISSED
+    // --------------------------------------------
+
+    case "level1-attack-shot-missed":
+
+      shotMissedButton.querySelector(".counter").textContent =
+        Number(shotMissedButton.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsShotMissed--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // ATTACK REBOUND WON
+    // --------------------------------------------
+
+    case "level1-attack-rebound-won":
+
+      reboundWon.querySelector(".counter").textContent =
+        Number(reboundWon.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsReboundWon--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // ATTACK REBOUND LOST
+    // --------------------------------------------
+
+    case "level1-attack-rebound-lost":
+
+      reboundLost.querySelector(".counter").textContent =
+        Number(reboundLost.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsReboundLost--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // FEED SUCCESS
+    // --------------------------------------------
+
+    case "level1-feed-success":
+
+      feedSuccess.querySelector(".counter").textContent =
+        Number(feedSuccess.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsFeedSuccess--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // FEED FAIL
+    // --------------------------------------------
+
+    case "level1-feed-missed":
+
+      feedMissed.querySelector(".counter").textContent =
+        Number(feedMissed.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsFeedMissed--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // CENTRE SUCCESS
+    // --------------------------------------------
+
+    case "level1-centre-success":
+
+      centreSuccess.querySelector(".counter").textContent =
+        Number(centreSuccess.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsCentreSuccess--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // CENTRE FAIL
+    // --------------------------------------------
+
+    case "level1-centre-missed":
+
+      centreMissed.querySelector(".counter").textContent =
+        Number(centreMissed.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsCentreMissed--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // TURNOVER
+    // --------------------------------------------
+
+    case "level1-attack-turnover":
+
+      turnoverCount--;
+
+      updateTurnover();
+
+      turnoverButton.querySelector(".counter").textContent =
+        Number(turnoverButton.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsTurnoverCount--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // UNFORCED ERROR
+    // --------------------------------------------
+
+    case "level1-unforced-error":
+
+      unforcedErrorCount--;
+
+      updateUnforcedError();
+
+      unforcedErrorButton.querySelector(".counter").textContent =
+        Number(unforcedErrorButton.querySelector(".counter").textContent) - 1;
+
+      if (lastAction.gs) {
+        gsUnforcedErrorCount--;
+      }
+
+      break;
+
+
+    // --------------------------------------------
+    // DEFENSIVE REBOUND WON
+    // --------------------------------------------
+
+    case "level1-defence-rebound-won":
+
+  lvl1dreboundwon.querySelector(".counter").textContent =
+    Number(lvl1dreboundwon.querySelector(".counter").textContent) - 1;
+
+  if (lastAction.gs) {
+    gsDReboundWon--;
+  }
+
+  break;
+
+
+    // --------------------------------------------
+    // DEFENSIVE REBOUND LOST
+    // --------------------------------------------
+
+    case "level1-defence-rebound-lost":
+
+  lvl1dreboundlost.querySelector(".counter").textContent =
+    Number(lvl1dreboundlost.querySelector(".counter").textContent) - 1;
+
+  if (lastAction.gs) {
+    gsDReboundLost--;
+  }
+
+  break;
+
+
+    // --------------------------------------------
+    // DEFENCE UNFORCED ERROR
+    // --------------------------------------------
+
+    case "level1-defence-unforced-error":
+
+      dunforcedErrorCount--;
+
+      updateDunforcedError();
+
+      dunforcedErrorButton.querySelector(".counter").textContent =
+        Number(dunforcedErrorButton.querySelector(".counter").textContent) - 1;
+
+      break;
+
+
+    // --------------------------------------------
+    // OPPOSITION SCORE
+    // --------------------------------------------
+
+    case "opposition-score-btn":
+
+      oppositionScore--;
+
+      updateOppositionScore();
+
+      oppositionButton.querySelector(".counter").textContent =
+        Number(oppositionButton.querySelector(".counter").textContent) - 1;
+
+      break;
+
+  }
+
+
+  // Refresh all statistics
+
+  updateShotPercentage();
+
+  updateAttackReboundPercentage();
+  updateGSAttackReboundPercentage();
+
+  updateGSShotPercentage();
+
+  updateFeedSuccessPercentage();
+  updateGSFeedSuccessPercentage();
+
+  updateCentreSuccessPercentage();
+  updateGSCentreSuccessPercentage();
+
+  updateDefenceReboundPercentage();
+  updateGSDReboundPercentage();
+
+  updateTurnover();
+  updateGSTurnover();
+
+  updateUnforcedError();
+  updateGSUnforcedError();
+
+}
+
+
+// ======================================================
 // MAIN HANDLERS
+// ======================================================
+
 buttons.forEach((button) => {
 
   const counter = button.querySelector(".counter");
+
   if (!counter) return;
 
   button.addEventListener("click", () => {
-    counter.textContent = Number(counter.textContent) + 1;
 
-   history.push({
-    button: button.id,
-    time: matchClock.textContent,
-    gs: gsToggle.classList.contains("active")
-});
+
+    // --------------------------------------------
+    // RECORD ACTION
+    // --------------------------------------------
+
+    const isGS = gsToggle.classList.contains("active");
+
+    counter.textContent =
+      Number(counter.textContent) + 1;
+
+    history.push({
+      button: button.id,
+      time: matchClock.textContent,
+      gs: isGS
+    });
+
+
+    // --------------------------------------------
+    // REFRESH NORMAL MATCH REPORT
+    // --------------------------------------------
 
     updateShotPercentage();
     updateAttackReboundPercentage();
     updateGSAttackReboundPercentage();
+
     updateFeedSuccessPercentage();
+    updateGSFeedSuccessPercentage();
+
     updateCentreSuccessPercentage();
-    
+    updateGSCentreSuccessPercentage();
+
     updateDefenceReboundPercentage();
 
+
+    // ==================================================
     // TURNOVER
+    // ==================================================
+
     if (button.id === "level1-attack-turnover") {
+
       if (turnoverCount < TURNOVER_MAX) {
         turnoverCount++;
         updateTurnover();
       }
+
+      if (isGS) {
+        gsTurnoverCount++;
+        updateGSTurnover();
+      }
+
     }
 
-    // UNFORCED ERROR (FIXED)
+
+    // ==================================================
+    // UNFORCED ERROR
+    // ==================================================
+
     if (button.id === "level1-unforced-error") {
+
       if (unforcedErrorCount < UNFORCED_ERROR_MAX) {
         unforcedErrorCount++;
         updateUnforcedError();
       }
+
+      if (isGS) {
+        gsUnforcedErrorCount++;
+        updateGSUnforcedError();
+      }
+
     }
 
+
+    // ==================================================
     // DEFENCE UNFORCED ERROR
+    // ==================================================
+
     if (button.id === "level1-defence-unforced-error") {
+
       if (dunforcedErrorCount < DUNFORCED_ERROR_MAX) {
         dunforcedErrorCount++;
         updateDunforcedError();
       }
+
     }
-    
-    //GAMEFEED UPDATE shot scored
-if (button.id === "level1-attack-shot-success") {
 
-    const isGS = gsToggle.classList.contains("active");
 
-    teamScore++;
-    updateTeamScore();
+    // ==================================================
+    // GAME FEED - SHOT SCORED
+    // ==================================================
 
-    if (isGS) {
+    if (button.id === "level1-attack-shot-success") {
+
+      teamScore++;
+      updateTeamScore();
+
+      if (isGS) {
         gsShotSuccess++;
         updateGSShotPercentage();
-    }
+      }
 
-    const playerPrefix = isGS ? "GS " : "";
+      const playerPrefix = isGS ? "GS " : "";
 
-    eventFeed.innerHTML =
+      eventFeed.innerHTML =
         `<div class="shot-scored-event">${matchClock.textContent} - ${playerPrefix}SHOT SCORED</div>` +
         eventFeed.innerHTML;
 
-    // Turn GS toggle off after the action
-    gsToggle.classList.remove("active");
-}
+      gsToggle.classList.remove("active");
 
-
-//GAMEFEED UPDATE shot missed
-if (button.id === "level1-attack-shot-missed") {
-
-    const isGS = gsToggle.classList.contains("active");
-
-    if (isGS) {
-        gsShotMissed++;
-        updateGSShotPercentage();
     }
 
-    const playerPrefix = isGS ? "GS " : "";
 
-    eventFeed.innerHTML =
+    // ==================================================
+    // GAME FEED - SHOT MISSED
+    // ==================================================
+
+    if (button.id === "level1-attack-shot-missed") {
+
+      if (isGS) {
+        gsShotMissed++;
+        updateGSShotPercentage();
+      }
+
+      const playerPrefix = isGS ? "GS " : "";
+
+      eventFeed.innerHTML =
         `<div class="shot-missed-event">${matchClock.textContent} - ${playerPrefix}SHOT MISSED</div>` +
         eventFeed.innerHTML;
 
-    // Turn GS toggle off after the action
-    gsToggle.classList.remove("active");
-}
-      
-    // GAMEFEED UPDATE attacking rebound won
-if (button.id === "level1-attack-rebound-won") {
+      gsToggle.classList.remove("active");
 
-  const playerPrefix = gsToggle.classList.contains("active") ? "GS " : "";
-  if (gsToggle.classList.contains("active")) {
-  gsReboundWon++;
-  updateGSAttackReboundPercentage();
-}
-
-  eventFeed.innerHTML =
-    `<div class="attack-rebound-won-event">${matchClock.textContent} - ${playerPrefix}ATTACK REBOUND WON</div>` +
-    eventFeed.innerHTML;
-
-  // Turn GS toggle off after the action
-  gsToggle.classList.remove("active");
-  
-}
-    
-    //GAMEFEED UPDATE attacking rebound lost
-     if (button.id === "level1-attack-rebound-lost") {
-
-      const playerPrefix = gsToggle.classList.contains("active") ? "GS " : "";
-
-      if (gsToggle.classList.contains("active")) {
-    gsReboundLost++;
-    updateGSAttackReboundPercentage();
-  }
-
-  eventFeed.innerHTML = `<div class="attack-rebound-lost-event">${matchClock.textContent} - ${playerPrefix}ATTACK REBOUND LOST</div>`+
-  eventFeed.innerHTML;
-
-  // Turn GS toggle off after the action
-  gsToggle.classList.remove("active");
-       
     }
-    
-    //GAMEFEED UPDATE feed success
-     if (button.id === "level1-feed-success") {
 
-  const isGS = gsToggle.classList.contains("active");
 
-  if (isGS) {
-    gsFeedSuccess++;
-    updateGSFeedSuccessPercentage();
-  }
+    // ==================================================
+    // GAME FEED - ATTACK REBOUND WON
+    // ==================================================
 
-  const playerPrefix = isGS ? "GS " : "";
+    if (button.id === "level1-attack-rebound-won") {
 
-  eventFeed.innerHTML =
-    `<div class="feed-success-event">${matchClock.textContent} - ${playerPrefix}FEED SUCCESS</div>` +
-    eventFeed.innerHTML;
+      if (isGS) {
+        gsReboundWon++;
+        updateGSAttackReboundPercentage();
+      }
 
-  gsToggle.classList.remove("active");
-}
-    
-    //GAMEFEED UPDATE feed missed
-     if (button.id === "level1-feed-missed") {
+      const playerPrefix = isGS ? "GS " : "";
 
-  const isGS = gsToggle.classList.contains("active");
-
-  if (isGS) {
-    gsFeedMissed++;
-    updateGSFeedSuccessPercentage();
-  }
-
-  const playerPrefix = isGS ? "GS " : "";
-
-  eventFeed.innerHTML =
-    `<div class="feed-missed-event">${matchClock.textContent} - ${playerPrefix}FEED FAIL</div>` +
-    eventFeed.innerHTML;
-
-  gsToggle.classList.remove("active");
-}
-    
-    //GAMEFEED UPDATE centre success
-     if (button.id === "level1-centre-success") {
-  eventFeed.innerHTML = `<div class="centre-success-event">${matchClock.textContent} - CENTRE SUCCESS</div>`+
-  eventFeed.innerHTML;
-       
-    }
-    
-    //GAMEFEED UPDATE centre fail
-     if (button.id === "level1-centre-missed") {
-  eventFeed.innerHTML = `<div class="centre-fail-event">${matchClock.textContent} - CENTRE FAIL</div>`+
-  eventFeed.innerHTML;
-       
-    }
-    
-    //GAMEFEED UPDATE turnover
-     if (button.id === "level1-attack-turnover") {
-  eventFeed.innerHTML = `<div class="turnover-event">${matchClock.textContent} - TURNOVER</div>`+
-  eventFeed.innerHTML;
-       
-    }
-    
-    //GAMEFEED UPDATE unforced error
-     if (button.id === "level1-unforced-error") {
-  eventFeed.innerHTML = `<div class="unforced-error-event">${matchClock.textContent} - UNFORCED ERROR</div>`+
-  eventFeed.innerHTML;
-       
-    }
-    
-    //GAMEFEED UPDATE defence rebound won
-     if (button.id === "level1-defence-rebound-won") {
-  eventFeed.innerHTML = 
-  `<div class="defence-rebound-won-event">${matchClock.textContent} - DEFENCE REBOUND WON</div>` +
-  eventFeed.innerHTML;
-       
-    }
-    
-    //GAMEFEED UPDATE defence rebound lost
-     if (button.id === "level1-defence-rebound-lost") {
       eventFeed.innerHTML =
-     `<div class="defence-rebound-lost-event">${matchClock.textContent} - DEFENCE REBOUND LOST</div>` +
-     eventFeed.innerHTML;
-       
+        `<div class="attack-rebound-won-event">${matchClock.textContent} - ${playerPrefix}ATTACK REBOUND WON</div>` +
+        eventFeed.innerHTML;
+
+      gsToggle.classList.remove("active");
+
     }
-    
-    // GAMEFEED UPDATE oppo score
-     if (button.id === "opposition-score-btn") {
 
-     oppositionScore++;
-     updateOppositionScore();
 
-     eventFeed.innerHTML =
-     `<div class="oppo-score-event">${matchClock.textContent} - OPPO SCORE</div>` +
-     eventFeed.innerHTML;
-     
+    // ==================================================
+    // GAME FEED - ATTACK REBOUND LOST
+    // ==================================================
+
+    if (button.id === "level1-attack-rebound-lost") {
+
+      if (isGS) {
+        gsReboundLost++;
+        updateGSAttackReboundPercentage();
+      }
+
+      const playerPrefix = isGS ? "GS " : "";
+
+      eventFeed.innerHTML =
+        `<div class="attack-rebound-lost-event">${matchClock.textContent} - ${playerPrefix}ATTACK REBOUND LOST</div>` +
+        eventFeed.innerHTML;
+
+      gsToggle.classList.remove("active");
+
+    }
+
+
+    // ==================================================
+    // GAME FEED - FEED SUCCESS
+    // ==================================================
+
+    if (button.id === "level1-feed-success") {
+
+      if (isGS) {
+        gsFeedSuccess++;
+        updateGSFeedSuccessPercentage();
+      }
+
+      const playerPrefix = isGS ? "GS " : "";
+
+      eventFeed.innerHTML =
+        `<div class="feed-success-event">${matchClock.textContent} - ${playerPrefix}FEED SUCCESS</div>` +
+        eventFeed.innerHTML;
+
+      gsToggle.classList.remove("active");
+
+    }
+
+
+    // ==================================================
+    // GAME FEED - FEED FAIL
+    // ==================================================
+
+    if (button.id === "level1-feed-missed") {
+
+      if (isGS) {
+        gsFeedMissed++;
+        updateGSFeedSuccessPercentage();
+      }
+
+      const playerPrefix = isGS ? "GS " : "";
+
+      eventFeed.innerHTML =
+        `<div class="feed-missed-event">${matchClock.textContent} - ${playerPrefix}FEED FAIL</div>` +
+        eventFeed.innerHTML;
+
+      gsToggle.classList.remove("active");
+
+    }
+
+
+    // ==================================================
+    // GAME FEED - CENTRE SUCCESS
+    // ==================================================
+
+    if (button.id === "level1-centre-success") {
+
+      if (isGS) {
+        gsCentreSuccess++;
+        updateGSCentreSuccessPercentage();
+      }
+
+      const playerPrefix = isGS ? "GS " : "";
+
+      eventFeed.innerHTML =
+        `<div class="centre-success-event">${matchClock.textContent} - ${playerPrefix}CENTRE SUCCESS</div>` +
+        eventFeed.innerHTML;
+
+      gsToggle.classList.remove("active");
+
+    }
+
+
+    // ==================================================
+    // GAME FEED - CENTRE FAIL
+    // ==================================================
+
+    if (button.id === "level1-centre-missed") {
+
+      if (isGS) {
+        gsCentreMissed++;
+        updateGSCentreSuccessPercentage();
+      }
+
+      const playerPrefix = isGS ? "GS " : "";
+
+      eventFeed.innerHTML =
+        `<div class="centre-fail-event">${matchClock.textContent} - ${playerPrefix}CENTRE FAIL</div>` +
+        eventFeed.innerHTML;
+
+      gsToggle.classList.remove("active");
+
+    }
+
+
+    // ==================================================
+    // GAME FEED - TURNOVER
+    // ==================================================
+
+    if (button.id === "level1-attack-turnover") {
+
+      const playerPrefix = isGS ? "GS " : "";
+
+      eventFeed.innerHTML =
+        `<div class="turnover-event">${matchClock.textContent} - ${playerPrefix}TURNOVER</div>` +
+        eventFeed.innerHTML;
+
+      gsToggle.classList.remove("active");
+
+    }
+
+
+    // ==================================================
+    // GAME FEED - UNFORCED ERROR
+    // ==================================================
+
+    if (button.id === "level1-unforced-error") {
+
+      const playerPrefix = isGS ? "GS " : "";
+
+      eventFeed.innerHTML =
+        `<div class="unforced-error-event">${matchClock.textContent} - ${playerPrefix}UNFORCED ERROR</div>` +
+        eventFeed.innerHTML;
+
+      gsToggle.classList.remove("active");
+
+    }
+
+
+    // ==================================================
+// GAME FEED - DEFENCE REBOUND WON
+// ==================================================
+
+if (button.id === "level1-defence-rebound-won") {
+
+  if (isGS) {
+    gsDReboundWon++;
+    updateGSDReboundPercentage();
+  }
+
+  const playerPrefix = isGS ? "GS " : "";
+
+  eventFeed.innerHTML =
+    `<div class="defence-rebound-won-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND WON</div>` +
+    eventFeed.innerHTML;
+
+  gsToggle.classList.remove("active");
+
+}
+
+
+    // ==================================================
+// GAME FEED - DEFENCE REBOUND LOST
+// ==================================================
+
+if (button.id === "level1-defence-rebound-lost") {
+
+  if (isGS) {
+    gsDReboundLost++;
+    updateGSDReboundPercentage();
+  }
+
+  const playerPrefix = isGS ? "GS " : "";
+
+  eventFeed.innerHTML =
+    `<div class="defence-rebound-lost-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND LOST</div>` +
+    eventFeed.innerHTML;
+
+  gsToggle.classList.remove("active");
+
+}
+
+
+    // ==================================================
+    // GAME FEED - OPPOSITION SCORE
+    // ==================================================
+
+    if (button.id === "opposition-score-btn") {
+
+      oppositionScore++;
+
+      updateOppositionScore();
+
+      eventFeed.innerHTML =
+        `<div class="oppo-score-event">${matchClock.textContent} - OPPO SCORE</div>` +
+        eventFeed.innerHTML;
+
     }
 
   });
 
-  });
-  
-  clearLastButton.addEventListener("click", undoLastAction);
- 
- });
+});
+
+
+clearLastButton.addEventListener("click", undoLastAction);
+
+});

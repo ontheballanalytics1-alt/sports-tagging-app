@@ -8,11 +8,10 @@
     opacity: 0.1;      
     z-index: 0;
     pointer-events: none;
-
 }
 
 .testing-file-tab {
-  display: none;
+    display: none;
 }
 
 .match-report-column {
@@ -23,74 +22,161 @@
     flex-shrink: 0;
 }
 
-#match-report-tab {
-  width: 35px;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  align-self: flex-start;
 
-  font-weight: bold;
-  font-size: 14px;
-  letter-spacing: 1px;
-
-  background: white;
-  color: black;
-
-  border: 4px solid black;
-  border-left: none;
-  border-radius: 0 12px 12px 0;
-
-  box-sizing: border-box;
-
-  margin-right: -4px;
-  z-index: 2;
-}
-
-#gs-tab {
-  width: 35px;
-  height: 70px;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  align-self: flex-start;
-
-  font-weight: bold;
-  font-size: 14px;
-  letter-spacing: 1px;
-
-  background: white;
-  color: black;
-
-  border: 4px solid black;
-  border-left: none;
-  border-radius: 0 12px 12px 0;
-
-  box-sizing: border-box;
-
-  margin-right: -4px;
-  z-index: 2;
-}
+/* =========================
+   MATCH REPORT / GS / GA / WA / C / WD / GD / GK / 1 / 2 / 3 / 4 / 5 TABS
+========================= */
 
 #match-report-tab,
-#gs-tab {
-  position: relative;
-  z-index: 1;
+#gs-tab,
+#ga-tab,
+#wa-tab,
+#c-tab,
+#wd-tab,
+#gd-tab,
+#gk-tab,
+[id="1-tab"],
+[id="2-tab"],
+[id="3-tab"],
+[id="4-tab"],
+[id="5-tab"] {
+    width: 35px;
+    height: auto;
+    min-height: 50px;
+    padding: 8px 5px;
+
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
+
+    background: white;
+    color: black;
+
+    border: 4px solid black;
+    border-left: none;
+    border-radius: 0 12px 12px 0;
+
+    box-sizing: border-box;
+
+    margin-right: -4px;
+
+    z-index: 2;
+}
+
+#match-report-tab {
+    position: relative;
+    z-index: 8;
+}
+
+#gs-tab,
+#ga-tab,
+#wa-tab,
+#c-tab,
+#wd-tab,
+#gd-tab,
+#gk-tab,
+[id="1-tab"],
+[id="2-tab"],
+[id="3-tab"],
+[id="4-tab"],
+[id="5-tab"] {
+    position: relative;
 }
 
 #match-report-tab.active,
-#gs-tab.active {
-  z-index: 3;
+#gs-tab.active,
+#ga-tab.active,
+#wa-tab.active,
+#c-tab.active,
+#wd-tab.active,
+#gd-tab.active,
+#gk-tab.active,
+[id="1-tab"].active,
+[id="2-tab"].active,
+[id="3-tab"].active,
+[id="4-tab"].active,
+[id="5-tab"].active {
+    z-index: 3;
 }
+
+#gs-tab {
+    margin-top: -10px;
+    z-index: 2;
+}
+
+#ga-tab {
+    margin-top: -10px;
+    z-index: 1;
+}
+
+#wa-tab {
+    margin-top: -10px;
+    z-index: 0;
+}
+
+#c-tab {
+    margin-top: -10px;
+    z-index: -1;
+}
+
+#wd-tab {
+    margin-top: -10px;
+    z-index: -2;
+}
+
+#gd-tab {
+    margin-top: -10px;
+    z-index: -3;
+}
+
+#gk-tab {
+    margin-top: -10px;
+    z-index: -4;
+}
+
+[id="1-tab"] {
+    margin-top: -10px;
+    z-index: -5;
+}
+
+[id="2-tab"] {
+    margin-top: -10px;
+    z-index: -6;
+}
+
+[id="3-tab"] {
+    margin-top: -10px;
+    z-index: -7;
+}
+
+[id="4-tab"] {
+    margin-top: -10px;
+    z-index: -8;
+}
+
+[id="5-tab"] {
+    margin-top: -10px;
+    z-index: -9;
+}
+
+
+/* =========================
+   MATCH REPORT / GS BOXES
+========================= */
 
 .match-report-box,
 .gs-box {
-  position: relative;
-  z-index: 2;
+    position: relative;
+    z-index: 2;
 }
 
 .match-report-box {
@@ -110,61 +196,62 @@
     width: 350px;
     margin-bottom: 0px;
     display: none;
-    
 }
 
+
+/* =========================
+   TAG BUTTONS
+========================= */
+
 .tag-button {
-  background-color: pink;
-  border-radius: 25px;
-  width: 150px;
-  height: 50px;
-  font-size: 13px;
-  font-weight: bold;
-  font-style: italic;
-  font-family: Arial, sans-serif;
-  color: black;
-  border: 2px solid black;
-  cursor: pointer;
-  transition: 0.1s;
+    background-color: pink;
+    border-radius: 25px;
+    width: 150px;
+    height: 50px;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: italic;
+    font-family: Arial, sans-serif;
+    color: black;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: 0.1s;
+}
 
-  }
-
-  .tag-button:active {
+.tag-button:active {
     transform: translateY(4px);
-  
-  }
+}
 
-  .green-button {
+.green-button {
     background-color: lightgreen;
-    
+}
 
-  }
-
-  .red-button {
+.red-button {
     background-color: lightcoral;
-    
-  }
+}
 
-  .grey-button {
+.grey-button {
     background-color: lightgrey;
+}
 
-  }
-
-  .black-button {
+.black-button {
     color: white;
     background-color: black;
+}
 
-  }
 
-    .player-toggles {
+/* =========================
+   PLAYER TOGGLES
+========================= */
+
+.player-toggles {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+}
 
-  }
-   
-    .player-toggle {
+.player-toggle {
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -174,69 +261,80 @@
     font-weight: bold;
     font-size: 13px;
     cursor: pointer;
+}
 
-    }
+.player-toggle.active {
+    background-color: white;
+    color: black;
+}
 
-    .player-toggle.active {
-  background-color: white;
-  color: black;
-
-  }
-
-  .player-lock {
-  width: 46px;
-  height: 24px;
-  border-radius: 20px;
-  background-color: lightgreen;
-  border: 2px solid black;
-  position: relative;
-  cursor: pointer;
-  padding: 0;
-  box-sizing: border-box;
+.player-lock {
+    width: 46px;
+    height: 24px;
+    border-radius: 20px;
+    background-color: lightgreen;
+    border: 2px solid black;
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .player-lock::before {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 50%;
-  left: 2px;
-  top: 2px;
-  transition: 0.2s;
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    left: 2px;
+    top: 2px;
+    transition: 0.2s;
 }
 
 .player-lock.locked {
-  background-color: lightcoral;
+    background-color: lightcoral;
 }
 
 .player-lock.locked::before {
-  transform: translateX(22px);
+    transform: translateX(22px);
 }
 
 .player-toggle {
-  touch-action: none;
-  user-select: none;
+    touch-action: none;
+    user-select: none;
 }
 
-  .counter {
+
+/* =========================
+   COUNTERS
+========================= */
+
+.counter {
     display: block;
     font-size: 13px;
     margin-top: 5px;
-  
-  }
+}
 
-    .player-box {
+
+/* =========================
+   PLAYER BOX
+========================= */
+
+.player-box {
     border: 4px solid black;
     border-radius: 20px;
     padding: 20px;
     background-color: white;
     width: 310px;
-      
-  }
-  
+}
+
+
+/* =========================
+   GAME FEED
+========================= */
+
 .game-feed {
     border: 4px solid black;
     border-radius: 20px;
@@ -246,169 +344,160 @@
 
     max-height: 605px;
     overflow-y: auto;
-  
 }
 
-.shot-scored-event {
-  background-color: #D8B4FE;
-  color: black;
 
+/* =========================
+   GAME FEED EVENTS
+========================= */
+
+.shot-scored-event {
+    background-color: #D8B4FE;
+    color: black;
 }
 
 .shot-missed-event {
-  background-color: #AEB6C2;
-  color: black;
-  
+    background-color: #AEB6C2;
+    color: black;
 }
 
 .attack-rebound-won-event {
-  background-color: #D8B4FE;
-  color: black;
-  
-  }
+    background-color: #D8B4FE;
+    color: black;
+}
 
 .attack-rebound-lost-event {
-  background-color: #AEB6C2;
-  color: black;
-  
-  }
+    background-color: #AEB6C2;
+    color: black;
+}
 
 .feed-success-event {
-  background-color: #D8B4FE;
-  color: black;
-  
- }
+    background-color: #D8B4FE;
+    color: black;
+}
 
 .feed-missed-event {
-  background-color: #AEB6C2;
-  color: black;
-  
+    background-color: #AEB6C2;
+    color: black;
 }
 
 .centre-success-event {
-  background-color: #D8B4FE;
-  color: black;
-  
+    background-color: #D8B4FE;
+    color: black;
 }
 
 .centre-fail-event {
-  background-color: #AEB6C2;
-  color: black;
-  
+    background-color: #AEB6C2;
+    color: black;
 }
 
 .turnover-event {
-  background-color: #D8B4FE;
-  color: black;
-  
+    background-color: #D8B4FE;
+    color: black;
 }
 
 .unforced-error-event {
-  background-color: #AEB6C2;
-  color: black;
-  
+    background-color: #AEB6C2;
+    color: black;
 }
 
 .defence-rebound-won-event {
-  background-color: #D8B4FE;
-  color: black;
-  
+    background-color: #D8B4FE;
+    color: black;
 }
 
 .defence-rebound-lost-event {
-  background-color: #AEB6C2;
-  color: black;
-  
+    background-color: #AEB6C2;
+    color: black;
 }
 
 .feed-success-event {
-  background-color: #D8B4FE;
-  color: black;
-  
+    background-color: #D8B4FE;
+    color: black;
 }
 
 .oppo-score-event {
-  background-color: #AEB6C2;
-  color: black;
-  
+    background-color: #AEB6C2;
+    color: black;
 }
 
-  .player-title {
+
+/* =========================
+   TITLES
+========================= */
+
+.player-title {
     font-size: clamp(24px, 3vw, 40px);
     font-weight: bold;
     text-align: center;
     margin-bottom: 10px;
     font-family: arial, sans-serif;
-
-  }
-
-  .report-heading {
-  text-align: center;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  margin-top: 2px;
-  margin-bottom: 4px;
 }
 
-   .container {
-   display: flex;
-   gap: 40px;
-   align-items: flex-start;
-  
-  }
+.report-heading {
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    margin-bottom: 4px;
+}
 
-   .progress-bar {
-   width: 100%;
-   height: 20px;
-   background-color: lightgray;
-   border-radius: 10px;
-   overflow: hidden;
-   margin-top: 0px;
-   margin-bottom: 30px;
-   position: relative;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-     z-index: 1;
-   border: 1px solid rgba(0,0,0,0.2);
-     
- }
 
-   .progress-fill {
-   height: 100%;
-   width: 0%;
- background-color: #A78BFA;
-   transition: width 0.3s;
+/* =========================
+   MAIN CONTAINER
+========================= */
 
-   position: absolute;
-   left: 0;
-   top: 0;
-   z-index: 2;
-     
- }
+.container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
 
-   .progress-text {
-   position: center;
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: lightgray;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    border: 1px solid rgba(0,0,0,0.2);
+}
 
-   font-size: 16px;
-   font-weight: bold;
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #A78BFA;
+    transition: width 0.3s;
 
-   z-index: 3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
 
+.progress-text {
+    position: center;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 3;
     color: #111827;
+}
 
-  }
-
-  .column {
+.column {
     display: flex;
     width: auto;
     flex-direction: column;
     gap: 0px;
+}
 
-  }
-
-  .match-report-column {
+.match-report-column {
     flex-direction: row;
 }
 
@@ -418,17 +507,18 @@
     align-items: flex-start;
 }
 
-   #start-match, #opposition-score-btn {
-  vertical-align: top;
-  }
+#start-match,
+#opposition-score-btn {
+    vertical-align: top;
+}
 
-  /* =========================
+
+/* =========================
    iPAD LANDSCAPE
 ========================= */
 
 @media screen and (max-width: 1200px) and (orientation: landscape) {
 
-    /* MAIN THREE-COLUMN LAYOUT */
     .container {
         width: 100%;
         display: flex;
@@ -438,72 +528,62 @@
         align-items: flex-start;
     }
 
-    /* ALLOW COLUMNS TO SHRINK */
     .container > .column {
         box-sizing: border-box;
         min-width: 0;
     }
 
-    /* MATCH REPORT */
-.container > .column:nth-child(1) {
-    flex: 0 0 335px;
-    width: 335px;
-}
+    .container > .column:nth-child(1) {
+        flex: 0 0 335px;
+        width: 335px;
+    }
 
-    /* GAME FEED */
-.container > .column:nth-child(2) {
-    flex: 1 1 0;
-    width: 0;
-    min-width: 0;
-}
+    .container > .column:nth-child(2) {
+        flex: 1 1 0;
+        width: 0;
+        min-width: 0;
+    }
 
-/* GAME FEED BOX */
-.container > .column:nth-child(2) .game-feed {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    box-sizing: border-box;
-}
+    .container > .column:nth-child(2) .game-feed {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
 
-/* PLAYER TOGGLES */
-.container > .column:nth-child(3) {
-    flex: 0 0 46px;
-    width: 46px;
-    min-width: 46px;
-}
+    .container > .column:nth-child(3) {
+        flex: 0 0 46px;
+        width: 46px;
+        min-width: 46px;
+    }
 
-/* TAGGING PANEL */
-.container > .column:nth-child(4) {
-    flex: 0 0 310px;
-    width: 310px;
-    min-width: 310px;
-}
+    .container > .column:nth-child(4) {
+        flex: 0 0 310px;
+        width: 310px;
+        min-width: 310px;
+    }
 
-    /* BOXES FILL THEIR COLUMN */
-.match-report-box,
-.gs-box,
-.game-feed,
-.player-box {
-    width: 100%;
-    box-sizing: border-box;
-}
+    .match-report-box,
+    .gs-box,
+    .game-feed,
+    .player-box {
+        width: 100%;
+        box-sizing: border-box;
+    }
 
-/* TESTING MATCH REPORT / GS WIDTH */
-.match-report-column .match-report-box,
-.match-report-column .gs-box {
-    width: 300px !important;
-    min-width: 300px;
-    max-width: 300px;
-    flex: 0 0 300px;
-    box-sizing: border-box;
-}
+    .match-report-column .match-report-box,
+    .match-report-column .gs-box {
+        width: 300px !important;
+        min-width: 300px;
+        max-width: 300px;
+        flex: 0 0 300px;
+        box-sizing: border-box;
+    }
 
-    /* PLAYER BOX */
     .player-box {
         padding: 12px;
     }
 
-    /* MAIN TITLES */
     .player-title {
         font-size: clamp(20px, 3vw, 36px);
         line-height: 1.1;
@@ -512,7 +592,6 @@
         margin-bottom: 10px;
     }
 
-    /* REPORT HEADINGS */
     .report-heading {
         font-size: clamp(14px, 1.8vw, 22px);
         line-height: 1.1;
@@ -520,21 +599,15 @@
         white-space: nowrap;
     }
 
-    /* =========================
-       CROSSKEYS BUTTON BOX
-    ========================= */
-
     .column .player-box:first-child {
         display: block;
     }
 
-    /* TITLE MUST NOT BE PART OF BUTTON GRID */
     .column .player-box:first-child .player-title {
         display: block;
         width: 100%;
     }
 
-    /* BUTTONS ONLY */
     .column .player-box:first-child .tag-button {
         display: inline-block;
         width: calc(50% - 5px);
@@ -546,66 +619,55 @@
         margin-bottom: 8px;
     }
 
-    /* REMOVE THE BR ELEMENTS */
     .column .player-box:first-child br {
         display: none;
     }
 
-    /* COUNTERS */
     .counter {
         font-size: 12px;
         margin-top: 3px;
     }
 
-    /* =========================
-   TIMER / CONTROL BOX
-========================= */
-
-.column .player-box:last-child {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-}
-
-/* START/STOP + RESTART */
-.timer-buttons {
-    display: contents;
-}
-
-/* ALL THREE BUTTONS */
-.timer-buttons .tag-button {
-    width: 100%;
-    height: 46px;
-    box-sizing: border-box;
-    font-size: clamp(9px, 1.1vw, 13px);
-    padding: 4px;
-}
-
-/* CLEAR LAST */
-#clear-last {
-    width: 100%;
-    height: 46px;
-    box-sizing: border-box;
-    font-size: clamp(9px, 1.1vw, 13px);
-    padding: 4px;
-    grid-column: 1 / 3;
-}
-
-    /* PROGRESS BARS */
-    .progress-bar {
-       width: 100%;
-       box-sizing: border-box;
+    .column .player-box:last-child {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
     }
 
+    .timer-buttons {
+        display: contents;
+    }
+
+    .timer-buttons .tag-button {
+        width: 100%;
+        height: 46px;
+        box-sizing: border-box;
+        font-size: clamp(9px, 1.1vw, 13px);
+        padding: 4px;
+    }
+
+    #clear-last {
+        width: 100%;
+        height: 46px;
+        box-sizing: border-box;
+        font-size: clamp(9px, 1.1vw, 13px);
+        padding: 4px;
+        grid-column: 1 / 3;
+    }
+
+    .progress-bar {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
 
+
 /* =========================
-iPHONE PORTRAIT
+   iPHONE PORTRAIT
 ========================= */
 
 @media screen and (max-width: 600px) and (orientation: portrait) {
 
-    /* MAIN PAGE */
     .container {
         display: flex;
         flex-direction: column;
@@ -616,36 +678,20 @@ iPHONE PORTRAIT
         box-sizing: border-box;
     }
 
-    /* =========================
-       COLUMN ORDER
-       
-       1 = MATCH REPORT
-       2 = TAGGING PANEL
-       3 = GAME FEED
-    ========================= */
-
-    /* Match Report */
     .container > .column:nth-child(1) {
         order: 1;
         width: 100%;
     }
 
-    /* Game Feed -> move to third */
     .container > .column:nth-child(2) {
         order: 3;
         width: 100%;
     }
 
-    /* Tagging Panel -> move to second */
     .container > .column:nth-child(3) {
         order: 2;
         width: 100%;
     }
-
-
-    /* =========================
-       BOX WIDTHS
-    ========================= */
 
     .match-report-box,
     .game-feed,
@@ -654,11 +700,6 @@ iPHONE PORTRAIT
         max-width: none;
         box-sizing: border-box;
     }
-
-
-    /* =========================
-       MATCH REPORT
-    ========================= */
 
     .match-report-box {
         padding: 12px;
@@ -676,11 +717,6 @@ iPHONE PORTRAIT
         margin-bottom: 18px;
     }
 
-
-    /* =========================
-       TAGGING PANEL
-    ========================= */
-
     .player-box {
         padding: 12px;
     }
@@ -691,8 +727,6 @@ iPHONE PORTRAIT
         margin-bottom: 12px;
         white-space: nowrap;
     }
-
-    /* First player box = main tagging buttons */
 
     .column .player-box:first-child {
         display: block;
@@ -723,54 +757,42 @@ iPHONE PORTRAIT
         margin-top: 3px;
     }
 
+    .column .player-box:last-child {
+        display: block;
+    }
 
-    /* =========================
-   BOTTOM CONTROL BOX
-========================= */
+    .timer-buttons {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        margin-bottom: 8px;
+    }
 
-.column .player-box:last-child {
-    display: block;
-}
+    .timer-buttons .tag-button {
+        width: calc(50% - 4px);
+        flex: 0 0 calc(50% - 4px);
+        height: 50px;
+        box-sizing: border-box;
+        font-size: 11px;
+        padding: 4px;
+    }
 
-/* START/STOP + RESTART */
-.timer-buttons {
-    display: flex;
-    gap: 8px;
-    width: 100%;
-    margin-bottom: 8px;
-}
-
-.timer-buttons .tag-button {
-    width: calc(50% - 4px);
-    flex: 0 0 calc(50% - 4px);
-    height: 50px;
-    box-sizing: border-box;
-    font-size: 11px;
-    padding: 4px;
-}
-
-/* CLEAR LAST */
-#clear-last {
-    display: block;
-    width: 100%;
-    height: 50px;
-    box-sizing: border-box;
-    font-size: 11px;
-    padding: 4px;
-}
-
-
-    /* =========================
-       GAME FEED
-    ========================= */
+    #clear-last {
+        display: block;
+        width: 100%;
+        height: 50px;
+        box-sizing: border-box;
+        font-size: 11px;
+        padding: 4px;
+    }
 
     .game-feed {
         max-height: 450px;
         overflow-y: auto;
         padding: 12px;
     }
-
 }
+
 
 /* =========================
    LOGIN HOMEPAGE
@@ -797,12 +819,12 @@ body.login-page {
     width: 100vw;
     height: 100vh;
     min-height: 0;
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    
+
     box-sizing: border-box;
     padding-top: 17vh;
 }
@@ -832,10 +854,10 @@ body.login-page {
     box-sizing: border-box;
     margin: 0 0 13px 0;
     padding: 4px 8px;
-    
+
     border: none;
     border-radius: 0;
-    
+
     font-family: Arial, sans-serif;
     font-size: 11px;
 }
@@ -843,16 +865,16 @@ body.login-page {
 .login-page #login-button {
     width: 145px;
     height: 24px;
-    
+
     box-sizing: border-box;
     padding: 0;
-    
+
     border: none;
     border-radius: 0;
-    
+
     background-color: #eeeeee;
     color: black;
-    
+
     font-family: Arial, sans-serif;
     font-size: 14px;
     cursor: pointer;
