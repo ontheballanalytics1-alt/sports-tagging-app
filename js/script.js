@@ -76,24 +76,46 @@ const teamName = document.getElementById("team-name");
 const buttonTeamName = document.getElementById("button-team-name");
 
 const playerTogglesColumn = document.getElementById("player-toggles-column");
+
 const matchReportTab = document.getElementById("match-report-tab");
 const gsTab = document.getElementById("gs-tab");
+const gaTab = document.getElementById("ga-tab");
+const waTab = document.getElementById("wa-tab");
+const cTab = document.getElementById("c-tab");
+const wdTab = document.getElementById("wd-tab");
+const gdTab = document.getElementById("gd-tab");
+const gkTab = document.getElementById("gk-tab");
+const s1Tab = document.getElementById("S1-tab");
+const s2Tab = document.getElementById("S2-tab");
+const s3Tab = document.getElementById("S3-tab");
+const s4Tab = document.getElementById("S4-tab");
+const s5Tab = document.getElementById("S5-tab");
 
 const matchReportBox = document.querySelector(".match-report-box");
 const gsBox = document.querySelector(".gs-box");
+const gaBox = document.querySelector(".ga-box");
+const waBox = document.querySelector(".wa-box");
+const cBox = document.querySelector(".c-box");
+const wdBox = document.querySelector(".wd-box");
+const gdBox = document.querySelector(".gd-box");
+const gkBox = document.querySelector(".gk-box");
+const s1Box = document.querySelector(".s1-box");
+const s2Box = document.querySelector(".s2-box");
+const s3Box = document.querySelector(".s3-box");
+const s4Box = document.querySelector(".s4-box");
+const s5Box = document.querySelector(".s5-box");
 
 const playerTabs = [
-  document.getElementById("ga-tab"),
-  document.getElementById("wa-tab"),
-  document.getElementById("c-tab"),
-  document.getElementById("wd-tab"),
-  document.getElementById("gd-tab"),
-  document.getElementById("gk-tab"),
-  document.getElementById("1-tab"),
-  document.getElementById("2-tab"),
-  document.getElementById("3-tab"),
-  document.getElementById("4-tab"),
-  document.getElementById("5-tab")
+  waTab,
+  cTab,
+  wdTab,
+  gdTab,
+  gkTab,
+  s1Tab,
+  s2Tab,
+  s3Tab,
+  s4Tab,
+  s5Tab
 ];
 
 const gsToggle = document.getElementById("gs-toggle");
@@ -117,6 +139,17 @@ if (team === "testing") {
   // Show all tabs
   matchReportTab.style.display = "flex";
   gsTab.style.display = "flex";
+  gaTab.style.display = "flex";
+  waTab.style.display = "flex";
+  cTab.style.display = "flex";
+  wdTab.style.display = "flex";
+  gdTab.style.display = "flex";
+  gkTab.style.display = "flex";
+  s1Tab.style.display = "flex";
+  s2Tab.style.display = "flex";
+  s3Tab.style.display = "flex";
+  s4Tab.style.display = "flex";
+  s5Tab.style.display = "flex";
 
   playerTabs.forEach((tab) => {
     tab.style.display = "flex";
@@ -126,11 +159,33 @@ if (team === "testing") {
   // Hide all player containers for now
   matchReportBox.style.display = "block";
   gsBox.style.display = "none";
+  gaBox.style.display = "none";
+  waBox.style.display = "none";
+  cBox.style.display = "none";
+  wdBox.style.display = "none";
+  gdBox.style.display = "none";
+  gkBox.style.display = "none";
+  s1Box.style.display = "none";
+  s2Box.style.display = "none";
+  s3Box.style.display = "none";
+  s4Box.style.display = "none";
+  s5Box.style.display = "none";
 
 
   // MATCH REPORT is active by default
   matchReportTab.classList.add("active");
   gsTab.classList.remove("active");
+  gaTab.classList.remove("active");
+  waTab.classList.remove("active");
+  cTab.classList.remove("active");
+  wdTab.classList.remove("active");
+  gdTab.classList.remove("active");
+  gkTab.classList.remove("active");
+  s1Tab.classList.remove("active");
+  s2Tab.classList.remove("active");
+  s3Tab.classList.remove("active");
+  s4Tab.classList.remove("active");
+  s5Tab.classList.remove("active");
 
   playerTabs.forEach((tab) => {
     tab.classList.remove("active");
@@ -145,9 +200,31 @@ if (team === "testing") {
 
     matchReportBox.style.display = "block";
     gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
 
     matchReportTab.classList.add("active");
     gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
 
     playerTabs.forEach((tab) => {
       tab.classList.remove("active");
@@ -164,9 +241,31 @@ if (team === "testing") {
 
     matchReportBox.style.display = "none";
     gsBox.style.display = "block";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
 
     gsTab.classList.add("active");
     matchReportTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
 
     playerTabs.forEach((tab) => {
       tab.classList.remove("active");
@@ -176,28 +275,529 @@ if (team === "testing") {
 
 
   // ==================================================
-  // PLAYER TABS
+  // GA TAB
   // ==================================================
 
-  playerTabs.forEach((tab) => {
+  gaTab.addEventListener("click", () => {
 
-    tab.addEventListener("click", () => {
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "block";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
 
-      // Containers for these tabs haven't been created yet.
-      // For now, just make the selected tab active.
+    gaTab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
 
-      matchReportTab.classList.remove("active");
-      gsTab.classList.remove("active");
-
-      playerTabs.forEach((otherTab) => {
-        otherTab.classList.remove("active");
-      });
-
-      tab.classList.add("active");
-
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
     });
 
   });
+
+
+  // ==================================================
+  // WA TAB
+  // ==================================================
+
+  waTab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "block";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
+
+    waTab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+  });
+
+
+  // ==================================================
+  // C TAB
+  // ==================================================
+
+  cTab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "block";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
+
+    cTab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+  });
+
+
+  // ==================================================
+  // WD TAB
+  // ==================================================
+
+  wdTab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "block";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
+
+    wdTab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+  });
+
+
+  // ==================================================
+  // GD TAB
+  // ==================================================
+
+  gdTab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "block";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
+
+    gdTab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+  });
+
+
+  // ==================================================
+  // GK TAB
+  // ==================================================
+
+  gkTab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "block";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
+
+    gkTab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+  });
+
+
+  // ==================================================
+  // S1 TAB
+  // ==================================================
+
+  s1Tab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "block";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
+
+    s1Tab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+    s1Tab.classList.add("active");
+
+  });
+
+
+  // ==================================================
+  // S2 TAB
+  // ==================================================
+
+  s2Tab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "block";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
+
+    s2Tab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+    s2Tab.classList.add("active");
+
+  });
+
+
+  // ==================================================
+  // S3 TAB
+  // ==================================================
+
+  s3Tab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "block";
+    s4Box.style.display = "none";
+    s5Box.style.display = "none";
+
+    s3Tab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+    s3Tab.classList.add("active");
+
+  });
+
+
+  // ==================================================
+  // S4 TAB
+  // ==================================================
+
+  s4Tab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "block";
+    s5Box.style.display = "none";
+
+    s4Tab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s5Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+    s4Tab.classList.add("active");
+
+  });
+
+
+  // ==================================================
+  // S5 TAB
+  // ==================================================
+
+  s5Tab.addEventListener("click", () => {
+
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+    wdBox.style.display = "none";
+    gdBox.style.display = "none";
+    gkBox.style.display = "none";
+    s1Box.style.display = "none";
+    s2Box.style.display = "none";
+    s3Box.style.display = "none";
+    s4Box.style.display = "none";
+    s5Box.style.display = "block";
+
+    s5Tab.classList.add("active");
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+    waTab.classList.remove("active");
+    cTab.classList.remove("active");
+    wdTab.classList.remove("active");
+    gdTab.classList.remove("active");
+    gkTab.classList.remove("active");
+    s1Tab.classList.remove("active");
+    s2Tab.classList.remove("active");
+    s3Tab.classList.remove("active");
+    s4Tab.classList.remove("active");
+
+    playerTabs.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+    s5Tab.classList.add("active");
+
+  });
+
+
+  // ==================================================
+// PLAYER TABS
+// ==================================================
+
+const playerTabBoxes = {
+  "wa-tab": waBox,
+  "c-tab": cBox,
+  "wd-tab": document.querySelector(".wd-box"),
+  "gd-tab": document.querySelector(".gd-box"),
+  "gk-tab": document.querySelector(".gk-box"),
+  "S1-tab": document.querySelector(".s1-box"),
+  "S2-tab": document.querySelector(".s2-box"),
+  "S3-tab": document.querySelector(".s3-box"),
+  "S4-tab": document.querySelector(".s4-box"),
+  "S5-tab": document.querySelector(".s5-box")
+};
+
+
+playerTabs.forEach((tab) => {
+
+  tab.addEventListener("click", () => {
+
+    // Hide all containers
+    matchReportBox.style.display = "none";
+    gsBox.style.display = "none";
+    gaBox.style.display = "none";
+    waBox.style.display = "none";
+    cBox.style.display = "none";
+
+    document.querySelector(".wd-box").style.display = "none";
+    document.querySelector(".gd-box").style.display = "none";
+    document.querySelector(".gk-box").style.display = "none";
+    document.querySelector(".s1-box").style.display = "none";
+    document.querySelector(".s2-box").style.display = "none";
+    document.querySelector(".s3-box").style.display = "none";
+    document.querySelector(".s4-box").style.display = "none";
+    document.querySelector(".s5-box").style.display = "none";
+
+
+    // Remove active from all tabs
+    matchReportTab.classList.remove("active");
+    gsTab.classList.remove("active");
+    gaTab.classList.remove("active");
+
+    playerTabs.forEach((otherTab) => {
+      otherTab.classList.remove("active");
+    });
+
+
+    // Show the selected container
+    const box = playerTabBoxes[tab.id];
+
+    if (box) {
+      box.style.display = "block";
+    }
+
+
+    // Bring selected tab to the front
+    tab.classList.add("active");
+
+  });
+
+});
 
 
   // Player lock
@@ -959,14 +1559,14 @@ function undoLastAction() {
 
     case "level1-defence-rebound-won":
 
-  lvl1dreboundwon.querySelector(".counter").textContent =
-    Number(lvl1dreboundwon.querySelector(".counter").textContent) - 1;
+      lvl1dreboundwon.querySelector(".counter").textContent =
+        Number(lvl1dreboundwon.querySelector(".counter").textContent) - 1;
 
-  if (lastAction.gs) {
-    gsDReboundWon--;
-  }
+      if (lastAction.gs) {
+        gsDReboundWon--;
+      }
 
-  break;
+      break;
 
 
     // --------------------------------------------
@@ -975,14 +1575,14 @@ function undoLastAction() {
 
     case "level1-defence-rebound-lost":
 
-  lvl1dreboundlost.querySelector(".counter").textContent =
-    Number(lvl1dreboundlost.querySelector(".counter").textContent) - 1;
+      lvl1dreboundlost.querySelector(".counter").textContent =
+        Number(lvl1dreboundlost.querySelector(".counter").textContent) - 1;
 
-  if (lastAction.gs) {
-    gsDReboundLost--;
-  }
+      if (lastAction.gs) {
+        gsDReboundLost--;
+      }
 
-  break;
+      break;
 
 
     // --------------------------------------------
@@ -1358,47 +1958,47 @@ buttons.forEach((button) => {
 
 
     // ==================================================
-// GAME FEED - DEFENCE REBOUND WON
-// ==================================================
+    // GAME FEED - DEFENCE REBOUND WON
+    // ==================================================
 
-if (button.id === "level1-defence-rebound-won") {
+    if (button.id === "level1-defence-rebound-won") {
 
-  if (isGS) {
-    gsDReboundWon++;
-    updateGSDReboundPercentage();
-  }
+      if (isGS) {
+        gsDReboundWon++;
+        updateGSDReboundPercentage();
+      }
 
-  const playerPrefix = isGS ? "GS " : "";
+      const playerPrefix = isGS ? "GS " : "";
 
-  eventFeed.innerHTML =
-    `<div class="defence-rebound-won-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND WON</div>` +
-    eventFeed.innerHTML;
+      eventFeed.innerHTML =
+        `<div class="defence-rebound-won-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND WON</div>` +
+        eventFeed.innerHTML;
 
-  gsToggle.classList.remove("active");
+      gsToggle.classList.remove("active");
 
-}
+    }
 
 
     // ==================================================
-// GAME FEED - DEFENCE REBOUND LOST
-// ==================================================
+    // GAME FEED - DEFENCE REBOUND LOST
+    // ==================================================
 
-if (button.id === "level1-defence-rebound-lost") {
+    if (button.id === "level1-defence-rebound-lost") {
 
-  if (isGS) {
-    gsDReboundLost++;
-    updateGSDReboundPercentage();
-  }
+      if (isGS) {
+        gsDReboundLost++;
+        updateGSDReboundPercentage();
+      }
 
-  const playerPrefix = isGS ? "GS " : "";
+      const playerPrefix = isGS ? "GS " : "";
 
-  eventFeed.innerHTML =
-    `<div class="defence-rebound-lost-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND LOST</div>` +
-    eventFeed.innerHTML;
+      eventFeed.innerHTML =
+        `<div class="defence-rebound-lost-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND LOST</div>` +
+        eventFeed.innerHTML;
 
-  gsToggle.classList.remove("active");
+      gsToggle.classList.remove("active");
 
-}
+    }
 
 
     // ==================================================
