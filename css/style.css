@@ -473,6 +473,11 @@
     user-select: none;
 }
 
+.player-toggle.off-court {
+    background-color: lightgrey;
+    color: black;
+}
+
 
 /* =========================
    COUNTERS
