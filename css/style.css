@@ -435,6 +435,17 @@
     color: black;
 }
 
+.player-toggle.off-court.active {
+    background-color: white;
+    color: black;
+}
+
+.player-toggle.off-court {
+    background-color: lightgrey;
+    color: black;
+}
+
+
 .player-lock {
     width: 46px;
     height: 24px;
@@ -473,10 +484,6 @@
     user-select: none;
 }
 
-.player-toggle.off-court {
-    background-color: lightgrey;
-    color: black;
-}
 
 
 /* =========================

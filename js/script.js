@@ -516,11 +516,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "gs-toggle"
     );
 
-  const playerLock =
-    document.getElementById(
-      "player-lock-toggle"
-    );
-
   const gsName =
     document.getElementById(
       "gs-name"
@@ -565,232 +560,46 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-  let selectedPlayer = null;
-
-
   playerToggles.forEach((toggle) => {
 
     toggle.addEventListener(
       "click",
       () => {
 
-        // ----------------------------------------------
-        // LOCKED
-        // ----------------------------------------------
-
         if (
-          playerLock &&
-          playerLock.classList.contains(
-            "locked"
-          )
-        ) {
-
-          const togglesArray =
-            Array.from(
-              playerToggles
-            );
-
-          const toggleIndex =
-            togglesArray.indexOf(
-              toggle
-            );
-
-
-          if (
-            toggleIndex >= 7 &&
-            !toggle.classList.contains(
-              "active"
-            )
-          ) {
-
-            return;
-
-          }
-
-
-          if (
-            toggle.classList.contains(
-              "active"
-            )
-          ) {
-
-            toggle.classList.remove(
-              "active"
-            );
-
-          } else {
-
-            playerToggles.forEach(
-              (otherToggle) => {
-
-                otherToggle.classList.remove(
-                  "active"
-                );
-
-              }
-            );
-
-
-            toggle.classList.add(
-              "active"
-            );
-
-          }
-
-
-          return;
-
-        }
-
-
-        // ----------------------------------------------
-        // UNLOCKED
-        // ----------------------------------------------
-
-        if (
-          selectedPlayer === null
-        ) {
-
-          const togglesArray =
-            Array.from(
-              playerToggles
-            );
-
-          const toggleIndex =
-            togglesArray.indexOf(
-              toggle
-            );
-
-
-          if (
-            toggleIndex >= 7 &&
-            !toggle.classList.contains(
-              "active"
-            )
-          ) {
-
-            return;
-
-          }
-
-
-          toggle.classList.add(
+          toggle.classList.contains(
             "active"
-          );
-
-
-          selectedPlayer =
-            toggle;
-
-
-          return;
-
-        }
-
-
-        // ----------------------------------------------
-        // SAME PLAYER
-        // ----------------------------------------------
-
-        if (
-          selectedPlayer === toggle
+          )
         ) {
 
           toggle.classList.remove(
             "active"
           );
 
-          selectedPlayer = null;
-
           return;
 
         }
 
 
-        // SWAP PLAYER NAMES
+        playerToggles.forEach(
+          (otherToggle) => {
 
-const tempText =
-  selectedPlayer.textContent;
+            otherToggle.classList.remove(
+              "active"
+            );
 
-selectedPlayer.textContent =
-  toggle.textContent;
-
-toggle.textContent =
-  tempText;
-
-const tempId =
-  selectedPlayer.id;
-
-selectedPlayer.id =
-  toggle.id;
-
-toggle.id =
-  tempId;
-
-
-        const togglesArray =
-          Array.from(
-            playerToggles
-          );
-
-
-        const selectedIndex =
-          togglesArray.indexOf(
-            selectedPlayer
-          );
-
-        const toggleIndex =
-          togglesArray.indexOf(
-            toggle
-          );
-
-
-        selectedPlayer.classList.toggle(
-          "off-court",
-          selectedIndex >= 7
-        );
-
-        toggle.classList.toggle(
-          "off-court",
-          toggleIndex >= 7
+          }
         );
 
 
-        selectedPlayer.classList.remove(
+        toggle.classList.add(
           "active"
         );
-
-        toggle.classList.remove(
-          "active"
-        );
-
-
-        selectedPlayer = null;
 
       }
     );
 
   });
-
-
-  // ======================================================
-  // PLAYER LOCK
-  // ======================================================
-
-  if (playerLock) {
-
-    playerLock.addEventListener(
-      "click",
-      () => {
-
-        playerLock.classList.toggle(
-          "locked"
-        );
-
-      }
-    );
-
-  }
 
 
   // ======================================================
@@ -2304,9 +2113,40 @@ function updateS5CentreSuccessPercentage() {
 
 
   let gsDReboundWon = 0;
-  let gsDReboundLost = 0;
-  let gdDReboundWon = 0;
-  let gdDReboundLost = 0;
+let gsDReboundLost = 0;
+
+let gaDReboundWon = 0;
+let gaDReboundLost = 0;
+
+let waDReboundWon = 0;
+let waDReboundLost = 0;
+
+let cDReboundWon = 0;
+let cDReboundLost = 0;
+
+let wdDReboundWon = 0;
+let wdDReboundLost = 0;
+
+let gdDReboundWon = 0;
+let gdDReboundLost = 0;
+
+let gkDReboundWon = 0;
+let gkDReboundLost = 0;
+
+let s1DReboundWon = 0;
+let s1DReboundLost = 0;
+
+let s2DReboundWon = 0;
+let s2DReboundLost = 0;
+
+let s3DReboundWon = 0;
+let s3DReboundLost = 0;
+
+let s4DReboundWon = 0;
+let s4DReboundLost = 0;
+
+let s5DReboundWon = 0;
+let s5DReboundLost = 0;
 
 
   function updateDefenceReboundPercentage() {
@@ -2377,6 +2217,116 @@ function updateS5CentreSuccessPercentage() {
     "#gd-defence-rebound-fill"
   );
 }
+
+  function updateGADReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      gaDReboundWon,
+      gaDReboundLost,
+      "#ga-defence-rebound-percentage",
+      "#ga-defence-rebound-fill"
+    );
+
+  }
+
+  function updateWADReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      waDReboundWon,
+      waDReboundLost,
+      "#wa-defence-rebound-percentage",
+      "#wa-defence-rebound-fill"
+    );
+
+  }
+
+  function updateCDReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      cDReboundWon,
+      cDReboundLost,
+      "#c-defence-rebound-percentage",
+      "#c-defence-rebound-fill"
+    );
+
+  }
+
+  function updateWDDReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      wdDReboundWon,
+      wdDReboundLost,
+      "#wd-defence-rebound-percentage",
+      "#wd-defence-rebound-fill"
+    );
+
+  }
+
+  function updateGKDReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      gkDReboundWon,
+      gkDReboundLost,
+      "#gk-defence-rebound-percentage",
+      "#gk-defence-rebound-fill"
+    );
+
+  }
+
+  function updateS1DReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      s1DReboundWon,
+      s1DReboundLost,
+      "#s1-defence-rebound-percentage",
+      "#s1-defence-rebound-fill"
+    );
+
+  }
+
+  function updateS2DReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      s2DReboundWon,
+      s2DReboundLost,
+      "#s2-defence-rebound-percentage",
+      "#s2-defence-rebound-fill"
+    );
+
+  }
+
+  function updateS3DReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      s3DReboundWon,
+      s3DReboundLost,
+      "#s3-defence-rebound-percentage",
+      "#s3-defence-rebound-fill"
+    );
+
+  }
+
+  function updateS4DReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      s4DReboundWon,
+      s4DReboundLost,
+      "#s4-defence-rebound-percentage",
+      "#s4-defence-rebound-fill"
+    );
+
+  }
+
+  function updateS5DReboundPercentage() {
+
+    updatePlayerReboundPercentage(
+      s5DReboundWon,
+      s5DReboundLost,
+      "#s5-defence-rebound-percentage",
+      "#s5-defence-rebound-fill"
+    );
+
+  }
 
 
     // ======================================================
@@ -4724,7 +4674,7 @@ case "level1-centre-missed":
         break;
 
 
-            // ==================================================
+                  // ==================================================
       // DEFENSIVE REBOUND WON
       // ==================================================
 
@@ -4743,7 +4693,7 @@ case "level1-centre-missed":
             );
 
 
-        if (lastAction.GS) {
+        if (lastAction.player === "GS") {
 
           gsDReboundWon =
             Math.max(
@@ -4753,12 +4703,112 @@ case "level1-centre-missed":
 
         }
 
-        if (lastAction.GD) {
+        if (lastAction.player === "GA") {
+
+          gaDReboundWon =
+            Math.max(
+              0,
+              gaDReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "WA") {
+
+          waDReboundWon =
+            Math.max(
+              0,
+              waDReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "C") {
+
+          cDReboundWon =
+            Math.max(
+              0,
+              cDReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "WD") {
+
+          wdDReboundWon =
+            Math.max(
+              0,
+              wdDReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "GD") {
 
           gdDReboundWon =
             Math.max(
               0,
               gdDReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "GK") {
+
+          gkDReboundWon =
+            Math.max(
+              0,
+              gkDReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "S1") {
+
+          s1DReboundWon =
+            Math.max(
+              0,
+              s1DReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "S2") {
+
+          s2DReboundWon =
+            Math.max(
+              0,
+              s2DReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "S3") {
+
+          s3DReboundWon =
+            Math.max(
+              0,
+              s3DReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "S4") {
+
+          s4DReboundWon =
+            Math.max(
+              0,
+              s4DReboundWon - 1
+            );
+
+        }
+
+        if (lastAction.player === "S5") {
+
+          s5DReboundWon =
+            Math.max(
+              0,
+              s5DReboundWon - 1
             );
 
         }
@@ -4785,7 +4835,7 @@ case "level1-centre-missed":
             );
 
 
-        if (lastAction.GS) {
+        if (lastAction.player === "GS") {
 
           gsDReboundLost =
             Math.max(
@@ -4795,12 +4845,112 @@ case "level1-centre-missed":
 
         }
 
-        if (lastAction.GD) {
+        if (lastAction.player === "GA") {
+
+          gaDReboundLost =
+            Math.max(
+              0,
+              gaDReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "WA") {
+
+          waDReboundLost =
+            Math.max(
+              0,
+              waDReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "C") {
+
+          cDReboundLost =
+            Math.max(
+              0,
+              cDReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "WD") {
+
+          wdDReboundLost =
+            Math.max(
+              0,
+              wdDReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "GD") {
 
           gdDReboundLost =
             Math.max(
               0,
               gdDReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "GK") {
+
+          gkDReboundLost =
+            Math.max(
+              0,
+              gkDReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "S1") {
+
+          s1DReboundLost =
+            Math.max(
+              0,
+              s1DReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "S2") {
+
+          s2DReboundLost =
+            Math.max(
+              0,
+              s2DReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "S3") {
+
+          s3DReboundLost =
+            Math.max(
+              0,
+              s3DReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "S4") {
+
+          s4DReboundLost =
+            Math.max(
+              0,
+              s4DReboundLost - 1
+            );
+
+        }
+
+        if (lastAction.player === "S5") {
+
+          s5DReboundLost =
+            Math.max(
+              0,
+              s5DReboundLost - 1
             );
 
         }
@@ -4872,7 +5022,7 @@ case "level1-centre-missed":
     }
 
 
-    // ======================================================
+        // ======================================================
     // REFRESH EVERYTHING AFTER UNDO
     // ======================================================
 
@@ -4933,22 +5083,56 @@ case "level1-centre-missed":
     updateS5FeedSuccessPercentage();
 
     updateCentreSuccessPercentage();
-updateGSCentreSuccessPercentage();
-updateGACentreSuccessPercentage();
-updateWACentreSuccessPercentage();
-updateCCentreSuccessPercentage();
-updateWDCentreSuccessPercentage();
-updateGDCentreSuccessPercentage();
-updateGKCentreSuccessPercentage();
-updateS1CentreSuccessPercentage();
-updateS2CentreSuccessPercentage();
-updateS3CentreSuccessPercentage();
-updateS4CentreSuccessPercentage();
-updateS5CentreSuccessPercentage();
-updateDefenceReboundPercentage();
+
+    updateGSCentreSuccessPercentage();
+
+    updateGACentreSuccessPercentage();
+
+    updateWACentreSuccessPercentage();
+
+    updateCCentreSuccessPercentage();
+
+    updateWDCentreSuccessPercentage();
+
+    updateGDCentreSuccessPercentage();
+
+    updateGKCentreSuccessPercentage();
+
+    updateS1CentreSuccessPercentage();
+
+    updateS2CentreSuccessPercentage();
+
+    updateS3CentreSuccessPercentage();
+
+    updateS4CentreSuccessPercentage();
+
+    updateS5CentreSuccessPercentage();
+
+    updateDefenceReboundPercentage();
 
     updateGSDReboundPercentage();
+
+    updateGADReboundPercentage();
+
+    updateWADReboundPercentage();
+
+    updateCDReboundPercentage();
+
+    updateWDDReboundPercentage();
+
     updateGDDReboundPercentage();
+
+    updateGKDReboundPercentage();
+
+    updateS1DReboundPercentage();
+
+    updateS2DReboundPercentage();
+
+    updateS3DReboundPercentage();
+
+    updateS4DReboundPercentage();
+
+    updateS5DReboundPercentage();
 
     updateTurnover();
 
@@ -5006,53 +5190,44 @@ updateDefenceReboundPercentage();
 
   }
 
-
-  // ======================================================
-// MAIN BUTTON HANDLERS
-// ======================================================
-
-buttons.forEach((button) => {
-
-  const counter =
-    button.querySelector(
-      ".counter"
-    );
-
+  buttons.forEach((button) => {
 
   button.addEventListener(
     "click",
     () => {
 
       // CENTRE POSITION VALIDATION
-if (
-  button.id === "level1-centre-success" ||
-  button.id === "level1-centre-missed"
-) {
 
-  const activeToggle =
-    document.querySelector(
-      ".player-toggle.active"
-    );
+      if (
+        button.id === "level1-centre-success" ||
+        button.id === "level1-centre-missed"
+      ) {
 
+        const activeToggle =
+          document.querySelector(
+            ".player-toggle.active"
+          );
 
-  const toggleIndex =
-    activeToggle
-      ? Array.from(
-          playerToggles
-        ).indexOf(
+        const toggleIndex =
           activeToggle
-        )
-      : -1;
+            ? Array.from(
+                playerToggles
+              ).indexOf(
+                activeToggle
+              )
+            : -1;
+
+        if (
+          toggleIndex < 0 ||
+          toggleIndex > 11
+        ) {
+          return;
+        }
+
+      }
 
 
-  if (
-    activeToggle &&
-    toggleIndex !== 3
-  ) {
-    return;
-  }
-
-}
+// SHOT POSITION VALIDATION
 
 
       // SHOT POSITION VALIDATION
@@ -5078,59 +5253,37 @@ if (
 
 
   if (
-    activeToggle &&
-    toggleIndex !== 0 &&
-    toggleIndex !== 1
-  ) {
-    return;
-  }
-
-}
-
-
-      // DEFENSIVE REBOUND POSITION VALIDATION
-if (
-  button.id === "level1-defence-rebound-won" ||
-  button.id === "level1-defence-rebound-lost"
-) {
-
-  const activeToggle =
-    document.querySelector(
-      ".player-toggle.active"
-    );
-
-
-  const toggleIndex =
-    activeToggle
-      ? Array.from(
-          playerToggles
-        ).indexOf(
-          activeToggle
-        )
-      : -1;
-
-
-    if (
   activeToggle &&
+  toggleIndex !== 0 &&
+  toggleIndex !== 1 &&
+  toggleIndex !== 2 &&
+  toggleIndex !== 3 &&
+  toggleIndex !== 4 &&
   toggleIndex !== 5 &&
-  toggleIndex !== 6
+  toggleIndex !== 6 &&
+  toggleIndex !== 7 &&
+  toggleIndex !== 8 &&
+  toggleIndex !== 9 &&
+  toggleIndex !== 10 &&
+  toggleIndex !== 11
 ) {
   return;
 }
 
 }
 
-      // ATTACK REBOUND POSITION VALIDATION
+
+            // DEFENSIVE REBOUND POSITION VALIDATION
+
       if (
-        button.id === "level1-attack-rebound-won" ||
-        button.id === "level1-attack-rebound-lost"
+        button.id === "level1-defence-rebound-won" ||
+        button.id === "level1-defence-rebound-lost"
       ) {
 
         const activeToggle =
           document.querySelector(
             ".player-toggle.active"
           );
-
 
         const toggleIndex =
           activeToggle
@@ -5141,16 +5294,55 @@ if (
               )
             : -1;
 
-
         if (
-          activeToggle &&
-          toggleIndex !== 0 &&
-          toggleIndex !== 1
+          toggleIndex < 0 ||
+          toggleIndex > 11
         ) {
           return;
         }
 
       }
+
+      // ATTACK REBOUND POSITION VALIDATION
+
+if (
+  button.id === "level1-attack-rebound-won" ||
+  button.id === "level1-attack-rebound-lost"
+) {
+
+  const activeToggle =
+    document.querySelector(
+      ".player-toggle.active"
+    );
+
+  const toggleIndex =
+    activeToggle
+      ? Array.from(
+          playerToggles
+        ).indexOf(
+          activeToggle
+        )
+      : -1;
+
+  if (
+    activeToggle &&
+    toggleIndex !== 0 &&
+    toggleIndex !== 1 &&
+    toggleIndex !== 2 &&
+    toggleIndex !== 3 &&
+    toggleIndex !== 4 &&
+    toggleIndex !== 5 &&
+    toggleIndex !== 6 &&
+    toggleIndex !== 7 &&
+    toggleIndex !== 8 &&
+    toggleIndex !== 9 &&
+    toggleIndex !== 10 &&
+    toggleIndex !== 11
+  ) {
+    return;
+  }
+
+}
 
       // FEED POSITION VALIDATION
 if (
@@ -5179,7 +5371,15 @@ if (
     toggleIndex !== 0 &&
     toggleIndex !== 1 &&
     toggleIndex !== 2 &&
-    toggleIndex !== 3
+    toggleIndex !== 3 &&
+    toggleIndex !== 4 &&
+    toggleIndex !== 5 &&
+    toggleIndex !== 6 &&
+    toggleIndex !== 7 &&
+    toggleIndex !== 8 &&
+    toggleIndex !== 9 &&
+    toggleIndex !== 10 &&
+    toggleIndex !== 11
   ) {
     return;
   }
@@ -5212,10 +5412,19 @@ if (
         // BUTTON COUNTER
         // ==================================================
 
-        counter.textContent =
-          Number(
-            counter.textContent
-          ) + 1;
+        const counter =
+  button.querySelector(
+    ".counter"
+  );
+
+if (counter) {
+
+  counter.textContent =
+    Number(
+      counter.textContent
+    ) + 1;
+
+}
 
 
        // ==================================================
@@ -5246,7 +5455,17 @@ if (
   if (
   !activeToggle ||
   toggleIndex === 0 ||
-  toggleIndex === 1
+  toggleIndex === 1 ||
+  toggleIndex === 2 ||
+  toggleIndex === 3 ||
+  toggleIndex === 4 ||
+  toggleIndex === 5 ||
+  toggleIndex === 6 ||
+  toggleIndex === 7 ||
+  toggleIndex === 8 ||
+  toggleIndex === 9 ||
+  toggleIndex === 10 ||
+  toggleIndex === 11
 ) {
 
     teamScore++;
@@ -5486,10 +5705,15 @@ if (
   player
 );
 
-  updatePlayerReboundCounter(
-    getActivePlayer(),
-    "won"
-  );
+  console.log("ACTIVE PLAYER:", getActivePlayer());
+console.log("WA COUNTER BEFORE:", waReboundWon);
+
+updatePlayerReboundCounter(
+  getActivePlayer(),
+  "won"
+);
+
+console.log("WA COUNTER AFTER:", waReboundWon);
 
 
   updateAttackReboundPercentage();
@@ -5745,11 +5969,11 @@ if (
 
 
   if (
-    activeToggle &&
-    toggleIndex !== 3
-  ) {
-    return;
-  }
+  toggleIndex < 0 ||
+  toggleIndex > 11
+) {
+  return;
+}
 
 
   if (activeToggle) {
@@ -5907,11 +6131,11 @@ if (
 
 
   if (
-    activeToggle &&
-    toggleIndex !== 3
-  ) {
-    return;
-  }
+  toggleIndex < 0 ||
+  toggleIndex > 11
+) {
+  return;
+}
 
 
   if (activeToggle) {
@@ -6289,109 +6513,235 @@ updateTurnover();
 
 
         // ==================================================
-        // DEFENCE REBOUND WON
-        // ==================================================
+// DEFENCE REBOUND WON
+// ==================================================
 
-        if (
-          button.id ===
-          "level1-defence-rebound-won"
-        ) {
+if (
+  button.id ===
+  "level1-defence-rebound-won"
+) {
 
-          if (flags.GS) {
-
-  gsDReboundWon++;
-  updateGSDReboundPercentage();
-
-}
-
-if (flags.GD) {
-
-  gdDReboundWon++;
-  updateGDDReboundPercentage();
-
-}
-
-
-          eventFeed.innerHTML =
-            `<div class="defence-rebound-won-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND WON</div>` +
-            eventFeed.innerHTML;
-
-
-          clearPlayerSelection();
-
-        }
-
-
-        // ==================================================
-        // DEFENCE REBOUND LOST
-        // ==================================================
-
-        if (
-          button.id ===
-          "level1-defence-rebound-lost"
-        ) {
-
-          if (flags.GS) {
-
-  gsDReboundLost++;
-  updateGSDReboundPercentage();
-
-}
-
-if (flags.GD) {
-
-  gdDReboundLost++;
-  updateGDDReboundPercentage();
-
-}
-
-
-          eventFeed.innerHTML =
-            `<div class="defence-rebound-lost-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND LOST</div>` +
-            eventFeed.innerHTML;
-
-
-          clearPlayerSelection();
-
-        }
-
-
-        // ==================================================
-        // OPPOSITION SCORE
-        // ==================================================
-
-        if (
-          button.id ===
-          "opposition-score-btn"
-        ) {
-
-          oppositionScore++;
-
-          updateOppositionScore();
-
-
-          eventFeed.innerHTML =
-            `<div class="oppo-score-event">${matchClock.textContent} - OPPO SCORE</div>` +
-            eventFeed.innerHTML;
-
-        }
-
-      }
-
+  const activeToggle =
+    document.querySelector(
+      ".player-toggle.active"
     );
 
-  });
+  const toggleIndex =
+    activeToggle
+      ? Array.from(
+          playerToggles
+        ).indexOf(
+          activeToggle
+        )
+      : -1;
+
+  if (
+    toggleIndex < 0 ||
+    toggleIndex > 11
+  ) {
+    return;
+  }
+
+  if (activeToggle) {
+
+    const toggleIdentity =
+      activeToggle.textContent.trim();
+
+    if (toggleIdentity === "GS") {
+      gsDReboundWon++;
+      updateGSDReboundPercentage();
+    }
+
+    if (toggleIdentity === "GA") {
+      gaDReboundWon++;
+      updateGADReboundPercentage();
+    }
+
+    if (toggleIdentity === "WA") {
+      waDReboundWon++;
+      updateWADReboundPercentage();
+    }
+
+    if (toggleIdentity === "C") {
+      cDReboundWon++;
+      updateCDReboundPercentage();
+    }
+
+    if (toggleIdentity === "WD") {
+      wdDReboundWon++;
+      updateWDReboundPercentage();
+    }
+
+    if (toggleIdentity === "GD") {
+      gdDReboundWon++;
+      updateGDDReboundPercentage();
+    }
+
+    if (toggleIdentity === "GK") {
+      gkDReboundWon++;
+      updateGKDReboundPercentage();
+    }
+
+    if (toggleIdentity === "S1") {
+      s1DReboundWon++;
+      updateS1DReboundPercentage();
+    }
+
+    if (toggleIdentity === "S2") {
+      s2DReboundWon++;
+      updateS2DReboundPercentage();
+    }
+
+    if (toggleIdentity === "S3") {
+      s3DReboundWon++;
+      updateS3DReboundPercentage();
+    }
+
+    if (toggleIdentity === "S4") {
+      s4DReboundWon++;
+      updateS4DReboundPercentage();
+    }
+
+        if (toggleIdentity === "S5") {
+      s5DReboundWon++;
+      updateS5DReboundPercentage();
+    }
+
+  }
+
+  // UPDATE MATCH REPORT DEFENSIVE REBOUND
+  updateDefenceReboundPercentage();
+
+  eventFeed.innerHTML =
+    `<div class="defence-rebound-won-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND WON</div>` +
+    eventFeed.innerHTML;
+
+  clearPlayerSelection();
+
+}
 
 
-  // ======================================================
+        // ==================================================
+// DEFENCE REBOUND LOST
+// ==================================================
+
+if (
+  button.id ===
+  "level1-defence-rebound-lost"
+) {
+
+  const activeToggle =
+    document.querySelector(
+      ".player-toggle.active"
+    );
+
+  const toggleIndex =
+    activeToggle
+      ? Array.from(
+          playerToggles
+        ).indexOf(
+          activeToggle
+        )
+      : -1;
+
+  if (
+    toggleIndex < 0 ||
+    toggleIndex > 11
+  ) {
+    return;
+  }
+
+  if (activeToggle) {
+
+    const toggleIdentity =
+      activeToggle.textContent.trim();
+
+    if (toggleIdentity === "GS") {
+      gsDReboundLost++;
+      updateGSDReboundPercentage();
+    }
+
+    if (toggleIdentity === "GA") {
+      gaDReboundLost++;
+      updateGADReboundPercentage();
+    }
+
+    if (toggleIdentity === "WA") {
+      waDReboundLost++;
+      updateWADReboundPercentage();
+    }
+
+    if (toggleIdentity === "C") {
+      cDReboundLost++;
+      updateCDReboundPercentage();
+    }
+
+    if (toggleIdentity === "WD") {
+      wdDReboundLost++;
+      updateWDDReboundPercentage();
+    }
+
+    if (toggleIdentity === "GD") {
+      gdDReboundLost++;
+      updateGDDReboundPercentage();
+    }
+
+    if (toggleIdentity === "GK") {
+      gkDReboundLost++;
+      updateGKDReboundPercentage();
+    }
+
+    if (toggleIdentity === "S1") {
+      s1DReboundLost++;
+      updateS1DReboundPercentage();
+    }
+
+    if (toggleIdentity === "S2") {
+      s2DReboundLost++;
+      updateS2DReboundPercentage();
+    }
+
+    if (toggleIdentity === "S3") {
+      s3DReboundLost++;
+      updateS3DReboundPercentage();
+    }
+
+    if (toggleIdentity === "S4") {
+      s4DReboundLost++;
+      updateS4DReboundPercentage();
+    }
+
+        if (toggleIdentity === "S5") {
+      s5DReboundLost++;
+      updateS5DReboundPercentage();
+    }
+
+  }
+
+  // UPDATE MATCH REPORT DEFENSIVE REBOUND
+  updateDefenceReboundPercentage();
+
+  eventFeed.innerHTML =
+    `<div class="defence-rebound-lost-event">${matchClock.textContent} - ${playerPrefix}DEFENCE REBOUND LOST</div>` +
+    eventFeed.innerHTML;
+
+  clearPlayerSelection();
+
+}
+
+
+    // ======================================================
   // CLEAR LAST
   // ======================================================
 
-  clearLastButton.addEventListener(
-    "click",
-    undoLastAction
+  }
   );
 
-  }
+});
+
+clearLastButton.addEventListener(
+  "click",
+  undoLastAction
 );
-  
+
+});
