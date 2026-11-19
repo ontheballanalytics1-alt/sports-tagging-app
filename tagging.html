@@ -72,7 +72,7 @@
 </div>
 
   <div class="match-report-box">
-   <div class="player-title">MATCH REPORT</div>
+   <div class="player-title" id="match-report-title">MATCH REPORT</div>
 
    <h3 class="report-heading">ATTACKING REBOUND</h3>
    <div class="progress-bar">
@@ -115,7 +115,11 @@
     <div class="progress-fill" id="level1-unforced-error-fill"></div>
     <h3 class="progress-text" id="level1-unforced-error-count">0</h3>
    </div>
-  </div>
+
+   <button id="download-match-report" class="download-report-button">
+    DOWNLOAD MATCH REPORT
+   </button>
+   </div>
 
       <div class="gs-box">
 
@@ -856,7 +860,16 @@
  </div>
 </div>
 
+
+<!-- PDF GENERATION LIBRARIES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- EXISTING JAVASCRIPT -->
 <script src="js/script.js"></script>
 
 </body>
 </html>
+
+
+

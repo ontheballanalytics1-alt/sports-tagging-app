@@ -758,35 +758,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   const teamScoreText =
-    document.getElementById(
-      "team-score"
-    );
+  document.getElementById(
+    "team-score"
+  );
 
-  const oppositionScoreText =
-    document.getElementById(
-      "opposition-score"
-    );
+const oppositionScoreText =
+  document.getElementById(
+    "opposition-score"
+  );
 
-  const oppositionButton =
-    document.getElementById(
-      "opposition-score-btn"
-    );
+const oppositionButton =
+  document.getElementById(
+    "opposition-score-btn"
+  );
+
+const matchReportTitle =
+  document.getElementById(
+    "match-report-title"
+  );
+
+
+function updateMatchReportTitle() {
+
+  matchReportTitle.textContent =
+    `${teamName.textContent} ${teamScore} v ${oppositionScore} OPPOSITION`;
+
+}
 
 
   function updateTeamScore() {
 
-    teamScoreText.textContent =
-      teamScore;
+  teamScoreText.textContent =
+    teamScore;
 
-  }
+  updateMatchReportTitle();
+
+}
 
 
-  function updateOppositionScore() {
+function updateOppositionScore() {
 
-    oppositionScoreText.textContent =
-      oppositionScore;
+  oppositionScoreText.textContent =
+    oppositionScore;
 
-  }
+  updateMatchReportTitle();
+
+}
+
+updateMatchReportTitle();
 
 
   // ======================================================
@@ -6499,9 +6518,352 @@ if (
 
 });
 
+
 clearLastButton.addEventListener(
   "click",
   undoLastAction
 );
 
+
+// ======================================================
+// PDF MATCH REPORT DOWNLOAD
+// ======================================================
+
+const downloadMatchReportButton =
+  document.getElementById(
+    "download-match-report"
+  );
+
+
+if (downloadMatchReportButton) {
+
+  downloadMatchReportButton.addEventListener(
+    "click",
+    async () => {
+
+      const originalButtonText =
+        downloadMatchReportButton.textContent;
+
+      let exportClone = null;
+
+
+      try {
+
+        downloadMatchReportButton.disabled = true;
+
+        downloadMatchReportButton.textContent =
+          "GENERATING PDF...";
+
+
+        // Check PDF libraries
+
+        if (
+          typeof html2canvas === "undefined" ||
+          !window.jspdf
+        ) {
+
+          throw new Error(
+            "PDF libraries have not loaded."
+          );
+
+        }
+
+
+        // Wait for fonts to finish loading
+
+        await document.fonts.ready;
+
+
+        // Find the main page container
+
+        const liveContainer =
+          document.querySelector(".container");
+
+
+        if (!liveContainer) {
+
+          throw new Error(
+            "Could not find the main container."
+          );
+
+        }
+
+
+        // Make a temporary copy of the page
+
+        exportClone =
+          liveContainer.cloneNode(true);
+
+
+        // Keep the copy at the same width as the live page
+
+        const originalWidth =
+          liveContainer.getBoundingClientRect().width;
+
+
+        exportClone.style.position =
+          "absolute";
+
+        exportClone.style.left =
+          "-100000px";
+
+        exportClone.style.top =
+          "0";
+
+        exportClone.style.width =
+          originalWidth + "px";
+
+        exportClone.style.maxWidth =
+          "none";
+
+        exportClone.style.margin =
+          "0";
+
+        exportClone.style.transform =
+          "none";
+
+        exportClone.style.zIndex =
+          "-1";
+
+
+        document.body.appendChild(
+          exportClone
+        );
+
+
+        // Remove the download button from the PDF copy
+
+        const copiedDownloadButton =
+          exportClone.querySelector(
+            "#download-match-report"
+          );
+
+        if (copiedDownloadButton) {
+
+          copiedDownloadButton.remove();
+
+        }
+
+
+        // Find every report container
+
+        const reportSelectors = [
+
+          ".match-report-box",
+
+          ".gs-box",
+
+          ".ga-box",
+
+          ".wa-box",
+
+          ".c-box",
+
+          ".wd-box",
+
+          ".gd-box",
+
+          ".gk-box",
+
+          ".s1-box",
+
+          ".s2-box",
+
+          ".s3-box",
+
+          ".s4-box",
+
+          ".s5-box"
+
+        ];
+
+
+        const reportBoxes =
+          reportSelectors
+            .map((selector) =>
+              exportClone.querySelector(selector)
+            )
+            .filter(Boolean);
+
+
+        // Make every copied report visible
+
+        reportBoxes.forEach((box) => {
+
+          box.style.setProperty(
+            "display",
+            "block",
+            "important"
+          );
+
+          box.style.setProperty(
+            "visibility",
+            "visible",
+            "important"
+          );
+
+          box.style.setProperty(
+            "opacity",
+            "1",
+            "important"
+          );
+
+        });
+
+
+        // Allow the browser to render the copied containers
+
+        await new Promise((resolve) => {
+
+          requestAnimationFrame(() => {
+
+            requestAnimationFrame(resolve);
+
+          });
+
+        });
+
+
+        // Create the PDF
+
+        const { jsPDF } =
+          window.jspdf;
+
+        let pdf = null;
+
+
+        // Capture each container separately
+
+        for (
+          let i = 0;
+          i < reportBoxes.length;
+          i++
+        ) {
+
+          const canvas =
+            await html2canvas(
+              reportBoxes[i],
+              {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: null,
+                logging: false
+              }
+            );
+
+
+          // Keep the original proportions
+
+          const pageWidth =
+            (canvas.width / 2) * 0.75;
+
+          const pageHeight =
+            (canvas.height / 2) * 0.75;
+
+
+          const orientation =
+            pageWidth > pageHeight
+              ? "landscape"
+              : "portrait";
+
+
+          if (!pdf) {
+
+            pdf = new jsPDF({
+
+              orientation: orientation,
+
+              unit: "pt",
+
+              format: [
+                pageWidth,
+                pageHeight
+              ],
+
+              compress: true
+
+            });
+
+          } else {
+
+            pdf.addPage(
+              [
+                pageWidth,
+                pageHeight
+              ],
+              orientation
+            );
+
+          }
+
+
+          // Add the container image to the page
+
+          const imageData =
+            canvas.toDataURL("image/png");
+
+
+          pdf.addImage(
+            imageData,
+            "PNG",
+            0,
+            0,
+            pageWidth,
+            pageHeight
+          );
+
+        }
+
+
+        // Download the PDF
+
+        const teamFileName =
+          (teamName.textContent.trim() || "Match")
+            .replace(/[^a-z0-9_-]/gi, "_");
+
+
+        pdf.save(
+          teamFileName + "_Match_Report.pdf"
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "PDF export error:",
+          error
+        );
+
+        alert(
+          "There was a problem creating the PDF. Please check the browser console."
+        );
+
+      } finally {
+
+        // Remove the temporary copy
+
+        if (exportClone) {
+
+          exportClone.remove();
+
+        }
+
+
+        // Restore the download button
+
+        downloadMatchReportButton.disabled =
+          false;
+
+        downloadMatchReportButton.textContent =
+          originalButtonText;
+
+      }
+
+    }
+  );
+
+}
+
+
 });
+
