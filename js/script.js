@@ -465,11 +465,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // ======================================================
+    // ======================================================
   // TESTING MODE
   // ======================================================
 
   if (team === "testing") {
+        
+    document.body.classList.add("testing-mode");
 
     allTabs.forEach((tab) => {
 
@@ -487,6 +489,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
       playerTogglesColumn.style.display =
         "flex";
+
+    }
+
+
+        // Hide START/STOP TIMER in testing mode
+    const startMatchButton =
+      document.querySelector("#start-match");
+
+    if (startMatchButton) {
+
+      startMatchButton.style.display =
+        "none";
+
+    }
+
+
+    // Hide RESTART TIMER in testing mode
+    const restartTimerButton =
+      document.querySelector("#clock-restart");
+
+    if (restartTimerButton) {
+
+      restartTimerButton.style.display =
+        "none";
 
     }
 
