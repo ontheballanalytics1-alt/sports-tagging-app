@@ -1044,6 +1044,15 @@
         padding: 12px;
     }
 
+        #match-report-title {
+        font-size: 19px;
+        white-space: nowrap;
+        letter-spacing: -0.5px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
     /* Hide gamefeed only on iPhone testing version */
     body.testing-mode .container > .column:nth-child(2) {
         display: none;
