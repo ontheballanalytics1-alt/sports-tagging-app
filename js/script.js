@@ -6620,6 +6620,8 @@ if (downloadMatchReportButton) {
         exportClone =
           liveContainer.cloneNode(true);
 
+          exportClone.classList.add("pdf-export");
+
 
         // Keep the copy at the same width as the live page
 

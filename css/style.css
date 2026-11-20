@@ -1158,3 +1158,41 @@ body.login-page {
     text-align: center;
     margin: 10px 0 0;
 }
+
+/* ======================================================
+   PDF EXPORT LAYOUT
+   ====================================================== */
+
+.pdf-export {
+    width: 386px !important;
+    min-width: 386px !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+}
+
+.pdf-export .match-report-column {
+    width: 386px !important;
+    min-width: 386px !important;
+    max-width: 386px !important;
+    flex: 0 0 386px !important;
+}
+
+.pdf-export .match-report-box,
+.pdf-export .gs-box,
+.pdf-export .ga-box,
+.pdf-export .wa-box,
+.pdf-export .c-box,
+.pdf-export .wd-box,
+.pdf-export .gd-box,
+.pdf-export .gk-box,
+.pdf-export .s1-box,
+.pdf-export .s2-box,
+.pdf-export .s3-box,
+.pdf-export .s4-box,
+.pdf-export .s5-box {
+    width: 350px !important;
+    min-width: 350px !important;
+    max-width: 350px !important;
+    flex: 0 0 350px !important;
+    box-sizing: border-box !important;
+}
