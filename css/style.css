@@ -876,26 +876,46 @@
 
     .container {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
         gap: 12px;
         width: 100%;
         padding: 10px;
         box-sizing: border-box;
     }
 
-    .container > .column:nth-child(1) {
-        order: 1;
-        width: 100%;
+    .container > .column {
+        box-sizing: border-box;
+        min-width: 0;
     }
 
-    .container > .column:nth-child(2) {
-        order: 3;
-        width: 100%;
-    }
-
+    /* PLAYER TOGGLES - LEFT SIDE */
     .container > .column:nth-child(3) {
+        order: 1;
+        flex: 0 0 52px;
+        width: 52px;
+    }
+
+    /* TAGGING PANEL - RIGHT SIDE */
+    .container > .column:nth-child(4) {
         order: 2;
+        flex: 1 1 0;
+        width: 0;
+        min-width: 0;
+    }
+
+    /* MATCH REPORT / PLAYER CONTAINERS - BELOW */
+    .container > .column:nth-child(1) {
+        order: 3;
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    /* GAME FEED - AT THE BOTTOM */
+    .container > .column:nth-child(2) {
+        order: 4;
+        flex: 0 0 100%;
         width: 100%;
     }
 
