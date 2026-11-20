@@ -919,7 +919,33 @@
         width: 100%;
     }
 
+    .    .match-report-column {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
     .match-report-box,
+    .gs-box,
+    .ga-box,
+    .wa-box,
+    .c-box,
+    .wd-box,
+    .gd-box,
+    .gk-box,
+    .s1-box,
+    .s2-box,
+    .s3-box,
+    .s4-box,
+    .s5-box {
+        width: 0;
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
     .game-feed,
     .player-box {
         width: 100%;
@@ -1022,7 +1048,7 @@
     body.testing-mode .container > .column:nth-child(2) {
         display: none;
     }
-    
+
 }
 
 
