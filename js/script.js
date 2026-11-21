@@ -861,51 +861,43 @@ updateMatchReportTitle();
 
   function updateShotPercentage() {
 
-    const scored =
-      Number(
-        shotScoredButton
-          .querySelector(".counter")
-          .textContent
-      );
+  const scored =
+    Number(
+      shotScoredButton
+        .querySelector(".counter")
+        .textContent
+    );
 
-    const missed =
-      Number(
-        shotMissedButton
-          .querySelector(".counter")
-          .textContent
-      );
-
-
-    const total =
-      scored + missed;
+  const missed =
+    Number(
+      shotMissedButton
+        .querySelector(".counter")
+        .textContent
+    );
 
 
-    if (total === 0) {
-
-      shotPercentageText.textContent =
-        "0%";
-
-      shotProgressFill.style.width =
-        "0%";
-
-      return;
-
-    }
+  const total =
+    scored + missed;
 
 
-    const percentage =
-      Math.round(
-        (scored / total) * 100
-      );
+  shotPercentageText.textContent =
+    total === 0
+      ? "0/0"
+      : scored + "/" + total;
 
 
-    shotPercentageText.textContent =
-      percentage + "%";
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (scored / total) * 100
+        );
 
-    shotProgressFill.style.width =
-      percentage + "%";
 
-  }
+  shotProgressFill.style.width =
+    percentage + "%";
+
+}
 
 
   // ======================================================
@@ -966,34 +958,23 @@ updateMatchReportTitle();
         fillSelector
       );
 
-
     if (!text || !fill) {
       return;
     }
 
-
     const total =
       success + missed;
 
-
     if (total === 0) {
-
-      text.textContent =
-        "0%";
-
-      fill.style.width =
-        "0%";
-
+      text.textContent = "0%";
+      fill.style.width = "0%";
       return;
-
     }
-
 
     const percentage =
       Math.round(
         (success / total) * 100
       );
-
 
     text.textContent =
       percentage + "%";
@@ -1004,91 +985,438 @@ updateMatchReportTitle();
   }
 
 
-  function updateAllPlayerShotPercentages() {
+function updateGSShotPercentage() {
 
-    updatePlayerShotPercentage(
-      gsShotSuccess,
-      gsShotMissed,
-      "#gs-shot-percentage",
+  const gsText =
+    document.querySelector(
+      "#gs-shot-percentage"
+    );
+
+  const gsFill =
+    document.querySelector(
       "#gs-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      gaShotSuccess,
-      gaShotMissed,
-      "#ga-shot-percentage",
+  if (!gsText || !gsFill) {
+    return;
+  }
+
+  const total =
+    gsShotSuccess + gsShotMissed;
+
+  gsText.textContent =
+    gsShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gsShotSuccess / total) * 100
+        );
+
+  gsFill.style.width =
+    percentage + "%";
+
+}
+
+function updateGAShotPercentage() {
+
+  const gaText =
+    document.querySelector(
+      "#ga-shot-percentage"
+    );
+
+  const gaFill =
+    document.querySelector(
       "#ga-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      waShotSuccess,
-      waShotMissed,
-      "#wa-shot-percentage",
+  if (!gaText || !gaFill) {
+    return;
+  }
+
+  const total =
+    gaShotSuccess + gaShotMissed;
+
+  gaText.textContent =
+    gaShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gaShotSuccess / total) * 100
+        );
+
+  gaFill.style.width =
+    percentage + "%";
+
+}
+
+function updateWAShotPercentage() {
+
+  const waText =
+    document.querySelector(
+      "#wa-shot-percentage"
+    );
+
+  const waFill =
+    document.querySelector(
       "#wa-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      cShotSuccess,
-      cShotMissed,
-      "#c-shot-percentage",
+  if (!waText || !waFill) {
+    return;
+  }
+
+  const total =
+    waShotSuccess + waShotMissed;
+
+  waText.textContent =
+    waShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (waShotSuccess / total) * 100
+        );
+
+  waFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateCShotPercentage() {
+
+  const cText =
+    document.querySelector(
+      "#c-shot-percentage"
+    );
+
+  const cFill =
+    document.querySelector(
       "#c-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      wdShotSuccess,
-      wdShotMissed,
-      "#wd-shot-percentage",
+  if (!cText || !cFill) {
+    return;
+  }
+
+  const total =
+    cShotSuccess + cShotMissed;
+
+  cText.textContent =
+    cShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (cShotSuccess / total) * 100
+        );
+
+  cFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateWDShotPercentage() {
+
+  const wdText =
+    document.querySelector(
+      "#wd-shot-percentage"
+    );
+
+  const wdFill =
+    document.querySelector(
       "#wd-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      gdShotSuccess,
-      gdShotMissed,
-      "#gd-shot-percentage",
+  if (!wdText || !wdFill) {
+    return;
+  }
+
+  const total =
+    wdShotSuccess + wdShotMissed;
+
+  wdText.textContent =
+    wdShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (wdShotSuccess / total) * 100
+        );
+
+  wdFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateGDShotPercentage() {
+
+  const gdText =
+    document.querySelector(
+      "#gd-shot-percentage"
+    );
+
+  const gdFill =
+    document.querySelector(
       "#gd-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      gkShotSuccess,
-      gkShotMissed,
-      "#gk-shot-percentage",
+  if (!gdText || !gdFill) {
+    return;
+  }
+
+  const total =
+    gdShotSuccess + gdShotMissed;
+
+  gdText.textContent =
+    gdShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gdShotSuccess / total) * 100
+        );
+
+  gdFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateGKShotPercentage() {
+
+  const gkText =
+    document.querySelector(
+      "#gk-shot-percentage"
+    );
+
+  const gkFill =
+    document.querySelector(
       "#gk-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      s1ShotSuccess,
-      s1ShotMissed,
-      "#s1-shot-percentage",
+  if (!gkText || !gkFill) {
+    return;
+  }
+
+  const total =
+    gkShotSuccess + gkShotMissed;
+
+  gkText.textContent =
+    gkShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gkShotSuccess / total) * 100
+        );
+
+  gkFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS1ShotPercentage() {
+
+  const s1Text =
+    document.querySelector(
+      "#s1-shot-percentage"
+    );
+
+  const s1Fill =
+    document.querySelector(
       "#s1-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      s2ShotSuccess,
-      s2ShotMissed,
-      "#s2-shot-percentage",
+  if (!s1Text || !s1Fill) {
+    return;
+  }
+
+  const total =
+    s1ShotSuccess + s1ShotMissed;
+
+  s1Text.textContent =
+    s1ShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s1ShotSuccess / total) * 100
+        );
+
+  s1Fill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS2ShotPercentage() {
+
+  const s2Text =
+    document.querySelector(
+      "#s2-shot-percentage"
+    );
+
+  const s2Fill =
+    document.querySelector(
       "#s2-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      s3ShotSuccess,
-      s3ShotMissed,
-      "#s3-shot-percentage",
+  if (!s2Text || !s2Fill) {
+    return;
+  }
+
+  const total =
+    s2ShotSuccess + s2ShotMissed;
+
+  s2Text.textContent =
+    s2ShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s2ShotSuccess / total) * 100
+        );
+
+  s2Fill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS3ShotPercentage() {
+
+  const s3Text =
+    document.querySelector(
+      "#s3-shot-percentage"
+    );
+
+  const s3Fill =
+    document.querySelector(
       "#s3-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      s4ShotSuccess,
-      s4ShotMissed,
-      "#s4-shot-percentage",
+  if (!s3Text || !s3Fill) {
+    return;
+  }
+
+  const total =
+    s3ShotSuccess + s3ShotMissed;
+
+  s3Text.textContent =
+    s3ShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s3ShotSuccess / total) * 100
+        );
+
+  s3Fill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS4ShotPercentage() {
+
+  const s4Text =
+    document.querySelector(
+      "#s4-shot-percentage"
+    );
+
+  const s4Fill =
+    document.querySelector(
       "#s4-shot-fill"
     );
 
-    updatePlayerShotPercentage(
-      s5ShotSuccess,
-      s5ShotMissed,
-      "#s5-shot-percentage",
+  if (!s4Text || !s4Fill) {
+    return;
+  }
+
+  const total =
+    s4ShotSuccess + s4ShotMissed;
+
+  s4Text.textContent =
+    s4ShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s4ShotSuccess / total) * 100
+        );
+
+  s4Fill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS5ShotPercentage() {
+
+  const s5Text =
+    document.querySelector(
+      "#s5-shot-percentage"
+    );
+
+  const s5Fill =
+    document.querySelector(
       "#s5-shot-fill"
     );
+
+  if (!s5Text || !s5Fill) {
+    return;
+  }
+
+  const total =
+    s5ShotSuccess + s5ShotMissed;
+
+  s5Text.textContent =
+    s5ShotSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s5ShotSuccess / total) * 100
+        );
+
+  s5Fill.style.width =
+    percentage + "%";
+
+}
+
+
+  function updateAllPlayerShotPercentages() {
+
+    updateGSShotPercentage();
+    updateGAShotPercentage();
+    updateWAShotPercentage();
+    updateCShotPercentage();
+    updateWDShotPercentage();
+    updateGDShotPercentage();
+    updateGKShotPercentage();
+    updateS1ShotPercentage();
+    updateS2ShotPercentage();
+    updateS3ShotPercentage();
+    updateS4ShotPercentage();
+    updateS5ShotPercentage();
 
   }
 
@@ -1157,51 +1485,43 @@ updateMatchReportTitle();
 
   function updateAttackReboundPercentage() {
 
-    const won =
-      Number(
-        reboundWon
-          .querySelector(".counter")
-          .textContent
-      );
+  const won =
+    Number(
+      reboundWon
+        .querySelector(".counter")
+        .textContent
+    );
 
-    const lost =
-      Number(
-        reboundLost
-          .querySelector(".counter")
-          .textContent
-      );
-
-
-    const total =
-      won + lost;
+  const lost =
+    Number(
+      reboundLost
+        .querySelector(".counter")
+        .textContent
+    );
 
 
-    if (total === 0) {
-
-      reboundText.textContent =
-        "0%";
-
-      reboundFill.style.width =
-        "0%";
-
-      return;
-
-    }
+  const total =
+    won + lost;
 
 
-    const percentage =
-      Math.round(
+  reboundText.textContent =
+  total === 0
+    ? "0/0"
+    : won + "/" + total;
+
+
+const percentage =
+  total === 0
+    ? 0
+    : Math.round(
         (won / total) * 100
       );
 
 
-    reboundText.textContent =
-      percentage + "%";
+  reboundFill.style.width =
+    percentage + "%";
 
-    reboundFill.style.width =
-      percentage + "%";
-
-  }
+}
 
 
   function updatePlayerReboundPercentage(
@@ -1261,138 +1581,338 @@ updateMatchReportTitle();
 
     function updateGSAttackReboundPercentage() {
 
-    updatePlayerReboundPercentage(
-      gsReboundWon,
-      gsReboundLost,
-      "#gs-attack-rebound-percentage",
+  const gsText =
+    document.querySelector(
+      "#gs-attack-rebound-percentage"
+    );
+
+  const gsFill =
+    document.querySelector(
       "#gs-attack-rebound-fill"
     );
 
+  if (!gsText || !gsFill) {
+    return;
   }
 
+  gsText.textContent =
+    gsReboundWon;
 
-  function updateGAAttackReboundPercentage() {
+  gsFill.style.width =
+    (
+      gsReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
 
-    updatePlayerReboundPercentage(
-      gaReboundWon,
-      gaReboundLost,
-      "#ga-attack-rebound-percentage",
+}
+
+
+function updateGAAttackReboundPercentage() {
+
+  const gaText =
+    document.querySelector(
+      "#ga-attack-rebound-percentage"
+    );
+
+  const gaFill =
+    document.querySelector(
       "#ga-attack-rebound-fill"
     );
 
+  if (!gaText || !gaFill) {
+    return;
   }
 
+  gaText.textContent =
+    gaReboundWon;
 
-  function updateWAAttackReboundPercentage() {
+  gaFill.style.width =
+    (
+      gaReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
 
-    updatePlayerReboundPercentage(
-      waReboundWon,
-      waReboundLost,
-      "#wa-attack-rebound-percentage",
+}
+
+
+function updateWAAttackReboundPercentage() {
+
+  const waText =
+    document.querySelector(
+      "#wa-attack-rebound-percentage"
+    );
+
+  const waFill =
+    document.querySelector(
       "#wa-attack-rebound-fill"
     );
 
+  if (!waText || !waFill) {
+    return;
   }
 
+  waText.textContent =
+    waReboundWon;
 
-  function updateCAttackReboundPercentage() {
+  waFill.style.width =
+    (
+      waReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
 
-    updatePlayerReboundPercentage(
-      cReboundWon,
-      cReboundLost,
-      "#c-attack-rebound-percentage",
+}
+
+
+function updateCAttackReboundPercentage() {
+
+  const cText =
+    document.querySelector(
+      "#c-attack-rebound-percentage"
+    );
+
+  const cFill =
+    document.querySelector(
       "#c-attack-rebound-fill"
     );
 
+  if (!cText || !cFill) {
+    return;
   }
 
-    function updateWDAttackReboundPercentage() {
+  cText.textContent =
+    cReboundWon;
 
-    updatePlayerReboundPercentage(
-      wdReboundWon,
-      wdReboundLost,
-      "#wd-attack-rebound-percentage",
+  cFill.style.width =
+    (
+      cReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
+
+}
+
+
+function updateWDAttackReboundPercentage() {
+
+  const wdText =
+    document.querySelector(
+      "#wd-attack-rebound-percentage"
+    );
+
+  const wdFill =
+    document.querySelector(
       "#wd-attack-rebound-fill"
     );
 
+  if (!wdText || !wdFill) {
+    return;
   }
 
-  function updateGDAttackReboundPercentage() {
+  wdText.textContent =
+    wdReboundWon;
 
-    updatePlayerReboundPercentage(
-      gdReboundWon,
-      gdReboundLost,
-      "#gd-attack-rebound-percentage",
+  wdFill.style.width =
+    (
+      wdReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
+
+}
+
+
+function updateGDAttackReboundPercentage() {
+
+  const gdText =
+    document.querySelector(
+      "#gd-attack-rebound-percentage"
+    );
+
+  const gdFill =
+    document.querySelector(
       "#gd-attack-rebound-fill"
     );
 
+  if (!gdText || !gdFill) {
+    return;
   }
 
-  function updateGKAttackReboundPercentage() {
+  gdText.textContent =
+    gdReboundWon;
 
-    updatePlayerReboundPercentage(
-      gkReboundWon,
-      gkReboundLost,
-      "#gk-attack-rebound-percentage",
+  gdFill.style.width =
+    (
+      gdReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
+
+}
+
+
+function updateGKAttackReboundPercentage() {
+
+  const gkText =
+    document.querySelector(
+      "#gk-attack-rebound-percentage"
+    );
+
+  const gkFill =
+    document.querySelector(
       "#gk-attack-rebound-fill"
     );
 
+  if (!gkText || !gkFill) {
+    return;
   }
 
-  function updateS1AttackReboundPercentage() {
+  gkText.textContent =
+    gkReboundWon;
 
-    updatePlayerReboundPercentage(
-      s1ReboundWon,
-      s1ReboundLost,
-      "#s1-attack-rebound-percentage",
+  gkFill.style.width =
+    (
+      gkReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
+
+}
+
+
+function updateS1AttackReboundPercentage() {
+
+  const s1Text =
+    document.querySelector(
+      "#s1-attack-rebound-percentage"
+    );
+
+  const s1Fill =
+    document.querySelector(
       "#s1-attack-rebound-fill"
     );
 
+  if (!s1Text || !s1Fill) {
+    return;
   }
 
-  function updateS2AttackReboundPercentage() {
+  s1Text.textContent =
+    s1ReboundWon;
 
-    updatePlayerReboundPercentage(
-      s2ReboundWon,
-      s2ReboundLost,
-      "#s2-attack-rebound-percentage",
+  s1Fill.style.width =
+    (
+      s1ReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
+
+}
+
+
+function updateS2AttackReboundPercentage() {
+
+  const s2Text =
+    document.querySelector(
+      "#s2-attack-rebound-percentage"
+    );
+
+  const s2Fill =
+    document.querySelector(
       "#s2-attack-rebound-fill"
     );
 
+  if (!s2Text || !s2Fill) {
+    return;
   }
 
-  function updateS3AttackReboundPercentage() {
+  s2Text.textContent =
+    s2ReboundWon;
 
-    updatePlayerReboundPercentage(
-      s3ReboundWon,
-      s3ReboundLost,
-      "#s3-attack-rebound-percentage",
+  s2Fill.style.width =
+    (
+      s2ReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
+
+}
+
+
+function updateS3AttackReboundPercentage() {
+
+  const s3Text =
+    document.querySelector(
+      "#s3-attack-rebound-percentage"
+    );
+
+  const s3Fill =
+    document.querySelector(
       "#s3-attack-rebound-fill"
     );
 
+  if (!s3Text || !s3Fill) {
+    return;
   }
 
-  function updateS4AttackReboundPercentage() {
+  s3Text.textContent =
+    s3ReboundWon;
 
-    updatePlayerReboundPercentage(
-      s4ReboundWon,
-      s4ReboundLost,
-      "#s4-attack-rebound-percentage",
+  s3Fill.style.width =
+    (
+      s3ReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
+
+}
+
+
+function updateS4AttackReboundPercentage() {
+
+  const s4Text =
+    document.querySelector(
+      "#s4-attack-rebound-percentage"
+    );
+
+  const s4Fill =
+    document.querySelector(
       "#s4-attack-rebound-fill"
     );
 
+  if (!s4Text || !s4Fill) {
+    return;
   }
 
-  function updateS5AttackReboundPercentage() {
+  s4Text.textContent =
+    s4ReboundWon;
 
-    updatePlayerReboundPercentage(
-      s5ReboundWon,
-      s5ReboundLost,
-      "#s5-attack-rebound-percentage",
+  s4Fill.style.width =
+    (
+      s4ReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
+
+}
+
+
+function updateS5AttackReboundPercentage() {
+
+  const s5Text =
+    document.querySelector(
+      "#s5-attack-rebound-percentage"
+    );
+
+  const s5Fill =
+    document.querySelector(
       "#s5-attack-rebound-fill"
     );
 
+  if (!s5Text || !s5Fill) {
+    return;
   }
+
+  s5Text.textContent =
+    s5ReboundWon;
+
+  s5Fill.style.width =
+    (
+      s5ReboundWon /
+      TURNOVER_MAX
+    ) * 100 + "%";
+
+}
 
   function updatePlayerReboundCounter(
   playerToggleId,
@@ -1570,302 +2090,467 @@ updateMatchReportTitle();
 
   function updateFeedSuccessPercentage() {
 
-    const won =
-      Number(
-        feedSuccess
-          .querySelector(".counter")
-          .textContent
-      );
+  const won =
+    Number(
+      feedSuccess
+        .querySelector(".counter")
+        .textContent
+    );
 
-    const lost =
-      Number(
-        feedMissed
-          .querySelector(".counter")
-          .textContent
-      );
-
-
-    const total =
-      won + lost;
+  const lost =
+    Number(
+      feedMissed
+        .querySelector(".counter")
+        .textContent
+    );
 
 
-    if (total === 0) {
-
-      feedText.textContent =
-        "0%";
-
-      feedFill.style.width =
-        "0%";
-
-      return;
-
-    }
+  const total =
+    won + lost;
 
 
-    const percentage =
-      Math.round(
-        (won / total) * 100
-      );
+  feedText.textContent =
+    total === 0
+      ? "0/0"
+      : won + "/" + total;
 
 
-    feedText.textContent =
-      percentage + "%";
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (won / total) * 100
+        );
 
-    feedFill.style.width =
-      percentage + "%";
 
-  }
+  feedFill.style.width =
+    percentage + "%";
+
+}
 
 
   // ------------------------------------------------------
   // GENERIC PLAYER FEED %
   // ------------------------------------------------------
 
-  function updatePlayerFeedPercentage(
-    success,
-    fail,
-    textSelector,
-    fillSelector
-  ) {
-
-    const text =
-      document.querySelector(
-        textSelector
-      );
-
-    const fill =
-      document.querySelector(
-        fillSelector
-      );
-
-
-    if (!text || !fill) {
-      return;
-    }
-
-
-    const total =
-      success + fail;
-
-
-    if (total === 0) {
-
-      text.textContent =
-        "0%";
-
-      fill.style.width =
-        "0%";
-
-      return;
-
-    }
-
-
-    const percentage =
-      Math.round(
-        (success / total) * 100
-      );
-
-
-    text.textContent =
-      percentage + "%";
-
-    fill.style.width =
-      percentage + "%";
-
-  }
-
-
-  // ------------------------------------------------------
-  // GS FEED %
-  // ------------------------------------------------------
-
   function updateGSFeedSuccessPercentage() {
 
-    updatePlayerFeedPercentage(
-      gsFeedSuccess,
-      gsFeedMissed,
-      "#gs-feed-success-percentage",
+  const gsText =
+    document.querySelector(
+      "#gs-feed-success-percentage"
+    );
+
+  const gsFill =
+    document.querySelector(
       "#gs-feed-success-fill"
     );
 
+  if (!gsText || !gsFill) {
+    return;
   }
 
+  const total =
+    gsFeedSuccess + gsFeedMissed;
 
-  // ------------------------------------------------------
-  // GA FEED %
-  // ------------------------------------------------------
+  gsText.textContent =
+    gsFeedSuccess + "/" + total;
 
-  function updateGAFeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gsFeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      gaFeedSuccess,
-      gaFeedMissed,
-      "#ga-feed-success-percentage",
+  gsFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateGAFeedSuccessPercentage() {
+
+  const gaText =
+    document.querySelector(
+      "#ga-feed-success-percentage"
+    );
+
+  const gaFill =
+    document.querySelector(
       "#ga-feed-success-fill"
     );
 
+  if (!gaText || !gaFill) {
+    return;
   }
 
+  const total =
+    gaFeedSuccess + gaFeedMissed;
 
-  // ------------------------------------------------------
-  // WA FEED %
-  // ------------------------------------------------------
+  gaText.textContent =
+    gaFeedSuccess + "/" + total;
 
-  function updateWAFeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gaFeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      waFeedSuccess,
-      waFeedMissed,
-      "#wa-feed-success-percentage",
+  gaFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateWAFeedSuccessPercentage() {
+
+  const waText =
+    document.querySelector(
+      "#wa-feed-success-percentage"
+    );
+
+  const waFill =
+    document.querySelector(
       "#wa-feed-success-fill"
     );
 
+  if (!waText || !waFill) {
+    return;
   }
 
+  const total =
+    waFeedSuccess + waFeedMissed;
 
-  // ------------------------------------------------------
-  // C FEED %
-  // ------------------------------------------------------
+  waText.textContent =
+    waFeedSuccess + "/" + total;
 
-  function updateCFeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (waFeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      cFeedSuccess,
-      cFeedMissed,
-      "#c-feed-success-percentage",
+  waFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateCFeedSuccessPercentage() {
+
+  const cText =
+    document.querySelector(
+      "#c-feed-success-percentage"
+    );
+
+  const cFill =
+    document.querySelector(
       "#c-feed-success-fill"
     );
 
+  if (!cText || !cFill) {
+    return;
   }
 
+  const total =
+    cFeedSuccess + cFeedMissed;
 
-  // ------------------------------------------------------
-  // WD FEED %
-  // ------------------------------------------------------
+  cText.textContent =
+    cFeedSuccess + "/" + total;
 
-  function updateWDFeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (cFeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      wdFeedSuccess,
-      wdFeedMissed,
-      "#wd-feed-success-percentage",
+  cFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateWDFeedSuccessPercentage() {
+
+  const wdText =
+    document.querySelector(
+      "#wd-feed-success-percentage"
+    );
+
+  const wdFill =
+    document.querySelector(
       "#wd-feed-success-fill"
     );
 
+  if (!wdText || !wdFill) {
+    return;
   }
 
+  const total =
+    wdFeedSuccess + wdFeedMissed;
 
-  // ------------------------------------------------------
-  // GD FEED %
-  // ------------------------------------------------------
+  wdText.textContent =
+    wdFeedSuccess + "/" + total;
 
-  function updateGDFeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (wdFeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      gdFeedSuccess,
-      gdFeedMissed,
-      "#gd-feed-success-percentage",
+  wdFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateGDFeedSuccessPercentage() {
+
+  const gdText =
+    document.querySelector(
+      "#gd-feed-success-percentage"
+    );
+
+  const gdFill =
+    document.querySelector(
       "#gd-feed-success-fill"
     );
 
+  if (!gdText || !gdFill) {
+    return;
   }
 
+  const total =
+    gdFeedSuccess + gdFeedMissed;
 
-  // ------------------------------------------------------
-  // GK FEED %
-  // ------------------------------------------------------
+  gdText.textContent =
+    gdFeedSuccess + "/" + total;
 
-  function updateGKFeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gdFeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      gkFeedSuccess,
-      gkFeedMissed,
-      "#gk-feed-success-percentage",
+  gdFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateGKFeedSuccessPercentage() {
+
+  const gkText =
+    document.querySelector(
+      "#gk-feed-success-percentage"
+    );
+
+  const gkFill =
+    document.querySelector(
       "#gk-feed-success-fill"
     );
 
+  if (!gkText || !gkFill) {
+    return;
   }
 
+  const total =
+    gkFeedSuccess + gkFeedMissed;
 
-  // ------------------------------------------------------
-  // S1 FEED %
-  // ------------------------------------------------------
+  gkText.textContent =
+    gkFeedSuccess + "/" + total;
 
-  function updateS1FeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gkFeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      s1FeedSuccess,
-      s1FeedMissed,
-      "#s1-feed-success-percentage",
+  gkFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS1FeedSuccessPercentage() {
+
+  const s1Text =
+    document.querySelector(
+      "#s1-feed-success-percentage"
+    );
+
+  const s1Fill =
+    document.querySelector(
       "#s1-feed-success-fill"
     );
 
+  if (!s1Text || !s1Fill) {
+    return;
   }
 
+  const total =
+    s1FeedSuccess + s1FeedMissed;
 
-  // ------------------------------------------------------
-  // S2 FEED %
-  // ------------------------------------------------------
+  s1Text.textContent =
+    s1FeedSuccess + "/" + total;
 
-  function updateS2FeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s1FeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      s2FeedSuccess,
-      s2FeedMissed,
-      "#s2-feed-success-percentage",
+  s1Fill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS2FeedSuccessPercentage() {
+
+  const s2Text =
+    document.querySelector(
+      "#s2-feed-success-percentage"
+    );
+
+  const s2Fill =
+    document.querySelector(
       "#s2-feed-success-fill"
     );
 
+  if (!s2Text || !s2Fill) {
+    return;
   }
 
+  const total =
+    s2FeedSuccess + s2FeedMissed;
 
-  // ------------------------------------------------------
-  // S3 FEED %
-  // ------------------------------------------------------
+  s2Text.textContent =
+    s2FeedSuccess + "/" + total;
 
-  function updateS3FeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s2FeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      s3FeedSuccess,
-      s3FeedMissed,
-      "#s3-feed-success-percentage",
+  s2Fill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS3FeedSuccessPercentage() {
+
+  const s3Text =
+    document.querySelector(
+      "#s3-feed-success-percentage"
+    );
+
+  const s3Fill =
+    document.querySelector(
       "#s3-feed-success-fill"
     );
 
+  if (!s3Text || !s3Fill) {
+    return;
   }
 
+  const total =
+    s3FeedSuccess + s3FeedMissed;
 
-  // ------------------------------------------------------
-  // S4 FEED %
-  // ------------------------------------------------------
+  s3Text.textContent =
+    s3FeedSuccess + "/" + total;
 
-  function updateS4FeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s3FeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      s4FeedSuccess,
-      s4FeedMissed,
-      "#s4-feed-success-percentage",
+  s3Fill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS4FeedSuccessPercentage() {
+
+  const s4Text =
+    document.querySelector(
+      "#s4-feed-success-percentage"
+    );
+
+  const s4Fill =
+    document.querySelector(
       "#s4-feed-success-fill"
     );
 
+  if (!s4Text || !s4Fill) {
+    return;
   }
 
+  const total =
+    s4FeedSuccess + s4FeedMissed;
 
-  // ------------------------------------------------------
-  // S5 FEED %
-  // ------------------------------------------------------
+  s4Text.textContent =
+    s4FeedSuccess + "/" + total;
 
-  function updateS5FeedSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s4FeedSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      s5FeedSuccess,
-      s5FeedMissed,
-      "#s5-feed-success-percentage",
+  s4Fill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateS5FeedSuccessPercentage() {
+
+  const s5Text =
+    document.querySelector(
+      "#s5-feed-success-percentage"
+    );
+
+  const s5Fill =
+    document.querySelector(
       "#s5-feed-success-fill"
     );
 
+  if (!s5Text || !s5Fill) {
+    return;
   }
+
+  const total =
+    s5FeedSuccess + s5FeedMissed;
+
+  s5Text.textContent =
+    s5FeedSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s5FeedSuccess / total) * 100
+        );
+
+  s5Fill.style.width =
+    percentage + "%";
+
+}
 
 
   // ======================================================
@@ -1944,226 +2629,495 @@ let s5CentreMissed = 0;
 
   function updateCentreSuccessPercentage() {
 
-    const won =
-      Number(
-        centreSuccess
-          .querySelector(".counter")
-          .textContent
-      );
+  const won =
+    Number(
+      centreSuccess
+        .querySelector(".counter")
+        .textContent
+    );
 
-    const lost =
-      Number(
-        centreMissed
-          .querySelector(".counter")
-          .textContent
-      );
-
-
-    const total =
-      won + lost;
+  const lost =
+    Number(
+      centreMissed
+        .querySelector(".counter")
+        .textContent
+    );
 
 
-    if (total === 0) {
-
-      centreText.textContent =
-        "0%";
-
-      centreFill.style.width =
-        "0%";
-
-      return;
-
-    }
+  const total =
+    won + lost;
 
 
-    const percentage =
-      Math.round(
-        (won / total) * 100
-      );
+  centreText.textContent =
+    total === 0
+      ? "0/0"
+      : won + "/" + total;
 
 
-    centreText.textContent =
-      percentage + "%";
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (won / total) * 100
+        );
 
-    centreFill.style.width =
-      percentage + "%";
 
-  }
+  centreFill.style.width =
+    percentage + "%";
+
+}
 
 
-  function updateGSCentreSuccessPercentage() {
+  // ------------------------------------------------------
+// PLAYER CENTRE SUCCESS
+// ------------------------------------------------------
 
-    updatePlayerFeedPercentage(
-      gsCentreSuccess,
-      gsCentreMissed,
-      "#gs-centre-success-percentage",
+function updateGSCentreSuccessPercentage() {
+
+  const gsText =
+    document.querySelector(
+      "#gs-centre-success-percentage"
+    );
+
+  const gsFill =
+    document.querySelector(
       "#gs-centre-success-fill"
     );
 
+  if (!gsText || !gsFill) {
+    return;
   }
 
+  const total =
+    gsCentreSuccess + gsCentreMissed;
 
-  // ------------------------------------------------------
-  // GA CENTRE %
-  // ------------------------------------------------------
+  gsText.textContent =
+    gsCentreSuccess + "/" + total;
 
-  function updateGACentreSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gsCentreSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      gaCentreSuccess,
-      gaCentreMissed,
-      "#ga-centre-success-percentage",
+  gsFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateGACentreSuccessPercentage() {
+
+  const gaText =
+    document.querySelector(
+      "#ga-centre-success-percentage"
+    );
+
+  const gaFill =
+    document.querySelector(
       "#ga-centre-success-fill"
     );
 
+  if (!gaText || !gaFill) {
+    return;
   }
 
+  const total =
+    gaCentreSuccess + gaCentreMissed;
 
-  // ------------------------------------------------------
-  // WA CENTRE %
-  // ------------------------------------------------------
+  gaText.textContent =
+    gaCentreSuccess + "/" + total;
 
-  function updateWACentreSuccessPercentage() {
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gaCentreSuccess / total) * 100
+        );
 
-    updatePlayerFeedPercentage(
-      waCentreSuccess,
-      waCentreMissed,
-      "#wa-centre-success-percentage",
+  gaFill.style.width =
+    percentage + "%";
+
+}
+
+
+function updateWACentreSuccessPercentage() {
+
+  const waText =
+    document.querySelector(
+      "#wa-centre-success-percentage"
+    );
+
+  const waFill =
+    document.querySelector(
       "#wa-centre-success-fill"
     );
 
+  if (!waText || !waFill) {
+    return;
   }
 
-  // ------------------------------------------------------
-// C CENTRE %
-// ------------------------------------------------------
+  const total =
+    waCentreSuccess + waCentreMissed;
+
+  waText.textContent =
+    waCentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (waCentreSuccess / total) * 100
+        );
+
+  waFill.style.width =
+    percentage + "%";
+
+}
+
 
 function updateCCentreSuccessPercentage() {
 
-  updatePlayerFeedPercentage(
-    cCentreSuccess,
-    cCentreMissed,
-    "#c-centre-success-percentage",
-    "#c-centre-success-fill"
-  );
+  const cText =
+    document.querySelector(
+      "#c-centre-success-percentage"
+    );
+
+  const cFill =
+    document.querySelector(
+      "#c-centre-success-fill"
+    );
+
+  if (!cText || !cFill) {
+    return;
+  }
+
+  const total =
+    cCentreSuccess + cCentreMissed;
+
+  cText.textContent =
+    cCentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (cCentreSuccess / total) * 100
+        );
+
+  cFill.style.width =
+    percentage + "%";
 
 }
+
 
 function updateWDCentreSuccessPercentage() {
 
-  updatePlayerFeedPercentage(
-    wdCentreSuccess,
-    wdCentreMissed,
-    "#wd-centre-success-percentage",
-    "#wd-centre-success-fill"
-  );
+  const wdText =
+    document.querySelector(
+      "#wd-centre-success-percentage"
+    );
+
+  const wdFill =
+    document.querySelector(
+      "#wd-centre-success-fill"
+    );
+
+  if (!wdText || !wdFill) {
+    return;
+  }
+
+  const total =
+    wdCentreSuccess + wdCentreMissed;
+
+  wdText.textContent =
+    wdCentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (wdCentreSuccess / total) * 100
+        );
+
+  wdFill.style.width =
+    percentage + "%";
 
 }
+
 
 function updateGDCentreSuccessPercentage() {
 
-  updatePlayerFeedPercentage(
-    gdCentreSuccess,
-    gdCentreMissed,
-    "#gd-centre-success-percentage",
-    "#gd-centre-success-fill"
-  );
+  const gdText =
+    document.querySelector(
+      "#gd-centre-success-percentage"
+    );
+
+  const gdFill =
+    document.querySelector(
+      "#gd-centre-success-fill"
+    );
+
+  if (!gdText || !gdFill) {
+    return;
+  }
+
+  const total =
+    gdCentreSuccess + gdCentreMissed;
+
+  gdText.textContent =
+    gdCentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gdCentreSuccess / total) * 100
+        );
+
+  gdFill.style.width =
+    percentage + "%";
 
 }
+
 
 function updateGKCentreSuccessPercentage() {
 
-  updatePlayerFeedPercentage(
-    gkCentreSuccess,
-    gkCentreMissed,
-    "#gk-centre-success-percentage",
-    "#gk-centre-success-fill"
-  );
+  const gkText =
+    document.querySelector(
+      "#gk-centre-success-percentage"
+    );
+
+  const gkFill =
+    document.querySelector(
+      "#gk-centre-success-fill"
+    );
+
+  if (!gkText || !gkFill) {
+    return;
+  }
+
+  const total =
+    gkCentreSuccess + gkCentreMissed;
+
+  gkText.textContent =
+    gkCentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gkCentreSuccess / total) * 100
+        );
+
+  gkFill.style.width =
+    percentage + "%";
 
 }
+
 
 function updateS1CentreSuccessPercentage() {
 
-  updatePlayerFeedPercentage(
-    s1CentreSuccess,
-    s1CentreMissed,
-    "#s1-centre-success-percentage",
-    "#s1-centre-success-fill"
-  );
+  const s1Text =
+    document.querySelector(
+      "#s1-centre-success-percentage"
+    );
+
+  const s1Fill =
+    document.querySelector(
+      "#s1-centre-success-fill"
+    );
+
+  if (!s1Text || !s1Fill) {
+    return;
+  }
+
+  const total =
+    s1CentreSuccess + s1CentreMissed;
+
+  s1Text.textContent =
+    s1CentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s1CentreSuccess / total) * 100
+        );
+
+  s1Fill.style.width =
+    percentage + "%";
 
 }
+
 
 function updateS2CentreSuccessPercentage() {
 
-  updatePlayerFeedPercentage(
-    s2CentreSuccess,
-    s2CentreMissed,
-    "#s2-centre-success-percentage",
-    "#s2-centre-success-fill"
-  );
+  const s2Text =
+    document.querySelector(
+      "#s2-centre-success-percentage"
+    );
+
+  const s2Fill =
+    document.querySelector(
+      "#s2-centre-success-fill"
+    );
+
+  if (!s2Text || !s2Fill) {
+    return;
+  }
+
+  const total =
+    s2CentreSuccess + s2CentreMissed;
+
+  s2Text.textContent =
+    s2CentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s2CentreSuccess / total) * 100
+        );
+
+  s2Fill.style.width =
+    percentage + "%";
 
 }
+
 
 function updateS3CentreSuccessPercentage() {
 
-  updatePlayerFeedPercentage(
-    s3CentreSuccess,
-    s3CentreMissed,
-    "#s3-centre-success-percentage",
-    "#s3-centre-success-fill"
-  );
+  const s3Text =
+    document.querySelector(
+      "#s3-centre-success-percentage"
+    );
+
+  const s3Fill =
+    document.querySelector(
+      "#s3-centre-success-fill"
+    );
+
+  if (!s3Text || !s3Fill) {
+    return;
+  }
+
+  const total =
+    s3CentreSuccess + s3CentreMissed;
+
+  s3Text.textContent =
+    s3CentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s3CentreSuccess / total) * 100
+        );
+
+  s3Fill.style.width =
+    percentage + "%";
 
 }
+
 
 function updateS4CentreSuccessPercentage() {
 
-  updatePlayerFeedPercentage(
-    s4CentreSuccess,
-    s4CentreMissed,
-    "#s4-centre-success-percentage",
-    "#s4-centre-success-fill"
-  );
+  const s4Text =
+    document.querySelector(
+      "#s4-centre-success-percentage"
+    );
+
+  const s4Fill =
+    document.querySelector(
+      "#s4-centre-success-fill"
+    );
+
+  if (!s4Text || !s4Fill) {
+    return;
+  }
+
+  const total =
+    s4CentreSuccess + s4CentreMissed;
+
+  s4Text.textContent =
+    s4CentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s4CentreSuccess / total) * 100
+        );
+
+  s4Fill.style.width =
+    percentage + "%";
 
 }
+
 
 function updateS5CentreSuccessPercentage() {
 
-  updatePlayerFeedPercentage(
-    s5CentreSuccess,
-    s5CentreMissed,
-    "#s5-centre-success-percentage",
-    "#s5-centre-success-fill"
-  );
+  const s5Text =
+    document.querySelector(
+      "#s5-centre-success-percentage"
+    );
+
+  const s5Fill =
+    document.querySelector(
+      "#s5-centre-success-fill"
+    );
+
+  if (!s5Text || !s5Fill) {
+    return;
+  }
+
+  const total =
+    s5CentreSuccess + s5CentreMissed;
+
+  s5Text.textContent =
+    s5CentreSuccess + "/" + total;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s5CentreSuccess / total) * 100
+        );
+
+  s5Fill.style.width =
+    percentage + "%";
 
 }
 
 
   // ======================================================
-  // DEFENSIVE REBOUNDS
-  // ======================================================
+// DEFENSIVE REBOUNDS
+// ======================================================
 
-  const lvl1dreboundwon =
-    document.querySelector(
-      "#level1-defence-rebound-won"
-    );
+const lvl1dreboundwon =
+  document.querySelector(
+    "#level1-defence-rebound-won"
+  );
 
-  const lvl1dreboundlost =
-    document.querySelector(
-      "#level1-defence-rebound-lost"
-    );
+const lvl1dreboundlost =
+  document.querySelector(
+    "#level1-defence-rebound-lost"
+  );
 
-  const lvl1dreboundText =
-    document.querySelector(
-      "#level1-defence-rebound-percentage"
-    );
+const lvl1dreboundText =
+  document.querySelector(
+    "#level1-defence-rebound-percentage"
+  );
 
-  const lvl1dreboundFill =
-    document.querySelector(
-      "#level1-defence-rebound-fill"
-    );
+const lvl1dreboundFill =
+  document.querySelector(
+    "#level1-defence-rebound-fill"
+  );
 
 
-  let gsDReboundWon = 0;
+let gsDReboundWon = 0;
 let gsDReboundLost = 0;
 
 let gaDReboundWon = 0;
@@ -2200,184 +3154,489 @@ let s5DReboundWon = 0;
 let s5DReboundLost = 0;
 
 
-  function updateDefenceReboundPercentage() {
+function updateDefenceReboundPercentage() {
 
-    const won =
-      Number(
-        lvl1dreboundwon
-          .querySelector(".counter")
-          .textContent
-      );
+  const won =
+    Number(
+      lvl1dreboundwon
+        .querySelector(".counter")
+        .textContent
+    );
 
-    const lost =
-      Number(
-        lvl1dreboundlost
-          .querySelector(".counter")
-          .textContent
-      );
-
-
-    const total =
-      won + lost;
+  const lost =
+    Number(
+      lvl1dreboundlost
+        .querySelector(".counter")
+        .textContent
+    );
 
 
-    if (total === 0) {
-
-      lvl1dreboundText.textContent =
-        "0%";
-
-      lvl1dreboundFill.style.width =
-        "0%";
-
-      return;
-
-    }
+  const total =
+    won + lost;
 
 
-    const percentage =
-      Math.round(
-        (won / total) * 100
-      );
+  lvl1dreboundText.textContent =
+    total === 0
+      ? "0/0"
+      : won + "/" + total;
 
 
-    lvl1dreboundText.textContent =
-      percentage + "%";
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (won / total) * 100
+        );
 
-    lvl1dreboundFill.style.width =
-      percentage + "%";
 
-  }
+  lvl1dreboundFill.style.width =
+    percentage + "%";
+
+}
 
 
-  function updateGSDReboundPercentage() {
+// ======================================================
+// GS DEFENSIVE REBOUNDS
+// ======================================================
 
-    updatePlayerFeedPercentage(
-      gsDReboundWon,
-      gsDReboundLost,
-      "#gs-defence-rebound-percentage",
+function updateGSDReboundPercentage() {
+
+  const gsText =
+    document.querySelector(
+      "#gs-defence-rebound-percentage"
+    );
+
+  const gsFill =
+    document.querySelector(
       "#gs-defence-rebound-fill"
     );
 
-  }
+  if (!gsText || !gsFill) return;
 
-  function updateGDDReboundPercentage() {
-  updatePlayerReboundPercentage(
-    gdDReboundWon,
-    gdDReboundLost,
-    "#gd-defence-rebound-percentage",
-    "#gd-defence-rebound-fill"
-  );
+  const total =
+    gsDReboundWon + gsDReboundLost;
+
+  gsText.textContent =
+    gsDReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gsDReboundWon / total) * 100
+        );
+
+  gsFill.style.width =
+    percentage + "%";
+
 }
 
-  function updateGADReboundPercentage() {
 
-    updatePlayerReboundPercentage(
-      gaDReboundWon,
-      gaDReboundLost,
-      "#ga-defence-rebound-percentage",
+// ======================================================
+// GA DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateGADReboundPercentage() {
+
+  const gaText =
+    document.querySelector(
+      "#ga-defence-rebound-percentage"
+    );
+
+  const gaFill =
+    document.querySelector(
       "#ga-defence-rebound-fill"
     );
 
-  }
+  if (!gaText || !gaFill) return;
 
-  function updateWADReboundPercentage() {
+  const total =
+    gaDReboundWon + gaDReboundLost;
 
-    updatePlayerReboundPercentage(
-      waDReboundWon,
-      waDReboundLost,
-      "#wa-defence-rebound-percentage",
+  gaText.textContent =
+    gaDReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gaDReboundWon / total) * 100
+        );
+
+  gaFill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// WA DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateWADReboundPercentage() {
+
+  const waText =
+    document.querySelector(
+      "#wa-defence-rebound-percentage"
+    );
+
+  const waFill =
+    document.querySelector(
       "#wa-defence-rebound-fill"
     );
 
-  }
+  if (!waText || !waFill) return;
 
-  function updateCDReboundPercentage() {
+  const total =
+    waDReboundWon + waDReboundLost;
 
-    updatePlayerReboundPercentage(
-      cDReboundWon,
-      cDReboundLost,
-      "#c-defence-rebound-percentage",
+  waText.textContent =
+    waDReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (waDReboundWon / total) * 100
+        );
+
+  waFill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// C DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateCDReboundPercentage() {
+
+  const cText =
+    document.querySelector(
+      "#c-defence-rebound-percentage"
+    );
+
+  const cFill =
+    document.querySelector(
       "#c-defence-rebound-fill"
     );
 
-  }
+  if (!cText || !cFill) return;
 
-  function updateWDDReboundPercentage() {
+  const total =
+    cDReboundWon + cDReboundLost;
 
-    updatePlayerReboundPercentage(
-      wdDReboundWon,
-      wdDReboundLost,
-      "#wd-defence-rebound-percentage",
+  cText.textContent =
+    cDReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (cDReboundWon / total) * 100
+        );
+
+  cFill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// WD DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateWDDReboundPercentage() {
+
+  const wdText =
+    document.querySelector(
+      "#wd-defence-rebound-percentage"
+    );
+
+  const wdFill =
+    document.querySelector(
       "#wd-defence-rebound-fill"
     );
 
-  }
+  if (!wdText || !wdFill) return;
 
-  function updateGKDReboundPercentage() {
+  const total =
+    wdDReboundWon + wdDReboundLost;
 
-    updatePlayerReboundPercentage(
-      gkDReboundWon,
-      gkDReboundLost,
-      "#gk-defence-rebound-percentage",
+  wdText.textContent =
+    wdDReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (wdDReboundWon / total) * 100
+        );
+
+  wdFill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// GD DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateGDDReboundPercentage() {
+
+  const gdText =
+    document.querySelector(
+      "#gd-defence-rebound-percentage"
+    );
+
+  const gdFill =
+    document.querySelector(
+      "#gd-defence-rebound-fill"
+    );
+
+  if (!gdText || !gdFill) return;
+
+  const total =
+    gdDReboundWon + gdDReboundLost;
+
+  gdText.textContent =
+    gdDReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gdDReboundWon / total) * 100
+        );
+
+  gdFill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// GK DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateGKDReboundPercentage() {
+
+  const gkText =
+    document.querySelector(
+      "#gk-defence-rebound-percentage"
+    );
+
+  const gkFill =
+    document.querySelector(
       "#gk-defence-rebound-fill"
     );
 
-  }
+  if (!gkText || !gkFill) return;
 
-  function updateS1DReboundPercentage() {
+  const total =
+    gkDReboundWon + gkDReboundLost;
 
-    updatePlayerReboundPercentage(
-      s1DReboundWon,
-      s1DReboundLost,
-      "#s1-defence-rebound-percentage",
+  gkText.textContent =
+    gkDReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (gkDReboundWon / total) * 100
+        );
+
+  gkFill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// S1 DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateS1DReboundPercentage() {
+
+  const s1Text =
+    document.querySelector(
+      "#s1-defence-rebound-percentage"
+    );
+
+  const s1Fill =
+    document.querySelector(
       "#s1-defence-rebound-fill"
     );
 
-  }
+  if (!s1Text || !s1Fill) return;
 
-  function updateS2DReboundPercentage() {
+  const total =
+    s1DReboundWon + s1DReboundLost;
 
-    updatePlayerReboundPercentage(
-      s2DReboundWon,
-      s2DReboundLost,
-      "#s2-defence-rebound-percentage",
+  s1Text.textContent =
+    s1DReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s1DReboundWon / total) * 100
+        );
+
+  s1Fill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// S2 DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateS2DReboundPercentage() {
+
+  const s2Text =
+    document.querySelector(
+      "#s2-defence-rebound-percentage"
+    );
+
+  const s2Fill =
+    document.querySelector(
       "#s2-defence-rebound-fill"
     );
 
-  }
+  if (!s2Text || !s2Fill) return;
 
-  function updateS3DReboundPercentage() {
+  const total =
+    s2DReboundWon + s2DReboundLost;
 
-    updatePlayerReboundPercentage(
-      s3DReboundWon,
-      s3DReboundLost,
-      "#s3-defence-rebound-percentage",
+  s2Text.textContent =
+    s2DReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s2DReboundWon / total) * 100
+        );
+
+  s2Fill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// S3 DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateS3DReboundPercentage() {
+
+  const s3Text =
+    document.querySelector(
+      "#s3-defence-rebound-percentage"
+    );
+
+  const s3Fill =
+    document.querySelector(
       "#s3-defence-rebound-fill"
     );
 
-  }
+  if (!s3Text || !s3Fill) return;
 
-  function updateS4DReboundPercentage() {
+  const total =
+    s3DReboundWon + s3DReboundLost;
 
-    updatePlayerReboundPercentage(
-      s4DReboundWon,
-      s4DReboundLost,
-      "#s4-defence-rebound-percentage",
+  s3Text.textContent =
+    s3DReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s3DReboundWon / total) * 100
+        );
+
+  s3Fill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// S4 DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateS4DReboundPercentage() {
+
+  const s4Text =
+    document.querySelector(
+      "#s4-defence-rebound-percentage"
+    );
+
+  const s4Fill =
+    document.querySelector(
       "#s4-defence-rebound-fill"
     );
 
-  }
+  if (!s4Text || !s4Fill) return;
 
-  function updateS5DReboundPercentage() {
+  const total =
+    s4DReboundWon + s4DReboundLost;
 
-    updatePlayerReboundPercentage(
-      s5DReboundWon,
-      s5DReboundLost,
-      "#s5-defence-rebound-percentage",
+  s4Text.textContent =
+    s4DReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s4DReboundWon / total) * 100
+        );
+
+  s4Fill.style.width =
+    percentage + "%";
+
+}
+
+
+// ======================================================
+// S5 DEFENSIVE REBOUNDS
+// ======================================================
+
+function updateS5DReboundPercentage() {
+
+  const s5Text =
+    document.querySelector(
+      "#s5-defence-rebound-percentage"
+    );
+
+  const s5Fill =
+    document.querySelector(
       "#s5-defence-rebound-fill"
     );
 
-  }
+  if (!s5Text || !s5Fill) return;
+
+  const total =
+    s5DReboundWon + s5DReboundLost;
+
+  s5Text.textContent =
+    s5DReboundWon;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (s5DReboundWon / total) * 100
+        );
+
+  s5Fill.style.width =
+    percentage + "%";
+
+}
 
 
     // ======================================================
