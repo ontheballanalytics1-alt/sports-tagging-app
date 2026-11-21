@@ -1196,3 +1196,29 @@ body.login-page {
     flex: 0 0 350px !important;
     box-sizing: border-box !important;
 }
+
+/* ======================================================
+   PDF PROGRESS BAR TEXT FIX
+   ====================================================== */
+
+.pdf-export .progress-bar {
+    position: relative !important;
+    isolation: isolate;
+}
+
+.pdf-export .progress-fill {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    z-index: 1 !important;
+}
+
+.pdf-export .progress-text {
+    position: relative !important;
+    z-index: 2 !important;
+    display: block;
+    text-align: center;
+    width: 100%;
+    line-height: 20px;
+    color: #111827 !important;
+}
