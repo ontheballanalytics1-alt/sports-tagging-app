@@ -19,12 +19,10 @@ loginButton.addEventListener("click", function () {
 
         window.location.replace("tagging.html?team=trial");
 
-    } else if (username === "testing" && password === "testing") {
-
+    } else if (username === "player" && password === "player") {
         sessionStorage.setItem("loggedIn", "true");
         sessionStorage.setItem("lastActivity", Date.now());
-
-        window.location.replace("tagging.html?team=testing");
+        window.location.replace("tagging.html?team=player");
 
     } else {
 

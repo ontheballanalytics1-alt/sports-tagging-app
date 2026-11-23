@@ -631,6 +631,13 @@
     font-size: 24px;
 }
 
+.player-name-hint {
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+    margin-top: -8px;
+    margin-bottom: 12px;
+}
 
 /* =========================
    MAIN CONTAINER

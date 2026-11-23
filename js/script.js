@@ -154,15 +154,15 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonTeamName.textContent =
       "TRIAL";
 
-  } else if (team === "testing") {
+  } else if (team === "player") {
 
     teamName.textContent =
-      "TESTING";
+      "PLAYER";
 
     buttonTeamName.textContent =
-      "TESTING";
+      "PLAYER";
 
-  }
+}
 
 
   // ======================================================
@@ -469,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // TESTING MODE
   // ======================================================
 
-  if (team === "testing") {
+  if (team === "player") {
         
     document.body.classList.add("testing-mode");
 
