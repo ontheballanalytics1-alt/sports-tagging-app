@@ -919,12 +919,10 @@
         width: 100%;
     }
 
-    /* GAME FEED - AT THE BOTTOM */
-    .container > .column:nth-child(2) {
-        order: 4;
-        flex: 0 0 100%;
-        width: 100%;
-    }
+    /* GAME FEED - HIDDEN ON IPHONE */
+.container > .column:nth-child(2) {
+    display: none !important;
+}
 
     .match-report-column {
         width: 100%;
