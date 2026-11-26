@@ -1061,9 +1061,9 @@
     }
 
     /* Hide gamefeed only on iPhone testing version */
-    body.testing-mode .container > .column:nth-child(2) {
-        display: none;
-    }
+    body.testing-mode:not(.crosskeys-mode) .container > .column:nth-child(2) {
+    display: none;
+}
 
 }
 

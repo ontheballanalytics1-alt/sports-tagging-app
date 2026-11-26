@@ -469,9 +469,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // TESTING MODE
   // ======================================================
 
-  if (team === "player") {
-        
+  if (team === "player" || team === "crosskeys") {
     document.body.classList.add("testing-mode");
+
+    if (team === "crosskeys") {
+        document.body.classList.add("crosskeys-mode");
+    }
 
     allTabs.forEach((tab) => {
 
